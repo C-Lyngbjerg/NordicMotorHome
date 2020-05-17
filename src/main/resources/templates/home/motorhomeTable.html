@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hygge onkel</title>
+</head>
+<body>
+<a href = "/createMotorhome">
+    <button>Create new motorhome</button>
+</a>
+<table>
+    <thead>
+    <tr>
+        <th>Reg. number</th>
+        <th>Type</th>
+        <th>Brand</th>
+        <th>Model</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="motorhome: ${motorhomes}">
+        <td th:text="${motorhome.motorhome_reg_number}"/>
+        <td th:text="${motorhome.type_description}"/>
+        <td th:text="${motorhome.motorhome_brand}"/>
+        <td th:text="${motorhome.motorhome_model}"/>
+
+        <td>
+            <a style="text-decoration: none" th:href="@{'/viewOne/'+${motorhome.motorhome_reg_number}}">
+                <button class="btn", id="btn-viewOne">View</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/delete/'+${motorhome.motorhome_reg_number}}">
+                <button class="btn", id="btn-delete">Delete</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/update/'+${motorhome.motorhome_reg_number}}">
+                <button class="btn", id="btn-update">Update info</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
