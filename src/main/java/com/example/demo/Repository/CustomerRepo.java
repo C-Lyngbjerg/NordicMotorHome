@@ -19,7 +19,7 @@ public class CustomerRepo {
         return template.query(sql, rowMapper);
     }
     public Customer addCustomer(Customer cus){
-        String sql = "INSERT INTO customers(customer_id,customer_first_name,customer_last_name,customer_address,customer_drivers_license,customer_license_type, customer_phone,customer_city,customer_country,customer_zip_code)";
+        String sql = "INSERT INTO customers (customer_id,customer_first_name,customer_last_name,customer_address,customer_drivers_license,customer_license_type, customer_phone,customer_city,customer_country,customer_zip_code) VALUES (?,?,?,?,?,?,?,?,?,?)";
         template.update(sql,cus.getCustomer_id(),cus.getCustomer_first_name(),cus.getCustomer_last_name(),cus.getCustomer_address(),cus.getCustomer_drivers_license(),cus.getCustomer_license_type(),cus.getCustomer_phone(),cus.getCustomer_city(),cus.getCustomer_country(),cus.getCustomer_zip_code());
         return null;
     }
