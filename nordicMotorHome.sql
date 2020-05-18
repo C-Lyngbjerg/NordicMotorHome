@@ -97,7 +97,20 @@ INSERT INTO zips VALUES
 (1416, 'Christianshavn');
 
 INSERT INTO mh_types VALUES
-(1, 'compact', 1999, 2, 2);
+(1, 'compact', 1999, 2, 2),
+(2, 'Medium', 2499, 3, 3);
+
+INSERT INTO customers VALUES
+(1, 'Christoffer', 'Bjerge', 'Valkyriegade', 'abc1234', 'B','60110716', 'Dansk', 2200),
+(2, 'William', 'Omoe', 'Lersoe Park allé', '123abc', 'E', '12345678', 'Dansk', 4850);
+
+INSERT INTO motorhomes VALUES
+('Reg12345', 'Volkswagen', '180', 'AMG', 1, 1),
+('AM1235', 'Pegueot', '200', 'Cayenne', 200, 2);
+
+INSERT INTO contracts VALUES
+(1, 9999, '2020-01-01', '2020-01-02', 1, 1, 0, 1, 0, 1,'Reg12345'),
+(2, 5555, '2020-02-02', '2020-02-03', 1, 0, 1, 0, 1, 1,'AM1235');
 
 
 
