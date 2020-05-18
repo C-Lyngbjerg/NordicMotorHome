@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Contract;
 import com.example.demo.Model.Customer;
 import com.example.demo.Model.Motorhome;
+import com.example.demo.Service.ContractService;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.MotorhomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class HomeController {
     CustomerService customerService;
     @Autowired
     MotorhomeService motorhomeService;
+    @Autowired
+    ContractService contractService;
 
     @GetMapping("/")
     public String index(){
@@ -41,14 +45,12 @@ public class HomeController {
         return "redirect:/customerTable";
     }
 
-
     @GetMapping("/motorhomeTable")
     public String motorhomeTable(Model model){
         List<Motorhome> motorhomeList = motorhomeService.fetchall();
         model.addAttribute("motorhomes",motorhomeList);
         return "home/motorhomeTable";
     }
-
     @GetMapping("/createMotorhome")
     public String createMotorhome(){
         return "home/createMotorhome";
@@ -57,5 +59,23 @@ public class HomeController {
     public String createMotorhome(@ModelAttribute Motorhome motorhome){
         motorhomeService.addMotorhome(motorhome);
         return "redirect:/motorhomeTable";
+    }
+
+    @GetMapping("/contractTable")
+    public String contractTable(Model model){
+        List<Contract> contractList = contractService.fetchAll();
+        model.addAttribute("contracts", contractList);
+        return "home/contractTable";
+    }
+    @GetMapping("/createContract")
+    public String createContract() {
+        return "home/createContract";
+    }
+    @PostMapping("/createContract")
+    public String createContract(@ModelAttribute Contract contract){
+        int rentPeriodPrice = contractService.calculateRentPeriodPrice(contract);
+        contract.calculatePrice(rentPeriodPrice);
+        contractService.addContract(contract);
+        return "redirect:/contractTable";
     }
 }
