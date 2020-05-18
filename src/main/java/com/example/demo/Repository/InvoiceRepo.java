@@ -28,8 +28,12 @@ public class InvoiceRepo {
     public Invoice findInvoiceById(int id){
         String sql = "SELECT * FROM invoices WHERE invoice_id = ?";
         RowMapper<Invoice> rowMapper = new BeanPropertyRowMapper<>(Invoice.class);
-        Invoice invoice =template.queryForObject(sql, rowMapper,id);
+        Invoice invoice = template.queryForObject(sql, rowMapper,id);
         return invoice;
+    }
+    public int findContractById(Invoice invoice){ //Skal nok hedder calculateDistanceDriven eller noget i den stil
+        String sql = "SELECT inv.invoice_odometer_end - con.contract_odometer_start AS total_driven FROM contracts con JOIN invoices inv ON con.contract_id = ?";
+        return template.update(sql, invoice.getContract_id());
     }
     public Boolean deleteInvoice(int id){
         String sql = "DELETE FROM invoices WHERE invoice_id = ?";

@@ -70,6 +70,7 @@ public class HomeController {
         model.addAttribute("invoices",invoiceList);
         return "home/invoiceTable";
     }
+    //Returnere fra et givent punkt til invoieTable side
     @PostMapping("/invoiceTable")
     public String invoiceTable(){
         return "redirect:/";
