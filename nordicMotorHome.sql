@@ -89,6 +89,15 @@ CREATE TABLE invoices
 );
 
 
+INSERT INTO zips VALUES
+(2700, 'Brønshøj'),
+(2200, 'Nørrebro'),
+(9800,'Hjørring'),
+(4850,'Stubbekøbing'),
+(1416, 'Christianshavn');
 
 INSERT INTO mh_types VALUES
 (1, 'compact', 1999, 2, 2);
+
+
+
