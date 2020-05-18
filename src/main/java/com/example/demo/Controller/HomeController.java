@@ -1,8 +1,10 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.Customer;
+import com.example.demo.Model.Invoice;
 import com.example.demo.Model.Motorhome;
 import com.example.demo.Service.CustomerService;
+import com.example.demo.Service.InvoiceService;
 import com.example.demo.Service.MotorhomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class HomeController {
     CustomerService customerService;
     @Autowired
     MotorhomeService motorhomeService;
+    @Autowired
+    InvoiceService invoiceService;
 
     @GetMapping("/")
     public String index(){
@@ -57,5 +61,17 @@ public class HomeController {
     public String createMotorhome(@ModelAttribute Motorhome motorhome){
         motorhomeService.addMotorhome(motorhome);
         return "redirect:/motorhomeTable";
+    }
+
+    //Create invoice table
+    @GetMapping("/invoiceTable")
+    public String invoiceTable(Model model){
+        List<Invoice> invoiceList = invoiceService.fetchAll();
+        model.addAttribute("invoices",invoiceList);
+        return "home/invoiceTable";
+    }
+    @PostMapping("/invoiceTable")
+    public String invoiceTable(){
+        return "redirect:/";
     }
 }

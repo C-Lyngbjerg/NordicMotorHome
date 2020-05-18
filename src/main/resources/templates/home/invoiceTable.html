@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoices</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Invoice Id</th>
+        <th>Contract Id</th>
+        <th>Total Price</th>
+        <th>Distance Driven</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="invoice: ${invoices}">
+        <td th:text="${invoice.invoice_id}"/>
+        <td th:text="${invoice.contract_id}"/>
+        <td th:text="${invoice.invoice_total_price}"/>
+        <td th:text="${invoice.invoice_distance_driven}"/>
+
+        <td>
+           <!-- <a style="text-decoration: none" th:href="@{'/viewOne/'+${motorhome.motorhome_reg_number}}">
+                <button class="btn", id="btn-viewOne">View</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/delete/'+${motorhome.motorhome_reg_number}}">
+                <button class="btn", id="btn-delete">Delete</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/update/'+${motorhome.motorhome_reg_number}}">
+                <button class="btn", id="btn-update">Update info</button>
+            </a>-->
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form action="/invoiceTable/" method="post">
+    <input class="returnButton" type="submit" value="Return">
+</form>
+</body>
+</html>
