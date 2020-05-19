@@ -16,16 +16,18 @@ public class Invoice {
     private int invoice_distance_driven;
     private int invoice_odometer_end;
     private int contract_id;
+    private boolean invoice_fuel_gage;
 
 
     public Invoice() {
     }
-    public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven,int invoice_odometer_end){
+    public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven,int invoice_odometer_end, boolean invoice_fuel_gage){
         this.invoice_id = invoice_id;
         this.contract_id = contract_id;
         this.invoice_total_price = invoice_total_price;
         this.invoice_distance_driven = invoice_distance_driven;
         this.invoice_odometer_end = invoice_odometer_end;
+        this.invoice_fuel_gage = invoice_fuel_gage;
     }
 
     public int getInvoice_id() {
@@ -67,4 +69,8 @@ public class Invoice {
     public void setInvoice_distance_driven(int invoice_distance_driven) {
         this.invoice_distance_driven = invoice_distance_driven;
     }
+
+    public boolean isInvoice_fuel_gage() { return invoice_fuel_gage; }
+
+    public void setInvoice_fuel_gage(boolean invoice_fuel_gage) { this.invoice_fuel_gage = invoice_fuel_gage; }
 }
