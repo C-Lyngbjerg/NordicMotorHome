@@ -10,32 +10,43 @@ import java.util.List;
 
 @Repository
 public class InvoiceRepo {
-
+/* Alle SQL queries bliver excecuted med 'template', hvor objecterne bliver skabt, ved hjælp af rowMapper og 'Beans'
+   'template' er en instance af JdbcTemplate klassen, der hører under Spring Framework.
+   'bean' er et objekt der bliver initialiseret af Spring Framework, hvor objektets type bliver skrevet i dens < > syntax
+ */
     @Autowired
     JdbcTemplate template;
-    // Fetch all, tager alle invoice data fra DB, laver et invoice objekt, hvor den
-    //tager data fra invoice_odometer_end og trækker det fra contract_odometer_start, og sætter det til at være invoice_distance_driven.
+/*  fetchAll() henter data fra table invoices i databasen, via et (DML) SQL statement, der sammen med en rowMapper
+    bliver lavet til et SQL query, ved hjælp af 'template' laver en Invoice instance, bestående af data
+    fra databasen.
+ */
     public List<Invoice> fetchAll(){
         String sql = "SELECT invoice_id, invoice_total_price, i.invoice_odometer_end - con.contract_odometer_start AS invoice_distance_driven,(SELECT DATEDIFF(contract_end_date,contract_start_date) FROM contracts WHERE contracts.contract_id = i.contract_id) AS invoice_rent_days,i.invoice_odometer_end,i.contract_id FROM invoices i JOIN contracts con ON i.contract_id = con.contract_id";
         RowMapper<Invoice> rowMapper = new BeanPropertyRowMapper<>(Invoice.class);
         return template.query(sql, rowMapper);
     }
-
+    //Muliggør at man via klienten, kan skabe en ny Invoice, der bliver tilføjet til databasen, ud fra et (DML) SQL query
     public Invoice addInvoice(Invoice invoice){
         String sql = "INSERT INTO invoices (invoice_id,invoice_total_price,invoice_distance_driven,invoice_odometer_end,contract_id, invoice_rent_days, invoice_fuel_gage) VALUES (?,?,?,?,?,?,?)";
         template.update(sql,invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(), invoice.isInvoice_fuel_gage(), invoice.getInvoice_rent_days());
         return null;
     }
+    //Søger databasen efter et specifikt datasæt, der i dette tilfælde er en specifik invoice, via dens primary key (invoice_id)
     public Invoice findInvoiceById(int id){
         String sql = "SELECT * FROM invoices WHERE invoice_id = ?";
         RowMapper<Invoice> rowMapper = new BeanPropertyRowMapper<>(Invoice.class);
         Invoice invoice = template.queryForObject(sql, rowMapper,id);
         return invoice;
     }
+    // Fjerner (DELETE) et datasæt i databasens 'invoices' table, der bliver fundet via dens primary key (invoice_id)
     public Boolean deleteInvoice(int id){
         String sql = "DELETE FROM invoices WHERE invoice_id = ?";
         return template.update(sql, id) < 0;
     }
+    /*Opdatere (UPDATE) et datasæt i databasen 'invoices' table, fundet via dens primary key (invoice_id)
+      Den bruger en UPDATE og sætter hver attribut i et datasæts til en ny værdi (eller den nuværende,
+      hvis ingen ændringer bliver lavet til den givende attribut i klienten).
+     */
     public Invoice updateInvoice(int id, Invoice invoice){
         String sql = "UPDATE invoices SET invoice_id = ?, invoice_total_price = ?, invoice_distance_driven = ?,invoice_odometer_end = ?,contract_id = ?, invoice_fuel_gage = ?, invoice_rent_days = ? WHERE invoice_id = ?";
         template.update(sql, invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(), invoice.isInvoice_fuel_gage(), invoice.getInvoice_rent_days(),invoice.getInvoice_id());

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-
+//Spring frameworks MVC
 @Controller
 public class HomeController {
     @Autowired
@@ -65,6 +65,9 @@ public class HomeController {
         motorhomeService.addMotorhome(motorhome);
         return "redirect:/motorhomeTable";
     }
+    //TODO
+    //TODO Lav udregning af ekstra omkostninger i forbindelse med 400 km om dagen i gennemsnit.
+    //TODO Lav udregning af ekstra omkostninger i forbindelse med hvorvidt tank er under 50%
 
     //Create invoice table i html filen 'invoiceTable'
     @GetMapping("/invoiceTable")
@@ -86,7 +89,8 @@ public class HomeController {
         return "home/createInvoice";
     }
 
-//    returnerer fra /createInvoice siden og creater den nye invoice, med de informationer der er tastet ind
+//    returnerer fra /createInvoice siden og creater den nye invoice data, med de informationer der er tastet ind
+    // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
     @PostMapping("/createInvoice")
     public String createInvoice(@ModelAttribute Invoice invoice) {
         invoiceService.addInvoice(invoice);

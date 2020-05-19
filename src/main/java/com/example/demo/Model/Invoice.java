@@ -1,9 +1,5 @@
 package com.example.demo.Model;
 
-import com.example.demo.Service.InvoiceService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -18,8 +14,8 @@ public class Invoice {
     private int invoice_rent_days;
     private int contract_id;
     private boolean invoice_fuel_gage;
-
-
+//TODO Kig lige op på hvordan Spring frameworket bruger constructors
+// Indeholder en tom og en "fuld" constructor, da Spring anvender den tomme
     public Invoice() {
     }
     public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven,int invoice_odometer_end, int invoice_rent_days, boolean invoice_fuel_gage){
@@ -35,17 +31,15 @@ public class Invoice {
     public int getInvoice_id() {
         return invoice_id;
     }
-
+    public void setInvoice_id(int invoice_id) {
+        this.invoice_id = invoice_id;
+    }
     public int getInvoice_odometer_end() {
         return invoice_odometer_end;
     }
 
     public void setInvoice_odometer_end(int invoice_odometer_end) {
         this.invoice_odometer_end = invoice_odometer_end;
-    }
-
-    public void setInvoice_id(int invoice_id) {
-        this.invoice_id = invoice_id;
     }
 
     public int getContract_id() {
@@ -55,17 +49,29 @@ public class Invoice {
     public void setContract_id(int contract_id) {
         this.contract_id = contract_id;
     }
+/*
+ * Udregner den totale pris kunden skal betale ved aflevering af autocamper.
+ * Dette er ekstra omkostninger, der indeholder:
+ *      Ekstra omkostninger ved kørsel over 400 km om dagen i gennemsnit
+ *      Ekstra omkostninger ved en gas tank under 50%
+ * Disse bliver udregnet og sat til objektets element "invoice_total_price"
+ * Da spring bruger getters, til at lave object via rowMapper, bliver dette lavet ved initialisation af objektet.
+ */
 
     public double getInvoice_total_price() {
         invoice_total_price = 0.0;
+        //Hvis gas tank er under 50% (sat som en boolean til at være true) vil der blive lagt 70 til total price
         if(isInvoice_fuel_gage()){
             invoice_total_price += 70.0;
         }else{
             invoice_total_price = 0.0;
         }
-        int distance_per_day = invoice_distance_driven/ 1; //1 = placeholder for datediff
+        //Antal km kørt divideret med antal leje dage giver den daglige distance kørt i gennemsnit
+        int distance_per_day = invoice_distance_driven / invoice_rent_days;
+        //Hvis gennemsnit er over 400, betyder det at der vil være omkostninger der skal omregnes,
+        //Hvis det er under 400 i gennemsnit, vil der ikke være grund til at lave noget computing og ignorere det
         if(distance_per_day > 400){
-            invoice_total_price += (double)(distance_per_day-400)*1;
+            invoice_total_price += (double)(distance_per_day-400)*invoice_rent_days;
         }
         return invoice_total_price;
     }
