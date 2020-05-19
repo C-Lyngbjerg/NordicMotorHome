@@ -55,6 +55,16 @@ public class Invoice {
     }
 
     public double getInvoice_total_price() {
+        invoice_total_price = 0.0;
+        if(isInvoice_fuel_gage()){
+            invoice_total_price += 70.0;
+        }else{
+            invoice_total_price = 0.0;
+        }
+        int distance_per_day = invoice_distance_driven/ 1; //1 = placeholder for datediff
+        if(distance_per_day > 400){
+            invoice_total_price += (double)(distance_per_day-400)*1;
+        }
         return invoice_total_price;
     }
 
@@ -70,7 +80,7 @@ public class Invoice {
         this.invoice_distance_driven = invoice_distance_driven;
     }
 
-    public boolean isInvoice_fuel_gage() { return invoice_fuel_gage; }
+    public boolean isInvoice_fuel_gage() { return true; }
 
     public void setInvoice_fuel_gage(boolean invoice_fuel_gage) { this.invoice_fuel_gage = invoice_fuel_gage; }
 }
