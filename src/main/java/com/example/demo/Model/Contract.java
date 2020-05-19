@@ -142,8 +142,8 @@ public class Contract {
     public void setMotorhome_reg_number(String motorhome_reg_number) {
         this.motorhome_reg_number = motorhome_reg_number;
     }
-    public void calculatePrice(int rentPeriodPrice){
-        int totalPrice = 0;
+    public void calculatePrice(double rentPeriodPrice){
+        double totalPrice = 0;
         if(contract_extra_bike_rack){
             totalPrice += 200;
         }

@@ -1,8 +1,6 @@
 package com.example.demo.Repository;
 
 
-import com.example.demo.Model.Customer;
-import sun.jvm.hotspot.asm.Operand;
 
 import java.util.List;
 

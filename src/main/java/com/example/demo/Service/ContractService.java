@@ -27,7 +27,7 @@ public class ContractService {
     public Contract updateContract(int id,Contract con){
         return repo.updateContract(id,con);
     }
-    public int calculateRentPeriodPrice(Contract con){
+    public double calculateRentPeriodPrice(Contract con){
         return repo.calculateRentPeriodPrice(con);
     }
 }

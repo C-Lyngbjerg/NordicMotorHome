@@ -41,7 +41,7 @@ public class HomeController {
     }
     @PostMapping("/createCustomer")
     public String createCustomer(@ModelAttribute Customer customer){
-        customerService.addCustomer(customer);
+        customerService.create(customer);
         return "redirect:/customerTable";
     }
 
@@ -73,7 +73,7 @@ public class HomeController {
     }
     @PostMapping("/createContract")
     public String createContract(@ModelAttribute Contract contract){
-        int rentPeriodPrice = contractService.calculateRentPeriodPrice(contract);
+        double rentPeriodPrice = contractService.calculateRentPeriodPrice(contract);
         contract.calculatePrice(rentPeriodPrice);
         contractService.addContract(contract);
         return "redirect:/contractTable";
