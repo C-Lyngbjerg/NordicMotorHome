@@ -9,19 +9,29 @@ public class Invoice {
     private int invoice_id;
     private double invoice_total_price;
     private int invoice_distance_driven;
+    private int invoice_odometer_end;
     private int contract_id;
 
     public Invoice() {
     }
-    public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven){
+    public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven,int invoice_odometer_end){
         this.invoice_id = invoice_id;
         this.contract_id = contract_id;
         this.invoice_total_price = invoice_total_price;
         this.invoice_distance_driven = invoice_distance_driven;
+        this.invoice_odometer_end = invoice_odometer_end;
     }
 
     public int getInvoice_id() {
         return invoice_id;
+    }
+
+    public int getInvoice_odometer_end() {
+        return invoice_odometer_end;
+    }
+
+    public void setInvoice_odometer_end(int invoice_odometer_end) {
+        this.invoice_odometer_end = invoice_odometer_end;
     }
 
     public void setInvoice_id(int invoice_id) {

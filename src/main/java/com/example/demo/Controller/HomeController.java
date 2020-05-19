@@ -63,7 +63,7 @@ public class HomeController {
         return "redirect:/motorhomeTable";
     }
 
-    //Create invoice table
+    //Create invoice table i html filen 'invoiceTable'
     @GetMapping("/invoiceTable")
     public String invoiceTable(Model model){
         List<Invoice> invoiceList = invoiceService.fetchAll();
