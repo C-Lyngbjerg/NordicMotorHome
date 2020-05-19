@@ -15,19 +15,21 @@ public class Invoice {
     private double invoice_total_price;
     private int invoice_distance_driven;
     private int invoice_odometer_end;
+    private int invoice_rent_days;
     private int contract_id;
     private boolean invoice_fuel_gage;
 
 
     public Invoice() {
     }
-    public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven,int invoice_odometer_end, boolean invoice_fuel_gage){
+    public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven,int invoice_odometer_end, int invoice_rent_days, boolean invoice_fuel_gage){
         this.invoice_id = invoice_id;
         this.contract_id = contract_id;
         this.invoice_total_price = invoice_total_price;
         this.invoice_distance_driven = invoice_distance_driven;
         this.invoice_odometer_end = invoice_odometer_end;
         this.invoice_fuel_gage = invoice_fuel_gage;
+        this.invoice_rent_days = invoice_rent_days;
     }
 
     public int getInvoice_id() {
@@ -83,4 +85,13 @@ public class Invoice {
     public boolean isInvoice_fuel_gage() { return true; }
 
     public void setInvoice_fuel_gage(boolean invoice_fuel_gage) { this.invoice_fuel_gage = invoice_fuel_gage; }
+
+    public int getInvoice_rent_days() {
+        return invoice_rent_days;
+    }
+
+    public void setInvoice_rent_days(int invoice_rent_days) {
+        this.invoice_rent_days = invoice_rent_days;
+    }
+
 }

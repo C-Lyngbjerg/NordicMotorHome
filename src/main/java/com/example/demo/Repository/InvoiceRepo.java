@@ -16,14 +16,14 @@ public class InvoiceRepo {
     // Fetch all, tager alle invoice data fra DB, laver et invoice objekt, hvor den
     //tager data fra invoice_odometer_end og trækker det fra contract_odometer_start, og sætter det til at være invoice_distance_driven.
     public List<Invoice> fetchAll(){
-        String sql = "SELECT invoice_id, invoice_total_price, i.invoice_odometer_end - con.contract_odometer_start AS invoice_distance_driven,i.invoice_odometer_end,i.contract_id FROM invoices i JOIN contracts con ON i.contract_id = con.contract_id ";
+        String sql = "SELECT invoice_id, invoice_total_price, i.invoice_odometer_end - con.contract_odometer_start AS invoice_distance_driven,(SELECT DATEDIFF(contract_end_date,contract_start_date) FROM contracts WHERE contracts.contract_id = i.contract_id) AS invoice_rent_days,i.invoice_odometer_end,i.contract_id FROM invoices i JOIN contracts con ON i.contract_id = con.contract_id";
         RowMapper<Invoice> rowMapper = new BeanPropertyRowMapper<>(Invoice.class);
         return template.query(sql, rowMapper);
     }
 
     public Invoice addInvoice(Invoice invoice){
-        String sql = "INSERT INTO invoices (invoice_id,invoice_total_price,invoice_distance_driven,invoice_odometer_end,contract_id) VALUES (?,?,?,?,?)";
-        template.update(sql,invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id());
+        String sql = "INSERT INTO invoices (invoice_id,invoice_total_price,invoice_distance_driven,invoice_odometer_end,contract_id, invoice_rent_days, invoice_fuel_gage) VALUES (?,?,?,?,?,?,?)";
+        template.update(sql,invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(), invoice.isInvoice_fuel_gage(), invoice.getInvoice_rent_days());
         return null;
     }
     public Invoice findInvoiceById(int id){
@@ -37,8 +37,8 @@ public class InvoiceRepo {
         return template.update(sql, id) < 0;
     }
     public Invoice updateInvoice(int id, Invoice invoice){
-        String sql = "UPDATE invoices SET invoice_id = ?, invoice_total_price = ?, invoice_distance_driven = ?,invoice_odometer_end = ?,contract_id = ? WHERE invoice_id = ?";
-        template.update(sql, invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(),invoice.getInvoice_id());
+        String sql = "UPDATE invoices SET invoice_id = ?, invoice_total_price = ?, invoice_distance_driven = ?,invoice_odometer_end = ?,contract_id = ?, invoice_fuel_gage = ?, invoice_rent_days = ? WHERE invoice_id = ?";
+        template.update(sql, invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(), invoice.isInvoice_fuel_gage(), invoice.getInvoice_rent_days(),invoice.getInvoice_id());
         return null;
     }
 }
