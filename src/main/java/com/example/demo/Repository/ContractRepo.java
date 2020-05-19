@@ -19,33 +19,47 @@ import static javax.swing.UIManager.get;
 public class ContractRepo {
 
     @Autowired
+            // template håndtere vores connection og statements til databasen.
     JdbcTemplate template;
-
+    // Vores fetchAll metode henter alle kontrakterne og mapper database resultsettet i en collection. fetchAll metoden bliver brugt i homecontrolleren.
     public List<Contract> fetchAll(){
         String sql = "SELECT * FROM contracts";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return template.query(sql, rowMapper);
     }
+    // Vores addContract metode indsætter data vi får fra inputs ind i dette prepared statement og opretter en kontrakt med disse informationer i databsen.
     public Contract addContract(Contract con){
         String sql = "INSERT INTO contracts (contract_id,contract_rent_price,contract_start_date,contract_end_date,contract_odometer_start,contract_extra_bike_rack,contract_extra_bed_sheets,contract_extra_child_seat,contract_extra_picnic_table,contract_extra_chairs,customer_id,motorhome_reg_number) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         template.update(sql,con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_reg_number());
         return null;
     }
+    // Denne metode vælger alle fra contracts hvor id'et matcher det parameteroverførte id.
+    // så mapper Rowmapperen informationerne fra kontrakten og der oprettes et contract object som returneres.
     public Contract findContractById(int id){
         String sql = "SELECT * FROM contracts WHERE contract_id = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         Contract con =template.queryForObject(sql, rowMapper,id);
         return con;
     }
+    // Denne metode bruger prepared statement til at slette en kontrakt med det parameteroverføte id.
+    // SQL statementet findet matchet med id'et og sletter.( i tvivl om < 0 ?)
     public Boolean deleteContract(int id){
         String sql = "DELETE FROM contracts WHERE contract_id = ?";
         return template.update(sql, id) < 0;
     }
+    // Denne metode vælge via prepared sql statement en kontrakt med det parameteroverførte id og giver mulighed for at ændre i informationer.
+    // Den displayer alle informationerne og gemmer efterfølgende det der står, ændret eller uændret.
     public Contract updateContract(int id, Contract con){
         String sql = "UPDATE contracts SET contract_id = ?,contract_rent_price = ?,contract_start_date = ?,contract_end_date = ?,contract_odometer_start = ?,contract_extra_bike_rack = ?,contract_extra_bed_sheets = ?,contract_extra_child_seat = ?,contract_extra_picnic_table = ?,contract_extra_chairs = ?,customer_id = ?,motorhome_reg_number = ?) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         template.update(sql, con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_reg_number());
         return null;
     }
+    // Denne metode tager den parameteroverførte kontrakt og søger efter price_per_day i mh_types tabellen hvor type_id matcher med type_id for den autocamper det er brugt i kontrakten.
+    // Så laver den et list object priceList som indeholder den pris der bliver hentet hjem vi statementet og templaten.
+    // Derefter lavet den et statement som tager to datoer og regner distancen mellem disse.
+    // Den laver næst et List object dateDiff som tager fat i de to datoer, start og end fra Contract objectet.
+    // Så laver den et tredje list object dateDiffAndDays som er en ArrayList der indeholder double værdier.
+    // De to værdier der er blevet sat ind i det to lists bliver added til den sidste liste og den liste bliver returneret og brugt i homecontrolleren.
     public List<Double> calculateRentPeriodAndPrice(Contract con){
         String sql1 = "SELECT type_price_per_day FROM mh_types WHERE type_id IN (SELECT type_id FROM motorhomes m WHERE m.motorhome_reg_number = ?)";
         List<Double> priceList = template.queryForList(sql1, Double.class, con.getMotorhome_reg_number());
