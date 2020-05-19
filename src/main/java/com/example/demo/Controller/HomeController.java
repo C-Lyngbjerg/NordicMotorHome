@@ -73,8 +73,8 @@ public class HomeController {
     }
     @PostMapping("/createContract")
     public String createContract(@ModelAttribute Contract contract){
-        double rentPeriodPrice = contractService.calculateRentPeriodPrice(contract);
-        contract.calculatePrice(rentPeriodPrice);
+        List<Double> datesAndPrice = contractService.calculateRentPeriodAndPrice(contract);
+        contract.calculatePrice(datesAndPrice);
         contractService.addContract(contract);
         return "redirect:/contractTable";
     }

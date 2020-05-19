@@ -3,6 +3,8 @@ package com.example.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Contract {
@@ -142,8 +144,8 @@ public class Contract {
     public void setMotorhome_reg_number(String motorhome_reg_number) {
         this.motorhome_reg_number = motorhome_reg_number;
     }
-    public void calculatePrice(double rentPeriodPrice){
-        double totalPrice = 0;
+    public void calculatePrice(List<Double> dateAndPrice){
+        double totalPrice = seasonCheck(dateAndPrice);
         if(contract_extra_bike_rack){
             totalPrice += 200;
         }
@@ -159,6 +161,22 @@ public class Contract {
         if (contract_extra_chairs){
             totalPrice += 200;
         }
-        this.contract_rent_price = totalPrice + rentPeriodPrice;
+        this.contract_rent_price = totalPrice;
+    }
+    public double seasonCheck(List<Double> dateAndPrice){
+        double totalPrice = 0;
+        LocalDate startDate = LocalDate.parse(contract_start_date);
+        for(int i = 0; i < dateAndPrice.get(1) + 1; i++){
+            if(startDate.getMonthValue() == 6 || startDate.getMonthValue() == 7 || startDate.getMonthValue() == 8){
+                totalPrice += dateAndPrice.get(0) * 1.6;
+
+            }else if(startDate.getMonthValue() == 3 || startDate.getMonthValue() == 4 || startDate.getMonthValue() == 5 || startDate.getMonthValue() == 9 || startDate.getMonthValue() == 10){
+                totalPrice += dateAndPrice.get(0) * 1.3;
+            }else{
+                totalPrice += dateAndPrice.get(0);
+            }
+            startDate = startDate.plusDays(1);
+        }
+        return totalPrice;
     }
 }
