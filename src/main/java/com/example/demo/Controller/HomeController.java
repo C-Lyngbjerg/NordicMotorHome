@@ -71,11 +71,13 @@ public class HomeController {
     public String createContract() {
         return "home/createContract";
     }
+
+    //Metoden til at lave et contract objekt, udregne den samlede pris og tilføje det til databasen
     @PostMapping("/createContract")
     public String createContract(@ModelAttribute Contract contract){
-        List<Double> datesAndPrice = contractService.calculateRentPeriodAndPrice(contract);
-        contract.calculatePrice(datesAndPrice);
-        contractService.addContract(contract);
+        List<Double> datesAndPrice = contractService.calculateRentPeriodAndPrice(contract); // metoden retunere en list som indenholder den daglige pris for lejet og samlet antaldage lejeperioden er på
+        contract.calculatePrice(datesAndPrice);// Listen der blev inisaliseret før bliver parameter overført til at kunne udregne den totale pris for udlejningsperioden
+        contractService.addContract(contract);//contracten bliver tilføjet til databasen
         return "redirect:/contractTable";
     }
 }

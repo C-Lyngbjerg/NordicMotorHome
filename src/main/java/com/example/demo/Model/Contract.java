@@ -144,8 +144,14 @@ public class Contract {
     public void setMotorhome_reg_number(String motorhome_reg_number) {
         this.motorhome_reg_number = motorhome_reg_number;
     }
+
+    /*
+    * I metoden calculatePrice findes prisen for hele lejeperioden
+    * Dette inkluderer hvilke extra ting kunden vælger at leje, så som camping bord og stole
+     */
     public void calculatePrice(List<Double> dateAndPrice){
         double totalPrice = seasonCheck(dateAndPrice);
+        //en masse if-statements som tilføjer prisen for alt extra indhold som bliver lejet.
         if(contract_extra_bike_rack){
             totalPrice += 200;
         }
@@ -161,21 +167,28 @@ public class Contract {
         if (contract_extra_chairs){
             totalPrice += 200;
         }
-        this.contract_rent_price = totalPrice;
+        this.contract_rent_price = totalPrice;//sætter kontraktens pris til den ændelige total pris
     }
+
+    /*
+    * seasonCheck metoden udregner den samlede pris for udlejningsperioden i de enkelte dages sæsonperiode
+    * Den parametre overførte liste dateAndPrice indenholder 2 variabler: index plads 0 har den daglige pris og index plads 1 indenholder det samlede antal dage udlejningen varer.
+    * */
     public double seasonCheck(List<Double> dateAndPrice){
         double totalPrice = 0;
-        LocalDate startDate = LocalDate.parse(contract_start_date);
-        for(int i = 0; i < dateAndPrice.get(1) + 1; i++){
+        LocalDate startDate = LocalDate.parse(contract_start_date); //contractens String værdi bliver lavet om til en LocalDate objekt. Det gør at vi kan tjekke datoen lettere
+        for(int i = 0; i < dateAndPrice.get(1) + 1; i++){  //vi tilføjer 1 til den samlede mængde af dage så den sidste dag også bliver regnet med.
+            //I if-else statementerne herunder tjekkes datoen for de enkelte dage hvor udlejning stræker sig og prisen bliver så forhøjet.
+            //Vi har valgt at højsæsonen strækker sig over de store sommermånederne 6-8
             if(startDate.getMonthValue() == 6 || startDate.getMonthValue() == 7 || startDate.getMonthValue() == 8){
                 totalPrice += dateAndPrice.get(0) * 1.6;
-
+            //Midtsæsonen har vi valgt at lægge i alle efterårs og forårs månederne ud over november
             }else if(startDate.getMonthValue() == 3 || startDate.getMonthValue() == 4 || startDate.getMonthValue() == 5 || startDate.getMonthValue() == 9 || startDate.getMonthValue() == 10){
                 totalPrice += dateAndPrice.get(0) * 1.3;
             }else{
                 totalPrice += dateAndPrice.get(0);
             }
-            startDate = startDate.plusDays(1);
+            startDate = startDate.plusDays(1);//Her lægger vi en dag til datoen
         }
         return totalPrice;
     }
