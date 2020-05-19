@@ -1,16 +1,22 @@
 package com.example.demo.Model;
 
+import com.example.demo.Service.InvoiceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Invoice {
+
     @Id
     private int invoice_id;
     private double invoice_total_price;
     private int invoice_distance_driven;
     private int invoice_odometer_end;
     private int contract_id;
+
 
     public Invoice() {
     }

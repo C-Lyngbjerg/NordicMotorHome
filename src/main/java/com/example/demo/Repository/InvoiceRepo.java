@@ -20,8 +20,9 @@ public class InvoiceRepo {
         RowMapper<Invoice> rowMapper = new BeanPropertyRowMapper<>(Invoice.class);
         return template.query(sql, rowMapper);
     }
+
     public Invoice addInvoice(Invoice invoice){
-        String sql = "INSERT INTO invoices (invoice_id,invoice_total_price,invoice_distance_driven,invoice_odometer_end,contract_id) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO invoices (invoice_id,invoice_total_price,invoice_distance_driven,invoice_odometer_end,contract_id) VALUES (?,?,?,?,?)";
         template.update(sql,invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id());
         return null;
     }
