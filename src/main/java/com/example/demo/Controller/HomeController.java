@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -79,5 +80,12 @@ public class HomeController {
         contract.calculatePrice(datesAndPrice);// Listen der blev inisaliseret før bliver parameter overført til at kunne udregne den totale pris for udlejningsperioden
         contractService.addContract(contract);//contracten bliver tilføjet til databasen
         return "redirect:/contractTable";
+    }
+
+    @GetMapping("/cancelContract/{contract_id}")
+    public String cancelContract(@PathVariable("contract_id") int contract_id, Model model){
+        model.addAttribute("contract",contractService.cancelContract(contract_id));
+        return "home/cancelledContract";
+
     }
 }

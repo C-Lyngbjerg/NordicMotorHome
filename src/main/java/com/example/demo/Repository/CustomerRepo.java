@@ -9,10 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CustomerRepo{
+public class CustomerRepo implements RepositoryI{
     @Autowired
     JdbcTemplate template;
-
 
     public List<Customer> fetchAll(){
         String sql = "SELECT * FROM customers";

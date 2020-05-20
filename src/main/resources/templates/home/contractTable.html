@@ -33,6 +33,9 @@
             <a style="text-decoration: none" th:href="@{'/update/'+${contract.contract_id}}">
                 <button class="btn", id="btn-update">Update info</button>
             </a>
+            <a style="text-decoration: none" th:href="@{'cancelContract/'+${contract.contract_id}}">
+                <button class="btn", id="btn-cancel">Cancel contract</button>
+            </a>
         </td>
     </tr>
     </tbody>

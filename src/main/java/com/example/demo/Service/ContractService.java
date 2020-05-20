@@ -30,4 +30,7 @@ public class ContractService {
     public List<Double> calculateRentPeriodAndPrice(Contract con){
         return repo.calculateRentPeriodAndPrice(con);
     }
+    public Contract cancelContract(int id){
+        return repo.cancelContract(id);
+    }
 }

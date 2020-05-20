@@ -16,7 +16,7 @@ import java.util.List;
 import static javax.swing.UIManager.get;
 
 @Repository
-public class ContractRepo {
+public class ContractRepo{
 
     @Autowired
             // template håndtere vores connection og statements til databasen.
@@ -69,5 +69,27 @@ public class ContractRepo {
         dateDiffAndDays.add(priceList.get(0));
         dateDiffAndDays.add(dateDiff.get(0));
         return dateDiffAndDays;
+    }
+
+    public Contract cancelContract(int id){
+        String sql = "SELECT * FROM contracts WHERE contract_id = ?";
+        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
+        Contract con = template.queryForObject(sql,rowMapper,id);
+        String sql1 = "SELECT DATEDIFF(?,CURDATE()) FROM contracts WHERE contract_id = ?";
+        Double daysToStart = template.queryForObject(sql1, Double.class, con.getContract_start_date(),con.getContract_id());
+        if(daysToStart >= 50){
+            if(con.getContract_rent_price() < 200){
+                con.setContract_rent_price(200);
+            }else {
+                con.setContract_rent_price(con.getContract_rent_price() * 0.2);
+            }
+        }else if(daysToStart > 15 && daysToStart < 49){
+            con.setContract_rent_price(con.getContract_rent_price()*0.5);
+        }else if(daysToStart < 15 && daysToStart > 0){
+            con.setContract_rent_price(con.getContract_rent_price()*0.8);
+        }else{
+            con.setContract_rent_price(con.getContract_rent_price()*0.95);
+        }
+        return con;
     }
 }
