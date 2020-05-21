@@ -78,7 +78,7 @@ public class ContractRepo{
         String sql1 = "SELECT DATEDIFF(?,CURDATE()) FROM contracts WHERE contract_id = ?";
         Double daysToStart = template.queryForObject(sql1, Double.class, con.getContract_start_date(),con.getContract_id());
         if(daysToStart >= 50){
-            if(con.getContract_rent_price() < 200){
+            if((con.getContract_rent_price() * 0.2) < 200){
                 con.setContract_rent_price(200);
             }else {
                 con.setContract_rent_price(con.getContract_rent_price() * 0.2);
