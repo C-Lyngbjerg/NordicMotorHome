@@ -43,4 +43,9 @@ class DemoApplicationTests {
         System.out.println(con.getContract_rent_price());
     }
 
+    @Test
+    public void objectCastingTest(){
+        Object con = new Object();
+    }
+
 }

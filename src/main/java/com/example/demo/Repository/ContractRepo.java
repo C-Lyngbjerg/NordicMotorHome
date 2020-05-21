@@ -16,7 +16,7 @@ import java.util.List;
 import static javax.swing.UIManager.get;
 
 @Repository
-public class ContractRepo{
+public class ContractRepo implements RepositoryI{
 
     @Autowired
             // template håndtere vores connection og statements til databasen.
@@ -28,14 +28,15 @@ public class ContractRepo{
         return template.query(sql, rowMapper);
     }
     // Vores addContract metode indsætter data vi får fra inputs ind i dette prepared statement og opretter en kontrakt med disse informationer i databsen.
-    public Contract addContract(Contract con){
+    public Object add(Object obj){
+        Contract con = (Contract) obj;
         String sql = "INSERT INTO contracts (contract_id,contract_rent_price,contract_start_date,contract_end_date,contract_odometer_start,contract_extra_bike_rack,contract_extra_bed_sheets,contract_extra_child_seat,contract_extra_picnic_table,contract_extra_chairs,customer_id,motorhome_reg_number) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         template.update(sql,con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_reg_number());
         return null;
     }
     // Denne metode vælger alle fra contracts hvor id'et matcher det parameteroverførte id.
     // så mapper Rowmapperen informationerne fra kontrakten og der oprettes et contract object som returneres.
-    public Contract findContractById(int id){
+    public Object findById(int id){
         String sql = "SELECT * FROM contracts WHERE contract_id = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         Contract con =template.queryForObject(sql, rowMapper,id);
@@ -43,7 +44,7 @@ public class ContractRepo{
     }
     // Denne metode bruger prepared statement til at slette en kontrakt med det parameteroverføte id.
     // SQL statementet findet matchet med id'et og sletter.( i tvivl om < 0 ?)
-    public Boolean deleteContract(int id){
+    public Boolean delete(int id){
         String sql = "DELETE FROM contracts WHERE contract_id = ?";
         return template.update(sql, id) < 0;
     }

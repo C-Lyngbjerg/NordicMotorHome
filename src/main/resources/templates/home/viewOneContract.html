@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Contract info</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Contract ID</th>
+        <th>Customer ID</th>
+        <th>Start date for contract</th>
+        <th>End date for contract</th>
+        <th>Car reg. number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><span th:text="${contract.contract_id}"></span></td>
+        <td><span th:text="${contract.customer_id}"></span></td>
+        <td><span th:text="${contract.contract_start_date}"></span></td>
+        <td><span th:text="${contract.contract_end_date}"></span></td>
+        <td><span th:text="${contract.motorhome_reg_number}"></span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CustomerRepo implements RepositoryI{
+public class CustomerRepo{
     @Autowired
     JdbcTemplate template;
 
