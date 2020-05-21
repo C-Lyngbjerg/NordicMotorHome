@@ -66,7 +66,7 @@ public class Invoice {
         }else{
             invoice_total_price = 0.0;
         }
-        //Antal km kørt divideret med antal leje dage giver den daglige distance kørt i gennemsnit
+        //Antal km kørt divideret med antal leje dage giver den daglige distance kørt i gennemsnit  noice
         int distance_per_day = invoice_distance_driven / invoice_rent_days;
         //Hvis gennemsnit er over 400, betyder det at der vil være omkostninger der skal omregnes,
         //Hvis det er under 400 i gennemsnit, vil der ikke være grund til at lave noget computing og ignorere det
