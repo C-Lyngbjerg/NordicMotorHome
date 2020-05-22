@@ -13,7 +13,6 @@ public class CustomerRepo{
     @Autowired
     JdbcTemplate template;
 
-
     public List<Customer> fetchAll(){
         String sql = "SELECT * FROM customers";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);

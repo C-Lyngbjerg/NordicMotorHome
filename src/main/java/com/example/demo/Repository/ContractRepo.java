@@ -8,46 +8,86 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ContractRepo {
+public class ContractRepo implements RepositoryI{
 
     @Autowired
+            // template håndtere vores connection og statements til databasen.
     JdbcTemplate template;
-
+    // Vores fetchAll metode henter alle kontrakterne og mapper database resultsettet i en collection. fetchAll metoden bliver brugt i homecontrolleren.
     public List<Contract> fetchAll(){
         String sql = "SELECT * FROM contracts";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return template.query(sql, rowMapper);
     }
-    public Contract addContract(Contract con){
+    // Vores addContract metode indsætter data vi får fra inputs ind i dette prepared statement og opretter en kontrakt med disse informationer i databsen.
+    public Object add(Object obj){
+        Contract con = (Contract) obj;
         String sql = "INSERT INTO contracts (contract_id,contract_rent_price,contract_start_date,contract_end_date,contract_odometer_start,contract_extra_bike_rack,contract_extra_bed_sheets,contract_extra_child_seat,contract_extra_picnic_table,contract_extra_chairs,customer_id,motorhome_reg_number) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         template.update(sql,con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_reg_number());
         return null;
     }
-    public Contract findContractById(int id){
+    // Denne metode vælger alle fra contracts hvor id'et matcher det parameteroverførte id.
+    // så mapper Rowmapperen informationerne fra kontrakten og der oprettes et contract object som returneres.
+    public Object findById(int id){
         String sql = "SELECT * FROM contracts WHERE contract_id = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         Contract con =template.queryForObject(sql, rowMapper,id);
         return con;
     }
-    public Boolean deleteContract(int id){
+    // Denne metode bruger prepared statement til at slette en kontrakt med det parameteroverføte id.
+    // SQL statementet findet matchet med id'et og sletter.( i tvivl om < 0 ?)
+    public Boolean delete(int id){
         String sql = "DELETE FROM contracts WHERE contract_id = ?";
         return template.update(sql, id) < 0;
     }
+    // Denne metode vælge via prepared sql statement en kontrakt med det parameteroverførte id og giver mulighed for at ændre i informationer.
+    // Den displayer alle informationerne og gemmer efterfølgende det der står, ændret eller uændret.
     public Contract updateContract(int id, Contract con){
         String sql = "UPDATE contracts SET contract_id = ?,contract_rent_price = ?,contract_start_date = ?,contract_end_date = ?,contract_odometer_start = ?,contract_extra_bike_rack = ?,contract_extra_bed_sheets = ?,contract_extra_child_seat = ?,contract_extra_picnic_table = ?,contract_extra_chairs = ?,customer_id = ?,motorhome_reg_number = ?) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         template.update(sql, con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_reg_number());
         return null;
     }
-    public int calculateRentPeriodPrice(Contract con){
+    // Denne metode tager den parameteroverførte kontrakt og søger efter price_per_day i mh_types tabellen hvor type_id matcher med type_id for den autocamper det er brugt i kontrakten.
+    // Så laver den et list object priceList som indeholder den pris der bliver hentet hjem vi statementet og templaten.
+    // Derefter lavet den et statement som tager to datoer og regner distancen mellem disse.
+    // Den laver næst et List object dateDiff som tager fat i de to datoer, start og end fra Contract objectet.
+    // Så laver den et tredje list object dateDiffAndDays som er en ArrayList der indeholder double værdier.
+    // De to værdier der er blevet sat ind i det to lists bliver added til den sidste liste og den liste bliver returneret og brugt i homecontrolleren.
+    public List<Double> calculateRentPeriodAndPrice(Contract con){
         String sql1 = "SELECT type_price_per_day FROM mh_types WHERE type_id IN (SELECT type_id FROM motorhomes m WHERE m.motorhome_reg_number = ?)";
-        RowMapper<Motorhome> row = new BeanPropertyRowMapper<>(Motorhome.class);
-        Motorhome motorhome = template.queryForObject(sql1, row, con.getMotorhome_reg_number());
+        List<Double> priceList = template.queryForList(sql1, Double.class, con.getMotorhome_reg_number());
         String sql = "SELECT DATEDIFF(?,?) AS dateDiff";
+        List<Double> dateDiff = template.queryForList(sql, Double.class, con.getContract_end_date(), con.getContract_start_date());
+        List<Double> dateDiffAndDays = new ArrayList<Double>();
+        dateDiffAndDays.add(priceList.get(0));
+        dateDiffAndDays.add(dateDiff.get(0));
+        return dateDiffAndDays;
+    }
+
+    public Contract cancelContract(int id){
+        String sql = "SELECT * FROM contracts WHERE contract_id = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
-        Contract con1 = template.queryForObject(sql, rowMapper, con.getContract_end_date(), con.getContract_start_date());
-        return con1.getDateDiff() * motorhome.getType_price_per_day();
+        Contract con = template.queryForObject(sql,rowMapper,id);
+        String sql1 = "SELECT DATEDIFF(?,CURDATE()) FROM contracts WHERE contract_id = ?";
+        Double daysToStart = template.queryForObject(sql1, Double.class, con.getContract_start_date(),con.getContract_id());
+        if(daysToStart >= 50){
+            if((con.getContract_rent_price() * 0.2) < 200){
+                con.setContract_rent_price(200);
+            }else {
+                con.setContract_rent_price(con.getContract_rent_price() * 0.2);
+            }
+        }else if(daysToStart > 15 && daysToStart < 49){
+            con.setContract_rent_price(con.getContract_rent_price()*0.5);
+        }else if(daysToStart < 15 && daysToStart > 0){
+            con.setContract_rent_price(con.getContract_rent_price()*0.8);
+        }else{
+            con.setContract_rent_price(con.getContract_rent_price()*0.95);
+        }
+        return con;
     }
 }
