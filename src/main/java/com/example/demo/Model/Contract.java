@@ -14,6 +14,7 @@ public class Contract {
     private String contract_start_date;
     private String contract_end_date;
     private int contract_odometer_start;
+    private String motorhome_reg_number;
     private boolean contract_extra_bike_rack;
     private boolean contract_extra_child_seat;
     private boolean contract_extra_bed_sheets;
@@ -22,8 +23,8 @@ public class Contract {
     private int customer_id;
     private int motorhome_id;
     private int dateDiff;
-    private int contract_pick_up_distance;
-    private int contract_drop_off_distance;
+    private double contract_pick_up_distance;
+    private double contract_drop_off_distance;
 
     public Contract() {
     }
@@ -41,6 +42,30 @@ public class Contract {
         this.contract_extra_chairs = contract_extra_chairs;
         this.customer_id = customer_id;
         this.motorhome_id = motorhome_id;
+    }
+
+    public String getMotorhome_reg_number() {
+        return motorhome_reg_number;
+    }
+
+    public void setMotorhome_reg_number(String motorhome_reg_number) {
+        this.motorhome_reg_number = motorhome_reg_number;
+    }
+
+    public double getContract_pick_up_distance() {
+        return contract_pick_up_distance;
+    }
+
+    public void setContract_pick_up_distance(double contract_pick_up_distance) {
+        this.contract_pick_up_distance = contract_pick_up_distance;
+    }
+
+    public double getContract_drop_off_distance() {
+        return contract_drop_off_distance;
+    }
+
+    public void setContract_drop_off_distance(double contract_drop_off_distance) {
+        this.contract_drop_off_distance = contract_drop_off_distance;
     }
 
     public int getDateDiff() {
@@ -169,6 +194,7 @@ public class Contract {
         if (contract_extra_chairs){
             totalPrice += 200;
         }
+        totalPrice += (this.contract_pick_up_distance + this.contract_drop_off_distance) * 0.7;
         this.contract_rent_price = totalPrice;//sætter kontraktens pris til den ændelige total pris
     }
 
