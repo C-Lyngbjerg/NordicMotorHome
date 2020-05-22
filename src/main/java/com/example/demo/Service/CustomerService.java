@@ -16,16 +16,16 @@ public class CustomerService {
     public List<Customer> fetchAll(){
         return repo.fetchAll();
     }
-    public Customer create(Customer cus){
-        return repo.create(cus);
+    public Customer add(Customer cus){
+        return repo.add(cus);
     }
-    public Customer findCustomerById(int id){
+    public Customer findById(int id){
         return repo.findById(id);
     }
-    public Boolean deleteCustomer(int id){
+    public Boolean delete(int id){
         return repo.delete(id);
     }
-    public Customer updateCustomer(int id,Customer cus){
+    public Customer update(int id,Customer cus){
         return repo.update(id,cus);
     }
 
