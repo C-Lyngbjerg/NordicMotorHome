@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create invoice</title>
+</head>
+<body>
+<h1> Create new invoice </h1>
+<table>
+    <form action="/createInvoice" method="post">
+        <tr>
+            <td><label>Enter invoice ID</label></td>
+            <td><input type="text" name="invoice_id" placeholder="ID"><br></td>
+        </tr>
+<!--        <tr>-->
+<!--            <td ><label>Enter total price</label></td>-->
+<!--            <td><input type="text" name="invoice_total_price" placeholder="Total price"><br></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label>Enter distance driven</label></td>-->
+<!--            <td><input type="text" name="invoice_distance_drive" placeholder="Distance"><br></td>-->
+<!--        </tr>-->
+        <tr>
+            <td><label>Enter odometer end</label></td>
+            <td><input type="text" name="invoice_odometer_end" placeholder="Odometer End"><br></td>
+        </tr>
+        <tr>
+            <td><label>Enter contract ID</label></td>
+            <td><input type="text" name="contract_id" placeholder="ID"><br></td>
+        </tr>
+        <tr>
+            <td><label>Enter fuel gage</label></td>
+            <td><input type="text" name="invoice_fuel_gage" placeholder="Fuel amount"><br></td>
+        </tr>
+        <tr>
+            <td><input class="returnButton" type="submit" value="Create"></td>
+        </tr>
+    </form>
+</table>
+</body>
+</html>
