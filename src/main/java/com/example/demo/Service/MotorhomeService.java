@@ -20,15 +20,15 @@ public class MotorhomeService {
         return motorhomeRepo.addMotorhome(motorhome);
     }
 
-    public Motorhome findMotorhomeByRegNumber(String regNumber){
-        return motorhomeRepo.findMotorhomeByRegNumber(regNumber);
+    public Motorhome findMotorhomeById(int id){
+        return motorhomeRepo.findMotorhomeById(id);
     }
 
-    public Boolean deleteMotorhome(String regNumber){
-        return motorhomeRepo.deleteMotorhome(regNumber);
+    public Boolean deleteMotorhome(int id){
+        return motorhomeRepo.deleteMotorhome(id);
     }
 
-    public Motorhome updateMotorhome(String regNumber, Motorhome motorhome){
-        return motorhomeRepo.updateMotorhome(regNumber,motorhome);
+    public Motorhome updateMotorhome(int id, Motorhome motorhome){
+        return motorhomeRepo.updateMotorhome(id,motorhome);
     }
 }

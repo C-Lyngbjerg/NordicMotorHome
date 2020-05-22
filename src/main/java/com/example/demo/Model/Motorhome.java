@@ -6,6 +6,7 @@ import javax.persistence.Id;
 @Entity
 public class Motorhome {
     @Id
+    private int motorhome_id;
     private String motorhome_reg_number;
     private String motorhome_brand;
     private int motorhome_room_heigth;
@@ -21,7 +22,8 @@ public class Motorhome {
 
     }
 
-    public Motorhome(String motorhome_reg_number, String motorhome_brand, int motorhome_room_heigth, String motorhome_model, int motorhome_odometer, int type_id, int type_price_per_day, int type_bed_count, int type_seat_count) {
+    public Motorhome(int motorhome_id, String motorhome_reg_number, String motorhome_brand, int motorhome_room_heigth, String motorhome_model, int motorhome_odometer, int type_id, int type_price_per_day, int type_bed_count, int type_seat_count) {
+        this.motorhome_id = motorhome_id;
         this.motorhome_reg_number = motorhome_reg_number;
         this.motorhome_brand = motorhome_brand;
         this.motorhome_room_heigth = motorhome_room_heigth;
@@ -31,6 +33,14 @@ public class Motorhome {
         this.type_price_per_day = type_price_per_day;
         this.type_bed_count = type_bed_count;
         this.type_seat_count = type_seat_count;
+    }
+
+    public int getMotorhome_id() {
+        return motorhome_id;
+    }
+
+    public void setMotorhome_id(int motorhome_id) {
+        this.motorhome_id = motorhome_id;
     }
 
     public String getType_description() {
