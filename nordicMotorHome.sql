@@ -64,6 +64,7 @@ CREATE TABLE contracts
     contract_end_date DATE NOT NULL,
     contract_odometer_start INT NOT NULL,
     contract_extra_bike_rack TINYINT NOT NULL,
+    contract_extra_bed_sheets TINYINT NOT NULL,
     contract_extra_child_seat TINYINT NOT NULL,
     contract_extra_picnic_table TINYINT NOT NULL,
     contract_extra_chairs TINYINT NOT NULL,
