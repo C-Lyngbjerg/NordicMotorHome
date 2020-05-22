@@ -1,8 +1,10 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Contract;
 import com.example.demo.Model.Customer;
 import com.example.demo.Model.Invoice;
 import com.example.demo.Model.Motorhome;
+import com.example.demo.Service.ContractService;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.InvoiceService;
 import com.example.demo.Service.MotorhomeService;
@@ -23,6 +25,9 @@ public class HomeController {
     MotorhomeService motorhomeService;
     @Autowired
     InvoiceService invoiceService;
+    @Autowired
+    ContractService contractService;
+
 
     @GetMapping("/")
     public String index() {
@@ -47,14 +52,12 @@ public class HomeController {
         return "redirect:/customerTable";
     }
 
-
     @GetMapping("/motorhomeTable")
     public String motorhomeTable(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchall();
         model.addAttribute("motorhomes", motorhomeList);
         return "home/motorhomeTable";
     }
-
     @GetMapping("/createMotorhome")
     public String createMotorhome() {
         return "home/createMotorhome";
@@ -65,6 +68,7 @@ public class HomeController {
         motorhomeService.addMotorhome(motorhome);
         return "redirect:/motorhomeTable";
     }
+
     //TODO
     //TODO Lav udregning af ekstra omkostninger i forbindelse med 400 km om dagen i gennemsnit.
     //TODO Lav udregning af ekstra omkostninger i forbindelse med hvorvidt tank er under 50%
@@ -95,6 +99,25 @@ public class HomeController {
     public String createInvoice(@ModelAttribute Invoice invoice) {
         invoiceService.addInvoice(invoice);
         return "redirect:/invoiceTable";
+
+
+    @GetMapping("/contractTable")
+    public String contractTable(Model model){
+        List<Contract> contractList = contractService.fetchAll();
+        model.addAttribute("contracts", contractList);
+        return "home/contractTable";
+    }
+    @GetMapping("/createContract")
+    public String createContract() {
+        return "home/createContract";
+    }
+    @PostMapping("/createContract")
+    public String createContract(@ModelAttribute Contract contract){
+        int rentPeriodPrice = contractService.calculateRentPeriodPrice(contract);
+        contract.calculatePrice(rentPeriodPrice);
+        contractService.addContract(contract);
+        return "redirect:/contractTable";
+
     }
 }
 //én lille piskommentar
