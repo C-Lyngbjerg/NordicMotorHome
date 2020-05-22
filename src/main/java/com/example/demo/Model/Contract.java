@@ -20,13 +20,13 @@ public class Contract {
     private boolean contract_extra_picnic_table;
     private boolean contract_extra_chairs;
     private int customer_id;
-    private String motorhome_reg_number;
+    private int motorhome_id;
     private int dateDiff;
 
     public Contract() {
     }
 
-    public Contract(int contract_id, double contract_rent_price, String contract_start_date, String contract_end_date, int contract_odometer_start, boolean contract_extra_bike_rack, boolean contract_extra_child_seat, boolean contract_extra_bed_sheets, boolean contract_extra_picnic_table, boolean contract_extra_chairs, int customer_id, String motorhome_reg_number) {
+    public Contract(int contract_id, double contract_rent_price, String contract_start_date, String contract_end_date, int contract_odometer_start, boolean contract_extra_bike_rack, boolean contract_extra_child_seat, boolean contract_extra_bed_sheets, boolean contract_extra_picnic_table, boolean contract_extra_chairs, int customer_id, int motorhome_id) {
         this.contract_id = contract_id;
         this.contract_rent_price = contract_rent_price;
         this.contract_start_date = contract_start_date;
@@ -38,7 +38,7 @@ public class Contract {
         this.contract_extra_picnic_table = contract_extra_picnic_table;
         this.contract_extra_chairs = contract_extra_chairs;
         this.customer_id = customer_id;
-        this.motorhome_reg_number = motorhome_reg_number;
+        this.motorhome_id = motorhome_id;
     }
 
     public int getDateDiff() {
@@ -137,12 +137,12 @@ public class Contract {
         this.customer_id = customer_id;
     }
 
-    public String getMotorhome_reg_number() {
-        return motorhome_reg_number;
+    public int getMotorhome_id() {
+        return motorhome_id;
     }
 
-    public void setMotorhome_reg_number(String motorhome_reg_number) {
-        this.motorhome_reg_number = motorhome_reg_number;
+    public void setMotorhome_id(int motorhome_reg_number) {
+        this.motorhome_id = motorhome_reg_number;
     }
 
     /*

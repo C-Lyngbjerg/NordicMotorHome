@@ -49,7 +49,7 @@ public class HomeController {
 
     @PostMapping("/createCustomer")
     public String createCustomer(@ModelAttribute Customer customer) {
-        customerService.addCustomer(customer);
+        customerService.add(customer);
         return "redirect:/customerTable";
     }
 
@@ -100,7 +100,7 @@ public class HomeController {
     public String createInvoice(@ModelAttribute Invoice invoice) {
         invoiceService.addInvoice(invoice);
         return "redirect:/invoiceTable";
-
+    }
 
     @GetMapping("/contractTable")
     public String contractTable(Model model){

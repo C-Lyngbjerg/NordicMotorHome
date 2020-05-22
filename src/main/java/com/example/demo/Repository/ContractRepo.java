@@ -1,14 +1,12 @@
 package com.example.demo.Repository;
 
 import com.example.demo.Model.Contract;
-import com.example.demo.Model.Motorhome;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class ContractRepo implements RepositoryI{
     public Object add(Object obj){
         Contract con = (Contract) obj;
         String sql = "INSERT INTO contracts (contract_id,contract_rent_price,contract_start_date,contract_end_date,contract_odometer_start,contract_extra_bike_rack,contract_extra_bed_sheets,contract_extra_child_seat,contract_extra_picnic_table,contract_extra_chairs,customer_id,motorhome_reg_number) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-        template.update(sql,con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_reg_number());
+        template.update(sql,con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_id());
         return null;
     }
     // Denne metode vælger alle fra contracts hvor id'et matcher det parameteroverførte id.
@@ -49,7 +47,7 @@ public class ContractRepo implements RepositoryI{
     // Den displayer alle informationerne og gemmer efterfølgende det der står, ændret eller uændret.
     public Contract updateContract(int id, Contract con){
         String sql = "UPDATE contracts SET contract_id = ?,contract_rent_price = ?,contract_start_date = ?,contract_end_date = ?,contract_odometer_start = ?,contract_extra_bike_rack = ?,contract_extra_bed_sheets = ?,contract_extra_child_seat = ?,contract_extra_picnic_table = ?,contract_extra_chairs = ?,customer_id = ?,motorhome_reg_number = ?) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-        template.update(sql, con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_reg_number());
+        template.update(sql, con.getContract_id(),con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_id());
         return null;
     }
     // Denne metode tager den parameteroverførte kontrakt og søger efter price_per_day i mh_types tabellen hvor type_id matcher med type_id for den autocamper det er brugt i kontrakten.
@@ -60,7 +58,7 @@ public class ContractRepo implements RepositoryI{
     // De to værdier der er blevet sat ind i det to lists bliver added til den sidste liste og den liste bliver returneret og brugt i homecontrolleren.
     public List<Double> calculateRentPeriodAndPrice(Contract con){
         String sql1 = "SELECT type_price_per_day FROM mh_types WHERE type_id IN (SELECT type_id FROM motorhomes m WHERE m.motorhome_reg_number = ?)";
-        List<Double> priceList = template.queryForList(sql1, Double.class, con.getMotorhome_reg_number());
+        List<Double> priceList = template.queryForList(sql1, Double.class, con.getMotorhome_id());
         String sql = "SELECT DATEDIFF(?,?) AS dateDiff";
         List<Double> dateDiff = template.queryForList(sql, Double.class, con.getContract_end_date(), con.getContract_start_date());
         List<Double> dateDiffAndDays = new ArrayList<Double>();
