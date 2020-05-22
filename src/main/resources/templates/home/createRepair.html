@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Repair</title>
+</head>
+<body>
+<h1>Repair menu</h1>
+<table>
+    <form action="/createRepair" method="post">
+        <tr>
+            <td><label>Indtast repair id</label></td>
+            <td><input type="text" name="repair_id" placeholder="Repair id"><br></td>
+        </tr>
+        <tr>
+            <td><label>Indtast kort beskrivelse</label></td>
+            <td><input type="text" name="repair_description" placeholder="Beskrivelse"><br></td>
+        </tr>
+        <tr>
+            <td><label>Indtast dato</label></td>
+            <td><input type="text" name="repair_date" placeholder="Format: YYYY-MM-DD"><br></td>
+        </tr>
+        <tr>
+            <td><label>Indtast motorhome id</label></td>
+            <td><input type="text" name="motorhome_id" placeholder="Motorhome id"><br></td>
+        </tr>
+        <tr>
+            <td><input class="returnButton" type="submit" value="Create"></td>
+        </tr>
+    </form>
+</table>
+<form action="/repairTable/" method="post">
+    <input class="returnButton" type="submit" value="Return">
+</form>
+</body>
+</html>
