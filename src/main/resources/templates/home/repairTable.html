@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Repair Table</title>
+</head>
+<body>
+<a href = "/createRepair">
+    <button>Create new repair</button>
+</a>
+<table>
+    <thead>
+    <tr>
+        <th>Repair id</th>
+        <th>Description</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="repair: ${repairs}">
+        <td th:text="${repair.repair_id}"/>
+        <td th:text="${repair.repair_description}"/>
+        <td th:text="${repair.repair_date}"/>
+<!--        <td>-->
+<!--            <a style="text-decoration: none" th:href="@{'/viewOne/'+${motorhome.motorhome_reg_number}}">-->
+<!--                <button class="btn", id="btn-viewOne">View</button>-->
+<!--            </a>-->
+<!--            <a style="text-decoration: none" th:href="@{'/delete/'+${motorhome.motorhome_reg_number}}">-->
+<!--                <button class="btn", id="btn-delete">Delete</button>-->
+<!--            </a>-->
+<!--            <a style="text-decoration: none" th:href="@{'/update/'+${motorhome.motorhome_reg_number}}">-->
+<!--                <button class="btn", id="btn-update">Update info</button>-->
+<!--            </a>-->
+<!--        </td>-->
+    </tr>
+    </tbody>
+</table>
+<form action="/repairTable/" method="post">
+    <input class="returnButton" type="submit" value="Return">
+</form>
+</body>
+</html>

@@ -1,13 +1,7 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Contract;
-import com.example.demo.Model.Customer;
-import com.example.demo.Model.Invoice;
-import com.example.demo.Model.Motorhome;
-import com.example.demo.Service.ContractService;
-import com.example.demo.Service.CustomerService;
-import com.example.demo.Service.InvoiceService;
-import com.example.demo.Service.MotorhomeService;
+import com.example.demo.Model.*;
+import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +22,8 @@ public class HomeController {
     InvoiceService invoiceService;
     @Autowired
     ContractService contractService;
+    @Autowired
+    RepairService repairService;
 
 
     @GetMapping("/")
@@ -70,9 +66,9 @@ public class HomeController {
         return "redirect:/motorhomeTable";
     }
 
-    //TODO
-    //TODO Lav udregning af ekstra omkostninger i forbindelse med 400 km om dagen i gennemsnit.
-    //TODO Lav udregning af ekstra omkostninger i forbindelse med hvorvidt tank er under 50%
+    /*
+    * Invoice del
+    */
 
     //Create invoice table i html filen 'invoiceTable'
     @GetMapping("/invoiceTable")
@@ -102,6 +98,10 @@ public class HomeController {
         return "redirect:/invoiceTable";
     }
 
+    /*
+     * Contract del
+     */
+
     @GetMapping("/contractTable")
     public String contractTable(Model model){
         List<Contract> contractList = contractService.fetchAll();
@@ -120,7 +120,6 @@ public class HomeController {
         contract.calculatePrice(datesAndPrice);// Listen der blev inisaliseret før bliver parameter overført til at kunne udregne den totale pris for udlejningsperioden
         contractService.add(contract);//contracten bliver tilføjet til databasen
         return "redirect:/contractTable";
-
     }
 
     @GetMapping("/viewOneContract/{contract_id}")
@@ -135,5 +134,30 @@ public class HomeController {
         return "home/cancelledContract";
 
     }
+    /*
+     * Repair del
+     */
+    //står for at lave og vise de tilgængelige repair objekter, til html side 'repairTable'
+    @GetMapping("/repairTable")
+    public String createRepair(Model model){
+        List<Repair> repairList = repairService.fetchAll();
+        model.addAttribute("repairs", repairList);
+        return "home/repairTable";
+    }
+    //Returnere fra et givent punkt i repair del, ved tryk på en return knap
+    @PostMapping("/repairTable")
+    public String returnFromRepair(){
+        return "redirect:/";
+    }
+    //Tager dig til createRepair html side, så man kan indsætte data
+    @GetMapping("/createRepair")
+    public String createRepair() {
+        return "home/createRepair";
+    }
+    //Står for at lave et nyt repair objekt ud fra indsat data, ved tryk på
+    @PostMapping("/createRepair")
+    public String createRepair(@ModelAttribute Repair repair){
+        repairService.addRepair(repair);
+        return "redirect:/repairTable";
+    }
 }
-//én lille piskommentar
