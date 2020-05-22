@@ -22,6 +22,8 @@ public class Contract {
     private int customer_id;
     private int motorhome_id;
     private int dateDiff;
+    private int contract_pick_up_distance;
+    private int contract_drop_off_distance;
 
     public Contract() {
     }
