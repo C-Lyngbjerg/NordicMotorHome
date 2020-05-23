@@ -25,7 +25,7 @@ public class ContractService {
         return repo.delete(id);
     }
     public Contract updateContract(int id,Contract con){
-        return repo.updateContract(id,con);
+        return repo.update(id,con);
     }
     public List<Double> calculateRentPeriodAndPrice(Contract con){
         return repo.calculateRentPeriodAndPrice(con);

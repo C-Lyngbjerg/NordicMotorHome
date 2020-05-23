@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CustomerRepo{
+public class CustomerRepo implements RepositoryI{
     @Autowired
     JdbcTemplate template;
 
@@ -18,9 +18,10 @@ public class CustomerRepo{
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return template.query(sql, rowMapper);
     }
-    public Customer add(Customer cus){
-        String sql = "INSERT INTO customers (customer_id,customer_first_name,customer_last_name,customer_address,customer_drivers_license,customer_license_type, customer_phone,customer_city,customer_country,customer_zip_code) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        template.update(sql,cus.getCustomer_id(),cus.getCustomer_first_name(),cus.getCustomer_last_name(),cus.getCustomer_address(),cus.getCustomer_drivers_license(),cus.getCustomer_license_type(),cus.getCustomer_phone(),cus.getCustomer_city(),cus.getCustomer_country(),cus.getCustomer_zip_code());
+    public Customer add(Object obj){
+        Customer cus = (Customer) obj;
+        String sql = "INSERT INTO customers (customer_id,customer_first_name,customer_last_name,customer_address,customer_drivers_license,customer_license_type, customer_phone,customer_city,customer_nationality,customer_zip_code) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        template.update(sql,cus.getCustomer_id(),cus.getCustomer_first_name(),cus.getCustomer_last_name(),cus.getCustomer_address(),cus.getCustomer_drivers_license(),cus.getCustomer_license_type(),cus.getCustomer_phone(),cus.getCustomer_city(),cus.getCustomer_nationality(),cus.getCustomer_zip_code());
         return null;
     }
 
@@ -30,15 +31,18 @@ public class CustomerRepo{
         Customer cus =template.queryForObject(sql, rowMapper,id);
         return cus;
     }
-
+    //Sletter kunde, samt kontrakt og invoice denne kunde er en del af.
     public Boolean delete(int id){
         String sql = "DELETE FROM customers WHERE customer_id = ?";
         return template.update(sql, id) < 0;
     }
 
-    public Customer update(int id, Customer cus){
-        String sql = "UPDATE customers SET customer_id = ?, customer_first_name = ?, customer_last_name = ?,customer_address = ?, customer_drivers_license = ?, customer_license_type = ?,customer_phone = ?, customer_city = ?, customer_county = ?, customer_zip_code = ? WHERE customer_id = ?";
-        template.update(sql, cus.getCustomer_id(),cus.getCustomer_first_name(),cus.getCustomer_last_name(),cus.getCustomer_address(),cus.getCustomer_drivers_license(),cus.getCustomer_license_type(),cus.getCustomer_phone(),cus.getCustomer_city(),cus.getCustomer_country(),cus.getCustomer_zip_code(), cus.getCustomer_id());
+    public Customer update(int id, Object obj){
+        Customer cus = (Customer) obj;
+        String sql1 = "UPDATE zips SET zip_city = ?, zip_code = ? WHERE zip_code = ?";
+        String sql2 = "UPDATE customers SET customer_id = ?, customer_first_name = ?, customer_last_name = ?,customer_address = ?, customer_drivers_license = ?, customer_license_type = ?,customer_phone = ?, customer_city = ?, customer_nationality = ?, customer_zip_code = ? WHERE customer_id = ?";
+        template.update(sql1,cus.getCustomer_city(),cus.getCustomer_zip_code(),cus.getCustomer_zip_code());
+        template.update(sql2, cus.getCustomer_id(),cus.getCustomer_first_name(),cus.getCustomer_last_name(),cus.getCustomer_address(),cus.getCustomer_drivers_license(),cus.getCustomer_license_type(),cus.getCustomer_phone(),cus.getCustomer_city(),cus.getCustomer_nationality(),cus.getCustomer_zip_code(), cus.getCustomer_id());
         return null;
     }
 }

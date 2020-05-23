@@ -17,18 +17,18 @@ public class RepairService {
     }
 
     public Repair addRepair(Repair repair){
-        return repairRepo.addRepair(repair);
+        return repairRepo.add(repair);
     }
 
-    public Repair findRepairById(int id){
-        return repairRepo.findRepairById(id);
+    public Repair findById(int id){
+        return repairRepo.findById(id);
     }
 
-    public Boolean deleteRepair(int id){
-        return repairRepo.deleteRepair(id);
+    public Boolean delete(int id){
+        return repairRepo.delete(id);
     }
 
-    public Repair updateRepair(int id, Repair repair){
-        return repairRepo.updateRepair(id,repair);
+    public Repair update(int id, Repair repair){
+        return repairRepo.update(id,repair);
     }
 }

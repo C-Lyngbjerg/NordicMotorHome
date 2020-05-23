@@ -13,13 +13,14 @@ public class Customer {
     private String customer_drivers_license;
     private String customer_license_type;
     private String customer_phone;
+    private String customer_nationality;
     private String customer_city;
-    private String customer_country;
     private int customer_zip_code;
 
     public Customer(){}
 
-    public Customer(int customer_id, String customer_first_name, String customer_last_name, String customer_address, String customer_drivers_license, String customer_license_type, String customer_phone, String customer_city, String customer_country, int customer_zip_code) {
+    public Customer(int customer_id, String customer_first_name, String customer_last_name, String customer_address, String customer_drivers_license,
+                    String customer_license_type, String customer_phone, String customer_city, String customer_nationality, int customer_zip_code) {
         this.customer_id = customer_id;
         this.customer_first_name = customer_first_name;
         this.customer_last_name = customer_last_name;
@@ -27,8 +28,8 @@ public class Customer {
         this.customer_drivers_license = customer_drivers_license;
         this.customer_license_type = customer_license_type;
         this.customer_phone = customer_phone;
+        this.customer_nationality = customer_nationality;
         this.customer_city = customer_city;
-        this.customer_country = customer_country;
         this.customer_zip_code = customer_zip_code;
     }
 
@@ -96,12 +97,12 @@ public class Customer {
         this.customer_city = customer_city;
     }
 
-    public String getCustomer_country() {
-        return customer_country;
+    public String getCustomer_nationality() {
+        return customer_nationality;
     }
 
-    public void setCustomer_country(String customer_country) {
-        this.customer_country = customer_country;
+    public void setCustomer_nationality(String customer_country) {
+        this.customer_nationality = customer_nationality;
     }
 
     public int getCustomer_zip_code() {
