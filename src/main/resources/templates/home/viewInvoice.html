@@ -11,22 +11,24 @@
     <tr>
         <th>Invoice Id</th>
         <th>Contract Id</th>
-        <th>Total Price</th>
         <th>Distance Driven</th>
         <th>Days rented</th>
         <th>Fuel gage under 50%</th>
+<!--        <th>Total Price</th>-->
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><span th:text="${invoice.invoice_id}"></span></td>
         <td><span th:text="${invoice.contract_id}"></span></td>
-        <td><span th:text="${invoice.invoice_total_price}"></span></td>
         <td><span th:text="${invoice.invoice_distance_driven}"></span></td>
         <td><span th:text="${invoice.invoice_rent_days}"></span></td>
         <td><span th:text="${invoice.invoice_fuel_gage}"></span></td>
+<!--        <td><span th:text="${invoice.invoice_total_price}"></span></td>-->
     </tr>
     </tbody>
 </table>
 </body>
 </html>
+
+<!-- Har udkommenteret invoice_total_price for nu, da det ikke virker og jeg ikke kan finde en løsning. Afventer snak med Cay - Christoffer-->
