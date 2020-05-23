@@ -20,7 +20,7 @@ public class Customer {
     public Customer(){}
 
     public Customer(int customer_id, String customer_first_name, String customer_last_name, String customer_address, String customer_drivers_license,
-                    String customer_license_type, String customer_phone, String customer_city, String customer_nationality, int customer_zip_code) {
+                    String customer_license_type, String customer_phone, String customer_nationality, String customer_city, int customer_zip_code) {
         this.customer_id = customer_id;
         this.customer_first_name = customer_first_name;
         this.customer_last_name = customer_last_name;
