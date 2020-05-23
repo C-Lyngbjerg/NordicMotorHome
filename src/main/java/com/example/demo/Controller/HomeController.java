@@ -133,7 +133,31 @@ public class HomeController {
     public String cancelContract(@PathVariable("contract_id") int contract_id, Model model){
         model.addAttribute("contract",contractService.cancelContract(contract_id));
         return "home/cancelledContract";
+    }
 
+    @GetMapping("/updateContract/{contract_id}")
+    public String updateContract(@PathVariable("contract_id") int contract_id, Model model){
+        model.addAttribute("contract", contractService.findById(contract_id));
+        return "home/updateContract";
+    }
+
+    @PostMapping("/updatedContract")
+    public String updatedContract(@ModelAttribute Contract contract){
+        List<Double> priceAndDateDiff = contractService.calculateRentPeriodAndPrice(contract);
+        contract.calculatePrice(priceAndDateDiff);
+        contractService.update(contract);
+        return "redirect:/contractTable";
+    }
+
+    @GetMapping("/deleteContract/{contract_id}")
+    public String deleteContract(@PathVariable("contract_id") int contract_id){
+        boolean deleted = contractService.delete(contract_id);
+        if(deleted){
+            return "redirect:/contractTable";
+        }
+        else{
+            return "redirect:/contractTable";
+        }
     }
 }
 //én lille piskommentar

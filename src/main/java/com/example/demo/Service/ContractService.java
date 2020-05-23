@@ -24,8 +24,8 @@ public class ContractService {
     public Boolean delete(int id){
         return repo.delete(id);
     }
-    public Object update(int id,Object obj){
-        return repo.update(id,obj);
+    public Object update(Object obj){
+        return repo.update(obj);
     }
     public List<Double> calculateRentPeriodAndPrice(Contract con){
         return repo.calculateRentPeriodAndPrice(con);

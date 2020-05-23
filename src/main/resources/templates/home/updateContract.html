@@ -7,15 +7,15 @@
 <body>
 <h1>Edit contract</h1>
 <form action="/updatedContract" method="post">
-    <table id="submitTable" style="width: 22%">
+    <table>
         <thead>
         <tr>
             <th>Info</th>
             <th>Input</th>
         </tr>
         </thead>
-        <tbody style="text-align: left">
-        <tr>
+        <tbody>
+        <tr style="display: none">
             <td>
                 <label>Contract ID</label>
             </td>
@@ -44,7 +44,7 @@
                 <label>End date</label>
             </td>
             <td>
-                <input type="text" name="contract_from_date" th:value="${contract.contract_from_date}">
+                <input type="text" name="contract_end_date" th:value="${contract.contract_end_date}">
             </td>
         </tr>
         <tr>
@@ -52,15 +52,71 @@
                 <label>Start odometer</label>
             </td>
             <td>
-                <input type="text" name="contract_odometer" th:value="${contract.contract_odometer}">
+                <input type="text" name="contract_odometer_start" th:value="${contract.contract_odometer_start}">
             </td>
         </tr>
         <tr>
             <td>
-                <label>Car registration number</label>
+                <label>Motorhome ID</label>
             </td>
             <td>
-                <input type="text" name="car_reg_number" th:value="${contract.car_reg_number}">
+                <input type="text" name="motorhome_id" th:value="${contract.motorhome_id}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Bike rack</label>
+            </td>
+            <td>
+                <input type="text" name="contract_extra_bike_rack" th:value="${contract.contract_extra_bike_rack}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Child seat</label>
+            </td>
+            <td>
+                <input type="text" name="contract_extra_child_seat" th:value="${contract.contract_extra_child_seat}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Bed sheets</label>
+            </td>
+            <td>
+                <input type="text" name="contract_extra_bed_sheets" th:value="${contract.contract_extra_bed_sheets}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Picnic table</label>
+            </td>
+            <td>
+                <input type="text" name="contract_extra_picnic_table" th:value="${contract.contract_extra_picnic_table}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Chairs</label>
+            </td>
+            <td>
+                <input type="text" name="contract_extra_chairs" th:value="${contract.contract_extra_chairs}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Distance to pick up</label>
+            </td>
+            <td>
+                <input type="text" name="contract_pick_up_distance" th:value="${contract.contract_pick_up_distance}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Distance to drop off</label>
+            </td>
+            <td>
+                <input type="text" name="contract_drop_off_distance" th:value="${contract.contract_drop_off_distance}">
             </td>
         </tr>
         </tbody>
