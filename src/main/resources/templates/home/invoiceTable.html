@@ -30,15 +30,15 @@
         <td th:text="${invoice.invoice_fuel_gage}"/>
 
         <td>
-           <!-- <a style="text-decoration: none" th:href="@{'/viewOne/'+${motorhome.motorhome_reg_number}}">
+           <a style="text-decoration: none" th:href="@{'/viewInvoice/'+${invoice.invoice_id}}">
                 <button class="btn", id="btn-viewOne">View</button>
             </a>
-            <a style="text-decoration: none" th:href="@{'/delete/'+${motorhome.motorhome_reg_number}}">
+            <a style="text-decoration: none" th:href="@{'/deleteInvoice/'+${invoice.invoice_id}}">
                 <button class="btn", id="btn-delete">Delete</button>
             </a>
-            <a style="text-decoration: none" th:href="@{'/update/'+${motorhome.motorhome_reg_number}}">
+            <a style="text-decoration: none" th:href="@{'/updateInvoice/'+${invoice.invoice_id}}">
                 <button class="btn", id="btn-update">Update info</button>
-            </a>-->
+            </a>
         </td>
     </tr>
     </tbody>

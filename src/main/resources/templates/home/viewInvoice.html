@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+</head>
+<body>
+<h1>Invoice info</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Invoice Id</th>
+        <th>Contract Id</th>
+        <th>Total Price</th>
+        <th>Distance Driven</th>
+        <th>Days rented</th>
+        <th>Fuel gage under 50%</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><span th:text="${invoice.invoice_id}"></span></td>
+        <td><span th:text="${invoice.contract_id}"></span></td>
+        <td><span th:text="${invoice.invoice_total_price}"></span></td>
+        <td><span th:text="${invoice.invoice_distance_driven}"></span></td>
+        <td><span th:text="${invoice.invoice_rent_days}"></span></td>
+        <td><span th:text="${invoice.invoice_fuel_gage}"></span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
