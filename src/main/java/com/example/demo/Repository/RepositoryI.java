@@ -1,5 +1,6 @@
 package com.example.demo.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface RepositoryI {

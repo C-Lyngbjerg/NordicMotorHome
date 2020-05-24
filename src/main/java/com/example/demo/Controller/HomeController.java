@@ -25,6 +25,7 @@ public class HomeController {
     @Autowired
     RepairService repairService;
 
+//TODO kig på at indbygge knapper til valg af zipkode og andre ting du ved bro
 
     @GetMapping("/")
     public String index() {
