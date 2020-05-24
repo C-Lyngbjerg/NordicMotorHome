@@ -12,7 +12,7 @@
     <tr>
         <th>Contract ID</th>
         <th>Customer ID</th>
-        <th>Rental price</th>
+        <th>Rental price after cancellation</th>
     </tr>
     </thead>
     <tbody>
@@ -21,15 +21,15 @@
         <td><span th:text="${contract.customer_id}"></span></td>
         <td><span th:text="${contract.contract_rent_price}"></span></td>
         <td>
-            <a th:href="@{confirmCancellation/{id}/{price}(id = ${contract.contract_id}, price = ${contract.contract_rent_price})}">
-                <button>Cancel contract</button>
-            </a>
+
         </td>
     </tr>
     </tbody>
     <br>
     <p>Are you sure you want to cancel this contract?</p>
-
+    <a th:href="@{confirmCancellation/{id}/{price}(id = ${contract.contract_id}, price = ${contract.contract_rent_price})}">
+        <button>Confirm</button>
+    </a>
     <a style="text-decoration: none" href = "/contractTable">
         <button>Return to contracts table</button>
     </a>

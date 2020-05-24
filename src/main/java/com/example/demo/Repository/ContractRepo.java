@@ -18,7 +18,7 @@ public class ContractRepo implements RepositoryI{
     JdbcTemplate template;
     // Vores fetchAll metode henter alle kontrakterne og mapper database resultsettet i en collection. fetchAll metoden bliver brugt i homecontrolleren.
     public List<Contract> fetchAll(){
-        String sql = "SELECT * FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id";
+        String sql = "SELECT * FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id ORDER BY contract_id";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return template.query(sql, rowMapper);
     }

@@ -140,7 +140,7 @@ public class HomeController {
         con.setContract_rent_price(price);
         contractService.update(con);
         //invoice skal ændres her.
-        return "redircet:/contractTable";
+        return "redirect:/contractTable";
     }
 
     @GetMapping("/updateContract/{contract_id}")
