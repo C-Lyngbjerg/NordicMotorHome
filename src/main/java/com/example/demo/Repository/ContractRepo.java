@@ -32,19 +32,20 @@ public class ContractRepo implements RepositoryI{
     // Denne metode vælger alle fra contracts hvor id'et matcher det parameteroverførte id.
     // så mapper Rowmapperen informationerne fra kontrakten og der oprettes et contract object som returneres.
     public Object findById(int id){
-        String sql = "SELECT contract_id, contract_rent_price, contract_start_date, contract_end_date, contract_odometer_start, contract_extra_bike_rack, contract_extra_bed_sheets, contract_extra_child_seat, contract_extra_picnic_table, contract_extra_chairs, customer_id, c.motorhome_id, motorhome_reg_number FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id WHERE contract_id = ?";
+        String sql = "SELECT * FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id WHERE contract_id = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         Contract con =template.queryForObject(sql, rowMapper,id);
         return con;
     }
-    // Denne metode bruger prepared statement til at slette en kontrakt med det parameteroverføte id.
-    // SQL statementet findet matchet med id'et og sletter.( i tvivl om < 0 ?)
+
+    /*Denne metode bruger prepared statement til at slette en kontrakt med det parameteroverføte id.
+     SQL statementet findet matchet med id'et og sletter.( i tvivl om < 0 ?)*/
     public Boolean delete(int id){
         String sql = "DELETE FROM contracts WHERE contract_id = ?";
         return template.update(sql, id) < 0;
     }
-    // Denne metode vælge via prepared sql statement en kontrakt med det parameteroverførte id og giver mulighed for at ændre i informationer.
-    // Den displayer alle informationerne og gemmer efterfølgende det der står, ændret eller uændret.
+    /*Denne metode vælge via prepared sql statement en kontrakt med det parameteroverførte id og giver mulighed for at ændre i informationer.
+    Den displayer alle informationerne og gemmer efterfølgende det der står, ændret eller uændret.*/
     public Object update(Object obj){
         Contract con = (Contract) obj;
         String sql = "UPDATE contracts SET contract_rent_price = ?,contract_start_date = ?,contract_end_date = ?,contract_odometer_start = ?,contract_extra_bike_rack = ?,contract_extra_bed_sheets = ?,contract_extra_child_seat = ?,contract_extra_picnic_table = ?,contract_extra_chairs = ?,customer_id = ?,motorhome_id = ? WHERE contract_id = ?";
@@ -52,12 +53,13 @@ public class ContractRepo implements RepositoryI{
 
         return null;
     }
-    // Denne metode tager den parameteroverførte kontrakt og søger efter price_per_day i mh_types tabellen hvor type_id matcher med type_id for den autocamper det er brugt i kontrakten.
-    // Så laver den et list object priceList som indeholder den pris der bliver hentet hjem vi statementet og templaten.
-    // Derefter lavet den et statement som tager to datoer og regner distancen mellem disse.
-    // Den laver næst et List object dateDiff som tager fat i de to datoer, start og end fra Contract objectet.
-    // Så laver den et tredje list object dateDiffAndDays som er en ArrayList der indeholder double værdier.
-    // De to værdier der er blevet sat ind i det to lists bliver added til den sidste liste og den liste bliver returneret og brugt i homecontrolleren.
+
+    /* Denne metode tager den parameteroverførte kontrakt og søger efter price_per_day i mh_types tabellen hvor type_id matcher med type_id for den autocamper det er brugt i kontrakten.
+     Så laver den et list object priceList som indeholder den pris der bliver hentet hjem vi statementet og templaten.
+     Derefter lavet den et statement som tager to datoer og regner distancen mellem disse.
+     Den laver næst et List object dateDiff som tager fat i de to datoer, start og end fra Contract objectet.
+     Så laver den et tredje list object dateDiffAndDays som er en ArrayList der indeholder double værdier.
+    De to værdier der er blevet sat ind i det to lists bliver added til den sidste liste og den liste bliver returneret og brugt i homecontrolleren.*/
     public List<Double> calculateRentPeriodAndPrice(Contract con){
         String sql1 = "SELECT type_price_per_day FROM mh_types WHERE type_id IN (SELECT type_id FROM motorhomes m WHERE m.motorhome_id = ?)";
         Double price = template.queryForObject(sql1, Double.class, con.getMotorhome_id());
@@ -69,12 +71,18 @@ public class ContractRepo implements RepositoryI{
         return priceAndDateDiff;
     }
 
+    /*
+    Denne metode bruges til at udregne prisen for en kontrakt hvis den bliver annulleret
+    Den finder den udvalgte kontrakt og udregner hvor mange dage der er indtil kontraktens start dato.
+    Derefter nedsætter den prisen med den procentdel den skal
+    */
     public Contract cancelContract(int id){
         String sql = "SELECT * FROM contracts WHERE contract_id = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         Contract con = template.queryForObject(sql,rowMapper,id);
-        String sql1 = "SELECT DATEDIFF(?,CURDATE()) FROM contracts WHERE contract_id = ?";
+        String sql1 = "SELECT DATEDIFF(?,CURDATE()) FROM contracts WHERE contract_id = ?"; // Her udregner den dagene mellem dagens dato og starten på kontrakten
         Double daysToStart = template.queryForObject(sql1, Double.class, con.getContract_start_date(),con.getContract_id());
+        // De forskellige if statement til at omregne prisen med den procent del der passer.
         if(daysToStart >= 50){
             if((con.getContract_rent_price() * 0.2) < 200){
                 con.setContract_rent_price(200);
@@ -88,8 +96,7 @@ public class ContractRepo implements RepositoryI{
         }else{
             con.setContract_rent_price(con.getContract_rent_price()*0.95);
         }
-        //String sql2 = "UPDATE contracts SET contract_rent_price = ? WHERE contract_id = ?";
-        //template.update(sql2,con.getContract_rent_price(),con.getContract_id());
+        //Ændringen bliver ikke opdateret til databasen endnu. den retuneres bare
         return con;
     }
 }

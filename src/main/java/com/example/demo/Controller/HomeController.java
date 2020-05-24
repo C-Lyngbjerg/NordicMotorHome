@@ -129,17 +129,27 @@ public class HomeController {
         return "home/viewOneContract";
     }
 
+    //Denne metode bruges hvis man vælger at annullere en kontrakt.
     @GetMapping("/cancelContract/{contract_id}")
     public String cancelContract(@PathVariable("contract_id") int contract_id, Model model){
+        //Tilføjer den contract som har fået ændret sin pris efter annullering
         model.addAttribute("contract",contractService.cancelContract(contract_id));
         return "home/cancelledContract";
     }
+
+    /*
+        Hvis det bliver annulleringen bliver bekræftet opdateres databasen med denne metode
+        Der bliver parameter overført to ting til metoden. kontraktens id og kontraktens nye pris
+        Først finder den konktrakten fra databasen ud fra id'et og laver et nyt kontrakt objekt
+        så bruges der en set funktion til at ændre kontraktens pris til det der bliver parameteroverført
+        objektet bliver så brugt til at opdatere databasen ligesom der bliver gjort i updatedContract metoden nedenfor
+    */
     @GetMapping("/cancelContract/confirmCancellation/{id}/{price}")
     public String confirmCancellation(@PathVariable int id, @PathVariable double price){
         Contract con = (Contract) contractService.findById(id);
         con.setContract_rent_price(price);
         contractService.update(con);
-        //invoice skal ændres her.
+        //invoice skal ændres/laves her.
         return "redirect:/contractTable";
     }
 
