@@ -134,6 +134,14 @@ public class HomeController {
         model.addAttribute("contract",contractService.cancelContract(contract_id));
         return "home/cancelledContract";
     }
+    @GetMapping("/cancelContract/confirmCancellation/{id}/{price}")
+    public String confirmCancellation(@PathVariable int id, @PathVariable double price){
+        Contract con = (Contract) contractService.findById(id);
+        con.setContract_rent_price(price);
+        contractService.update(con);
+        //invoice skal ændres her.
+        return "redircet:/contractTable";
+    }
 
     @GetMapping("/updateContract/{contract_id}")
     public String updateContract(@PathVariable("contract_id") int contract_id, Model model){

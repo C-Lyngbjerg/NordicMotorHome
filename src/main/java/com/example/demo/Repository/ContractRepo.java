@@ -18,7 +18,7 @@ public class ContractRepo implements RepositoryI{
     JdbcTemplate template;
     // Vores fetchAll metode henter alle kontrakterne og mapper database resultsettet i en collection. fetchAll metoden bliver brugt i homecontrolleren.
     public List<Contract> fetchAll(){
-        String sql = "SELECT contract_id, customer_id, c.motorhome_id, motorhome_reg_number FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id";
+        String sql = "SELECT * FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return template.query(sql, rowMapper);
     }
@@ -32,7 +32,7 @@ public class ContractRepo implements RepositoryI{
     // Denne metode vælger alle fra contracts hvor id'et matcher det parameteroverførte id.
     // så mapper Rowmapperen informationerne fra kontrakten og der oprettes et contract object som returneres.
     public Object findById(int id){
-        String sql = "SELECT contract_rent_price, contract_start_date, contract_end_date, contract_odometer_start, contract_extra_bike_rack, contract_extra_bed_sheets, contract_extra_child_seat, contract_extra_picnic_table, contract_extra_chairs, customer_id, c.motorhome_id, motorhome_reg_number FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id WHERE contract_id = ?";
+        String sql = "SELECT contract_id, contract_rent_price, contract_start_date, contract_end_date, contract_odometer_start, contract_extra_bike_rack, contract_extra_bed_sheets, contract_extra_child_seat, contract_extra_picnic_table, contract_extra_chairs, customer_id, c.motorhome_id, motorhome_reg_number FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id WHERE contract_id = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         Contract con =template.queryForObject(sql, rowMapper,id);
         return con;
@@ -88,8 +88,8 @@ public class ContractRepo implements RepositoryI{
         }else{
             con.setContract_rent_price(con.getContract_rent_price()*0.95);
         }
-        String sql2 = "UPDATE contracts SET contract_rent_price = ? WHERE contract_id = ?";
-        template.update(sql2,con.getContract_rent_price(),con.getContract_id());
+        //String sql2 = "UPDATE contracts SET contract_rent_price = ? WHERE contract_id = ?";
+        //template.update(sql2,con.getContract_rent_price(),con.getContract_id());
         return con;
     }
 }

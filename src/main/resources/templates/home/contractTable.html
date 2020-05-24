@@ -14,8 +14,9 @@
     <tr>
         <th>Contract Id</th>
         <th>Customer Id</th>
-        <th>Motorhome Registration Number</th>
         <th>Motorhome Id</th>
+        <th>Motorhome Registration Number</th>
+        <th>Rental price</th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,8 @@
         <td th:text="${contract.customer_id}"/>
         <td th:text="${contract.motorhome_id}"/>
         <td th:text="${contract.motorhome_reg_number}"/>
+        <td th:text="${contract.contract_rent_price}"/>
+
 
         <td>
             <a style="text-decoration: none" th:href="@{'/viewOneContract/'+${contract.contract_id}}">
