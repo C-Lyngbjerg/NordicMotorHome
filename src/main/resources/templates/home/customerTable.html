@@ -15,7 +15,6 @@
         <th>Id</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>TEST PLACEHOLDER</th>
     </tr>
     </thead>
     <tbody>
@@ -23,8 +22,6 @@
         <td th:text="${customer.customer_id}"/>
         <td th:text="${customer.customer_first_name}"/>
         <td th:text="${customer.customer_last_name}"/>
-        <td th:text="${customer.customer_nationality}"/>
-
         <td>
             <a style="text-decoration: none" th:href="@{'/viewCustomer/'+${customer.customer_id}}">
                 <button>View</button>
