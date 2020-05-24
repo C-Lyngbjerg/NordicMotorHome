@@ -101,7 +101,7 @@ public class Customer {
         return customer_nationality;
     }
 
-    public void setCustomer_nationality(String customer_country) {
+    public void setCustomer_nationality(String customer_nationality) {
         this.customer_nationality = customer_nationality;
     }
 

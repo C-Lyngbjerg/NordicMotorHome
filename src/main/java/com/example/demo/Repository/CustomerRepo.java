@@ -14,7 +14,7 @@ public class CustomerRepo implements RepositoryI{
     JdbcTemplate template;
 
     public List<Customer> fetchAll(){
-        String sql = "SELECT * FROM customers";
+        String sql = "SELECT customer_id, customer_first_name, customer_last_name, customer_address, customer_drivers_license,customer_license_type, customer_phone,customer_nationality,c.zip_code AS customer_zip_code,z.zip_city AS customer_city FROM customers c JOIN zips z ON c.zip_code = z.zip_code";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return template.query(sql, rowMapper);
     }
