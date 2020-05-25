@@ -1,64 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Create Contract</title>
 </head>
 <h1>Create a new contract</h1>
 <body>
-<form action="/createContract" method="post">
-    <tr>
-        <td><label>Enter start date</label></td>
-        <td><input type="text" name="contract_start_date" placeholder="Start date (YYYY-MM-DD)"><br></td>
-    </tr>
-    <tr>
-        <td><label>Enter end date</label></td>
-        <td><input type="text" name="contract_end_date" placeholder="End date (YYYY-MM-DD)"><br></td>
-    </tr>
-    <tr>
-        <td><label>Enter motorhomes odometer</label></td>
-        <td><input type="text" name="contract_odometer_start" placeholder="km"><br></td>
-    </tr>
-    <tr>
-        <td><label>Bike rack</label></td>
-        <td><input type="checkbox" name="contract_extra_bike_rack" value="1"><br></td>
-    </tr>
-    <tr>
-        <td><label>Bed sheets</label></td>
-        <td><input type="checkbox" name="contract_extra_bed_sheets" value="1"><br></td>
-    </tr>
-    <tr>
-        <td><label>Child seat</label></td>
-        <td><input type="checkbox" name="contract_extra_child_seat" value="1"><br></td>
-    </tr>
-    <tr>
-        <td><label>Picnic table</label></td>
-        <td><input type="checkbox" name="contract_extra_picnic_table" value="1"><br></td>
-    </tr>
-    <tr>
-        <td><label>Chairs</label></td>
-        <td><input type="checkbox" name="contract_extra_chairs" value="1"><br></td>
-    </tr>
-    <tr>
-        <td><label>Distance from pickup in km</label></td>
-        <td><input type="text" name="contract_pick_up_distance" placeholder="kilometer"><br></td>
-    </tr>
-    <tr>
-        <td><label>Distance from drop off in km</label></td>
-        <td><input type="text" name="contract_drop_off_distance" placeholder="kilometer"><br></td>
-    </tr>
-    <tr>
-        <td><label>Enter customer id</label></td>
-        <td><input type="text" name="customer_id" placeholder="Customer Id"><br></td>
-    </tr>
-    <tr>
-        <td><label>Enter motorhome id</label></td>
-        <td><input type="text" name="motorhome_id" placeholder="Motorhome id"><br></td>
-    </tr>
+<div>
+    <h2>Available motorhomes</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="motorhome: ${motorhomeList}">
+            <td th:text="${motorhome.motorhome_id}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <form action="/finalizeContract" method="post">
+        <tr>
+            <td ><label style="display: none">Enter start date</label></td>
+            <td  ><input style="display: none" type="text" name="contract_start_date" th:value="${contract.contract_start_date}"><br></td>
+        </tr>
+        <tr>
+            <td><label style="display: none">Enter end date</label></td>
+            <td><input style="display: none" type="text" name="contract_end_date" th:value="${contract.contract_end_date}"><br></td>
+        </tr>
+        <tr>
+            <td><label>Enter motorhomes odometer</label></td>
+            <td><input type="text" name="contract_odometer_start" placeholder="km"><br></td>
+        </tr>
+        <tr>
+            <td><label>Bike rack</label></td>
+            <td><input type="checkbox" name="contract_extra_bike_rack" value="1"><br></td>
+        </tr>
+        <tr>
+            <td><label>Bed sheets</label></td>
+            <td><input type="checkbox" name="contract_extra_bed_sheets" value="1"><br></td>
+        </tr>
+        <tr>
+            <td><label>Child seat</label></td>
+            <td><input type="checkbox" name="contract_extra_child_seat" value="1"><br></td>
+        </tr>
+        <tr>
+            <td><label>Picnic table</label></td>
+            <td><input type="checkbox" name="contract_extra_picnic_table" value="1"><br></td>
+        </tr>
+        <tr>
+            <td><label>Chairs</label></td>
+            <td><input type="checkbox" name="contract_extra_chairs" value="1"><br></td>
+        </tr>
+        <tr>
+            <td><label>Distance from pickup in km</label></td>
+            <td><input type="text" name="contract_pick_up_distance" placeholder="kilometer"><br></td>
+        </tr>
+        <tr>
+            <td><label>Distance from drop off in km</label></td>
+            <td><input type="text" name="contract_drop_off_distance" placeholder="kilometer"><br></td>
+        </tr>
+        <tr>
+            <td><label>Enter customer id</label></td>
+            <td><input type="text" name="customer_id" placeholder="Customer Id"><br></td>
+        </tr>
+        <tr>
+            <td><label>Enter motorhome id</label></td>
+            <td><input type="text" name="motorhome_id" placeholder="Motorhome id"><br></td>
+        </tr>
 
-    <tr>
-        <td><input class="returnButton" type="submit" value="Create"></td>
-    </tr>
-</form>
+        <tr>
+            <td><input class="returnButton" type="submit" value="Create"></td>
+        </tr>
+    </form>
+</div>
+
 </body>
 </html>
