@@ -1,48 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Customer</title>
 </head>
 <body>
 <h1> Create new customer </h1>
 <table>
-    <form action="/createCustomer" method="post">
+    <form action="#" th:action="@{/createCustomer}" th:object="${customer}" method="post">
         <tr>
             <td><label>Enter first name</label></td>
-            <td><input type="text" name="customer_first_name" placeholder="First name"><br></td>
+            <td><input type="text" th:field="*{customer_first_name}" placeholder="First name"><br></td>
+            <td th:if="${#fields.hasErrors('customer_first_name')}" th:errors="*{customer_first_name}"></td>
         </tr>
         <tr>
             <td><label>Enter last name</label></td>
-            <td><input type="text" name="customer_last_name" placeholder="Last name"><br></td>
+            <td><input type="text" th:field="*{customer_last_name}" placeholder="Last name"><br></td>
+            <td th:if="${#fields.hasErrors('customer_last_name')}" th:errors="*{customer_last_name}"></td>
         </tr>
         <tr>
             <td><label>Enter address</label></td>
-            <td><input type="text" name="customer_address" placeholder="Address"><br></td>
+            <td><input type="text" th:field="*{customer_address}" placeholder="Description"><br></td>
+            <td th:if="${#fields.hasErrors('customer_address')}" th:errors="*{customer_address}"></td>
         </tr>
         <tr>
             <td><label>Enter driver license</label></td>
-            <td><input type="text" name="customer_drivers_license" placeholder="Drivers license"><br></td>
+            <td><input type="text" th:field="*{customer_drivers_license}" placeholder="Drivers license"><br></td>
+            <td th:if="${#fields.hasErrors('customer_drivers_license')}" th:errors="*{customer_drivers_license}"></td>
         </tr>
         <tr>
             <td><label>Enter license type</label></td>
-            <td><input type="text" name="customer_license_type" placeholder="Format: B, C, A"><br></td>
+            <td><input type="text" th:field="*{customer_license_type}" placeholder="License type"><br></td>
+            <td th:if="${#fields.hasErrors('customer_license_type')}" th:errors="*{customer_license_type}"></td>
         </tr>
         <tr>
             <td><label>Enter phone</label></td>
-            <td><input type="text" name="customer_phone" placeholder="Phone"><br></td>
+            <td><input type="text" th:field="*{customer_phone}" placeholder="Phone number"><br></td>
+            <td th:if="${#fields.hasErrors('customer_phone')}" th:errors="*{customer_phone}"></td>
         </tr>
         <tr>
             <td><label>Enter nationality</label></td>
-            <td><input type="text" name="customer_nationality" placeholder="nationality"><br></td>
+            <td><input type="text" th:field="*{customer_nationality}" placeholder="Nationality"><br></td>
+            <td th:if="${#fields.hasErrors('customer_nationality')}" th:errors="*{customer_nationality}"></td>
         </tr>
         <tr>
             <td><label>Enter city</label></td>
-            <td><input type="text" name="customer_city" placeholder="City"><br></td>
+            <td><input type="text" th:field="*{customer_city}" placeholder="City"><br></td>
+            <td th:if="${#fields.hasErrors('customer_city')}" th:errors="*{customer_city}"></td>
         </tr>
         <tr>
             <td><label>Enter zip code</label></td>
-            <td><input type="text" name="customer_zip_code" placeholder="Zip code(skal være eksisterende)"><br></td>
+            <td><input type="text" th:field="*{customer_zip_code}" placeholder="zip code"><br></td>
+            <td th:if="${#fields.hasErrors('customer_zip_code')}" th:errors="*{customer_zip_code}"></td>
         <tr>
         <tr>
             <td><input class="returnButton" type="submit" value="Create"></td>

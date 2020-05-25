@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Create Repair</title>
@@ -7,22 +7,26 @@
 <body>
 <h1>Repair menu</h1>
 <table>
-    <form action="/createRepair" method="post">
-        <tr>
+    <form action="#" th:action="@{/createRepair}" th:object="${repair}" method="post">
+        <tr style="display: none">
             <td><label>Indtast repair id</label></td>
-            <td><input type="text" name="repair_id" placeholder="Repair id"><br></td>
+            <td><input type="text" th:field="*{repair_id}" placeholder="Repair id"/><br></td>
+            <td th:if="${#fields.hasErrors('repair_id')}" th:errors="*{repair_id}"></td>
         </tr>
         <tr>
             <td><label>Indtast kort beskrivelse</label></td>
-            <td><input type="text" name="repair_description" placeholder="Beskrivelse"><br></td>
+            <td><input type="text" th:field="*{repair_description}" placeholder="Beskrivelse"><br></td>
+            <td th:if="${#fields.hasErrors('repair_description')}" th:errors="*{repair_description}"></td>
         </tr>
         <tr>
             <td><label>Indtast dato</label></td>
-            <td><input type="text" name="repair_date" placeholder="Format: YYYY-MM-DD"><br></td>
+            <td><input type="text" th:field="*{repair_date}" placeholder="Format: YYYY-MM-DD"><br></td>
+            <td th:if="${#fields.hasErrors('repair_date')}" th:errors="*{repair_date}"></td>
         </tr>
         <tr>
             <td><label>Indtast motorhome id</label></td>
-            <td><input type="text" name="motorhome_id" placeholder="Motorhome id"><br></td>
+            <td><input type="text" th:field="*{motorhome_id}" placeholder="Motorhome id"><br></td>
+            <td th:if="${#fields.hasErrors('motorhome_id')}" th:errors="*{motorhome_id}"></td>
         </tr>
         <tr>
             <td><input class="returnButton" type="submit" value="Create"></td>
