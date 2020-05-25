@@ -25,8 +25,8 @@ public class CustomerService {
     public Boolean delete(int id){
         return repo.delete(id);
     }
-    public Customer update(int id,Customer cus){
-        return repo.update(id,cus);
+    public Customer update(Customer cus){
+        return repo.update(cus);
     }
 
 }

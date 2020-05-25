@@ -81,7 +81,7 @@ public class HomeController {
     //Sender de opdaterede information til database via et DML statement, ud fra den givende input
     @PostMapping("/updateCustomer")
     public String updateRepair(@ModelAttribute Customer customer){
-        customerService.update(customer.getCustomer_id(), customer);
+        customerService.update(customer);
         return "redirect:/customerTable";
     }
     /*
@@ -189,7 +189,7 @@ public class HomeController {
 
     @PostMapping("/updateInvoice")
     public String updateInvoice(@ModelAttribute Invoice invoice){
-        invoiceService.updateInvoice(invoice.getInvoice_id(), invoice);
+        invoiceService.update(invoice);
         return "redirect:/invoiceTable";
     }
 
@@ -296,7 +296,7 @@ public class HomeController {
     //Står for at lave et nyt repair objekt ud fra indsat data, ved tryk på
     @PostMapping("/createRepair")
     public String createRepair(@ModelAttribute Repair repair){
-        repairService.addRepair(repair);
+        repairService.add(repair);
         return "redirect:/repairTable";
     }
 
@@ -309,7 +309,7 @@ public class HomeController {
     //Sender de opdaterede information til database via et DML statement, ud fra den givende input
     @PostMapping("/updateRepair")
     public String updateRepair(@ModelAttribute Repair repair){
-        repairService.update(repair.getRepair_id(), repair);
+        repairService.update(repair);
         return "redirect:/repairTable";
     }
 

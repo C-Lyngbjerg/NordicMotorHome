@@ -50,7 +50,7 @@ public class CustomerRepo implements RepositoryI{
         return template.update(sql, id) < 0;
     }
 
-    public Customer update(int id, Object obj){
+    public Customer update(Object obj){
         Customer cus = (Customer) obj;
         try {
             String sql1 = "UPDATE zips SET zip_code = ?, zip_city = ? WHERE zip_code = ?";

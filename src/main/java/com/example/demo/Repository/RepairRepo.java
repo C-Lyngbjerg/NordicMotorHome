@@ -41,7 +41,7 @@ public class RepairRepo implements RepositoryI {
         return template.update(sql,id) < 0;
     }
 
-    public Repair update(int id, Object obj){
+    public Repair update(Object obj){
         Repair repair = (Repair) obj;
         String sql = "UPDATE repairs SET repair_id = ?, repair_description = ?, repair_date = ?, motorhome_id = ? WHERE repair_id = ?";
         template.update(sql,repair.getRepair_id(),repair.getRepair_description(),repair.getRepair_date(),repair.getMotorhome_id(),repair.getRepair_id());

@@ -24,7 +24,7 @@ public class InvoiceService {
     public Boolean delete(int id){
         return repo.delete(id);
     }
-    public Invoice updateInvoice(int id, Invoice invoice){
-        return repo.updateInvoice(id,invoice);
+    public Invoice update(Invoice invoice){
+        return repo.update(invoice);
     }
 }

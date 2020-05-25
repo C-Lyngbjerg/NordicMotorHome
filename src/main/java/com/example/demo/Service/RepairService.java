@@ -16,7 +16,7 @@ public class RepairService {
         return repairRepo.fetchAll();
     }
 
-    public Repair addRepair(Repair repair){
+    public Repair add(Repair repair){
         return repairRepo.add(repair);
     }
 
@@ -28,7 +28,7 @@ public class RepairService {
         return repairRepo.delete(id);
     }
 
-    public Repair update(int id, Repair repair){
-        return repairRepo.update(id,repair);
+    public Repair update(Repair repair){
+        return repairRepo.update(repair);
     }
 }

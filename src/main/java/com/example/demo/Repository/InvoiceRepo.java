@@ -48,7 +48,8 @@ public class InvoiceRepo implements RepositoryI{
       Den bruger en UPDATE og sætter hver attribut i et datasæts til en ny værdi (eller den nuværende,
       hvis ingen ændringer bliver lavet til den givende attribut i klienten).
      */
-    public Invoice updateInvoice(int id, Invoice invoice){
+    public Invoice update(Object object){
+        Invoice invoice = (Invoice) object;
         String sql = "UPDATE invoices SET invoice_id = ?, invoice_total_price = ?, invoice_distance_driven = ?,invoice_odometer_end = ?,contract_id = ?, invoice_fuel_gage = ?, invoice_rent_days = ? WHERE invoice_id = ?";
         template.update(sql, invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(), invoice.isInvoice_fuel_gage(), invoice.getInvoice_rent_days(),invoice.getInvoice_id());
         return null;
