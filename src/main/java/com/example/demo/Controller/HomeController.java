@@ -95,6 +95,11 @@ public class HomeController {
         model.addAttribute("motorhomes", motorhomeList);
         return "home/motorhomeTable";
     }
+    @PostMapping("/motorhomeTable")
+    public String motorhomeTable() {
+        return "redirect:/";
+    }
+
     @GetMapping("/createMotorhome")
     public String createMotorhome() {
         return "home/createMotorhome";
@@ -111,6 +116,11 @@ public class HomeController {
         model.addAttribute(motorhomeService.findById(motorhome_id));
         return "home/viewOneMotorhome";
     }
+    @PostMapping("/viewOneMotorhome")
+    public String viewOneMotorhome() {
+        return "redirect:/motorhomeTable";
+    }
+
     @GetMapping("/updateMotorhome/{motorhome_id}")
     public String updateMotorhome(@PathVariable("motorhome_id") int motorhome_id, Model model){
         model.addAttribute(motorhomeService.findById(motorhome_id));
@@ -152,11 +162,18 @@ public class HomeController {
 
     // Går til createInvoice siden, hvor man kan lave en ny invoice
     @GetMapping("/createInvoice")
-    public String createInvoice() {
+    public String createInvoice(Model model) {
+        createCon(model);
+        return "home/createInvoice";
+    }
+    public String createCon(Model model){
+        List<Contract> contractList = contractService.fetchAll();
+        model.addAttribute("contracts", contractList);
         return "home/createInvoice";
     }
     // returnerer fra /createInvoice siden og creater den nye invoice data, med de informationer der er tastet ind
     // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
+
     @PostMapping("/createInvoice")
     public String createInvoice(@ModelAttribute Invoice invoice) {
         invoiceService.add(invoice);
@@ -203,6 +220,12 @@ public class HomeController {
         model.addAttribute("contracts", contractList);
         return "home/contractTable";
     }
+
+    @PostMapping("/contractTable")
+    public String contractTable() {
+        return "redirect:/";
+    }
+
     @GetMapping("/createContract")
     public String createContract() {
         return "home/createContract";
@@ -220,6 +243,10 @@ public class HomeController {
     public String viewOneContract(@PathVariable("contract_id") int contract_id, Model model){
         model.addAttribute(contractService.findById(contract_id));
         return "home/viewOneContract";
+    }
+    @PostMapping("/viewOneContract")
+    public String viewOneContract() {
+        return "redirect:/contractTable";
     }
 
     //Denne metode bruges hvis man vælger at annullere en kontrakt.
@@ -271,9 +298,9 @@ public class HomeController {
         }
     }
 
-    /*
-     * Repair del
-     */
+    /* *********** *
+     * Repair del  *
+     ************* */
 
     //står for at lave og vise de tilgængelige repair objekter, til html side 'repairTable'
     @GetMapping("/repairTable")
