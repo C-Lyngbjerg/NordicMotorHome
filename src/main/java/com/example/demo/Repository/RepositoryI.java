@@ -14,5 +14,4 @@ public interface RepositoryI {
 
     public Object update(Object obj);
 
-
 }

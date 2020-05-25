@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>View Details</title>
+</head>
+<body>
+<h1>Motorhome Details</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Registration Number</th>
+        <th>Brand</th>
+        <th>Height floor to ceiling in cm</th>
+        <th>Model</th>
+        <th>Odometer</th>
+        <th>Type</th>
+        <th>Type Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><span th:text="${motorhome.motorhome_id}"></span></td>
+        <td><span th:text="${motorhome.motorhome_reg_number}"></span></td>
+        <td><span th:text="${motorhome.motorhome_brand}"></span></td>
+        <td><span th:text="${motorhome.motorhome_room_height}"></span></td>
+        <td><span th:text="${motorhome.motorhome_model}"></span></td>
+        <td><span th:text="${motorhome.motorhome_odometer}"></span></td>
+        <td><span th:text="${motorhome.type_id}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+</body>
+</html>
