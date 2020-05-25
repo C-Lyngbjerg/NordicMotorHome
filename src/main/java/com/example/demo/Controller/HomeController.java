@@ -242,7 +242,7 @@ public class HomeController {
         Contract con = (Contract) contractService.findById(id);
         con.setContract_rent_price(price);
         contractService.update(con);
-        //invoice skal ændres/laves her.
+        // TODO invoice skal ændres/laves her.
         return "redirect:/contractTable";
     }
 
