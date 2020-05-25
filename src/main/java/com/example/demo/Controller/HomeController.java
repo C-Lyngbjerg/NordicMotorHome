@@ -30,6 +30,7 @@ public class HomeController implements WebMvcConfigurer {
     RepairService repairService;
 
     //TODO kig på at indbygge knapper til valg af zipkode og andre ting du ved bro
+
     //TODO check up på hvad denne gør
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -111,7 +112,7 @@ public class HomeController implements WebMvcConfigurer {
     @GetMapping("/motorhomeTable")
     public String motorhomeTable(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchall();
-        model.addAttribute("motorhomes", motorhomeList);
+        model.addAttribute("motorhome", motorhomeList);
         return "home/motorhomeTable";
     }
     @PostMapping("/motorhomeTable")
@@ -120,12 +121,15 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @GetMapping("/createMotorhome")
-    public String createMotorhome() {
+    public String createMotorhome(Motorhome motorhome) {
         return "home/createMotorhome";
     }
 
     @PostMapping("/createMotorhome")
-    public String createMotorhome(@ModelAttribute Motorhome motorhome) {
+    public String createMotorhome(@ModelAttribute @Valid Motorhome motorhome,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "home/createMotorhome";
+        }
         motorhomeService.add(motorhome);
         return "redirect:/motorhomeTable";
     }
