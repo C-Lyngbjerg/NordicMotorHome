@@ -1,41 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Create invoice</title>
 </head>
 <body>
-<h1> Create new invoice </h1>
 <table>
-    <form action="/createInvoice" method="post">
-        <tr>
-            <td><label>Enter invoice ID</label></td>
-            <td><input type="text" name="invoice_id" placeholder="ID"><br></td>
-        </tr>
-<!--        <tr>-->
-<!--            <td ><label>Enter total price</label></td>-->
-<!--            <td><input type="text" name="invoice_total_price" placeholder="Total price"><br></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td><label>Enter distance driven</label></td>-->
-<!--            <td><input type="text" name="invoice_distance_drive" placeholder="Distance"><br></td>-->
-<!--        </tr>-->
-        <tr>
-            <td><label>Enter odometer end</label></td>
-            <td><input type="text" name="invoice_odometer_end" placeholder="Odometer End"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter contract ID</label></td>
-            <td><input type="text" name="contract_id" placeholder="ID"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter fuel gage</label></td>
-            <td><input type="checkbox" name="invoice_fuel_gage" value="1"><br></td>
-        </tr>
-        <tr>
-            <td><input class="returnButton" type="submit" value="Create"></td>
-        </tr>
-    </form>
+    <td>
+        <h1> Create new invoice </h1>
+        <table>
+            <form action="/createInvoice" method="post">
+                <tr>
+                    <td><label>Enter invoice ID</label></td>
+                    <td><input type="text" name="invoice_id" placeholder="ID"><br></td>
+                </tr>
+        <!--        <tr>-->
+        <!--            <td ><label>Enter total price</label></td>-->
+        <!--            <td><input type="text" name="invoice_total_price" placeholder="Total price"><br></td>-->
+        <!--        </tr>-->
+        <!--        <tr>-->
+        <!--            <td><label>Enter distance driven</label></td>-->
+        <!--            <td><input type="text" name="invoice_distance_drive" placeholder="Distance"><br></td>-->
+        <!--        </tr>-->
+                <tr>
+                    <td><label>Enter odometer end</label></td>
+                    <td><input type="text" name="invoice_odometer_end" placeholder="Odometer End"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Enter contract ID</label></td>
+                    <td><input type="text" name="contract_id" placeholder="ID"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Enter fuel gage</label></td>
+                    <td><input type="checkbox" name="invoice_fuel_gage" value="1"><br></td>
+                </tr>
+                <tr>
+                    <td><input class="returnButton" type="submit" value="Create"></td>
+                </tr>
+            </form>
+        </table>
+    </td>
+    <td>
+        <h1> Available contracts </h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Contract Id</th>
+                <th>Customer Id</th>
+                <th>Motorhome Id</th>
+                <th>Motorhome Registration Number</th>
+                <th>Rental price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contract: ${contracts}">
+                <td th:text="${contract.contract_id}"/>
+                <td th:text="${contract.customer_id}"/>
+                <td th:text="${contract.motorhome_id}"/>
+                <td th:text="${contract.motorhome_reg_number}"/>
+                <td th:text="${contract.contract_rent_price}"/>
+            </tr>
+            </tbody>
+        </table>
+    </td>
 </table>
 </body>
 </html>

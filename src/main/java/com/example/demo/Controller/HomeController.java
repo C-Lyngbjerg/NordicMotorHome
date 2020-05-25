@@ -162,11 +162,18 @@ public class HomeController {
 
     // Går til createInvoice siden, hvor man kan lave en ny invoice
     @GetMapping("/createInvoice")
-    public String createInvoice() {
+    public String createInvoice(Model model) {
+        createCon(model);
+        return "home/createInvoice";
+    }
+    public String createCon(Model model){
+        List<Contract> contractList = contractService.fetchAll();
+        model.addAttribute("contracts", contractList);
         return "home/createInvoice";
     }
     // returnerer fra /createInvoice siden og creater den nye invoice data, med de informationer der er tastet ind
     // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
+
     @PostMapping("/createInvoice")
     public String createInvoice(@ModelAttribute Invoice invoice) {
         invoiceService.add(invoice);
