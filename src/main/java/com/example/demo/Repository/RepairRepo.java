@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RepairRepo {
+public class RepairRepo implements RepositoryI {
 
     @Autowired
     JdbcTemplate template;
@@ -22,26 +22,28 @@ public class RepairRepo {
         return template.query(sql,rowMapper);
     }
 
-    public Repair addRepair(Repair repair){
+    public Repair add(Object obj){
+        Repair repair = (Repair) obj;
         String sql = "INSERT INTO repairs (repair_id, repair_description,repair_date,motorhome_id) VALUES (?,?,?,?)";
         template.update(sql,repair.getRepair_id(),repair.getRepair_description(),repair.getRepair_date(),repair.getMotorhome_id());
         return null;
     }
 
-    public Repair findRepairById(int id){
+    public Repair findById(int id){
         String sql = "SELECT * FROM repairs WHERE repair_id = ?";
         RowMapper<Repair> rowMapper = new BeanPropertyRowMapper<>(Repair.class);
-        Repair repair = template.queryForObject(sql,rowMapper);
+        Repair repair = template.queryForObject(sql,rowMapper,id);
         return repair;
     }
 
-    public Boolean deleteRepair(int id){
+    public Boolean delete(int id){
         String sql = "DELETE FROM repairs WHERE repair_id = ?";
         return template.update(sql,id) < 0;
     }
 
-    public Repair updateRepair(int id, Repair repair){
-        String sql = "UPDATE repairs SET repair_id = ?, repair_description = ?, repair_date = ?, motorhome_id =? WHERE repair_id = ?";
+    public Repair update(int id, Object obj){
+        Repair repair = (Repair) obj;
+        String sql = "UPDATE repairs SET repair_id = ?, repair_description = ?, repair_date = ?, motorhome_id = ? WHERE repair_id = ?";
         template.update(sql,repair.getRepair_id(),repair.getRepair_description(),repair.getRepair_date(),repair.getMotorhome_id(),repair.getRepair_id());
         return null;
     }

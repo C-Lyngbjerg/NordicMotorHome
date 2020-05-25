@@ -15,22 +15,29 @@ public class ContractService {
     public List<Contract> fetchAll(){
         return repo.fetchAll();
     }
+  
     public Object add(Object obj){
         return repo.add(obj);
     }
+  
     public Object findById(int id){
         return repo.findById(id);
     }
+  
     public Boolean delete(int id){
         return repo.delete(id);
     }
-    public Contract updateContract(int id,Contract con){
-        return repo.updateContract(id,con);
+
+    public Object update(Object obj){
+        return repo.update(obj);
     }
+  
     public List<Double> calculateRentPeriodAndPrice(Contract con){
         return repo.calculateRentPeriodAndPrice(con);
     }
+  
     public Contract cancelContract(int id){
         return repo.cancelContract(id);
     }
+  
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>View Customer</title>
+</head>
+<body>
+<h1>Customer info</h1>
+<pre>
+<b>Customer id:</b> <i><span th:text="${customer.customer_id}"/></i>
+<b>Name:</b> <i><span th:text="${customer.customer_first_name}"/> <span th:text="${customer.customer_last_name}"/></i>
+<b>Address:</b> <i><span th:text="${customer.customer_address}"/></i>
+<b>Driver license number:</b> <i><span th:text="${customer.customer_drivers_license}"/></i>
+<b>Driver license type:</b> <i><span th:text="${customer.customer_license_type}"/></i>
+<b>Phone number:</b> <i><span th:text="${customer.customer_phone}"/></i>
+<b>Nationality:</b> <i><span th:text="${customer.customer_nationality}"/></i>
+<b>City:</b> <i><span th:text="${customer.customer_city}"/></i>
+<b>Zip code:</b> <i><span th:text="${customer.customer_zip_code}"/></i>
+    <form action="/viewCustomer/" method="post">
+        <input class="returnButton" type="submit" value="Return">
+    </form>
+    </pre>
+</body>
+</html>

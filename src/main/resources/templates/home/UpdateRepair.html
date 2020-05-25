@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Repair</title>
+</head>
+<body>
+    <h1>Repair update</h1>
+    <table>
+        <form action="/updateRepair" method="post">
+            <tr style="display: none">
+                <td ><label>Repair id</label></td>
+                <td><input type="text" name="repair_id" th:value="${repairs.repair_id}"><br></td>
+            </tr>
+            <tr>
+                <td><label>Repair description</label></td>
+                <td><input type="text" name="repair_description" th:value="${repairs.repair_description}"><br></td>
+            </tr>
+            <tr>
+                <td><label>Repair date</label></td>
+                <td><input type="text" name="repair_date" th:value="${repairs.repair_date}"><br></td>
+            </tr>
+            <tr>
+                <td><label>Motorhome id</label></td>
+                <td><input type="text" name="motorhome_id" th:value="${repairs.motorhome_id}"><br></td>
+            </tr>
+            <tr>
+                <td><input class="returnButton" type="submit" value="Update"></td>
+            </tr>
+        </form>
+    </table>
+</body>
+</html>

@@ -25,6 +25,7 @@ public class HomeController {
     @Autowired
     RepairService repairService;
 
+//TODO kig på at indbygge knapper til valg af zipkode og andre ting du ved bro
 
     @GetMapping("/")
     public String index() {
@@ -37,18 +38,57 @@ public class HomeController {
         model.addAttribute("customers", customerList);
         return "home/customerTable";
     }
-
+    //
+    @PostMapping("/customerTable")
+    public String returnFromTable(){
+        return "redirect:/";
+    }
     @GetMapping("/createCustomer")
     public String createCustomer() {
         return "home/createCustomer";
     }
-
+    //
     @PostMapping("/createCustomer")
     public String createCustomer(@ModelAttribute Customer customer) {
         customerService.add(customer);
         return "redirect:/customerTable";
     }
+    //Går til side der viser fulde information om en given repair, ud fra den repair man trykker 'view' på i 'repairTable'
+    @GetMapping("/viewCustomer/{customer_id}") //TODO lortet gider ikke at vise city, nationality og zip code
+    public String viewCustomer(@PathVariable("customer_id") int id, Model model){
+        model.addAttribute("customer",customerService.findById(id));
+        return "home/viewCustomer";
+    }
+    //Returnere til 'repairTable' ved at trykke 'return' i view siden.
+    @PostMapping("/viewCustomer")
+    public String viewCustomer(){
+        return "redirect:/customerTable";
+    }
 
+    //Fjerne customer instance, fra siden og sletter det i DB via et DML DELETE statement.
+    @GetMapping("/deleteCustomer/{customer_id}")
+    public String deleteCustomer(@PathVariable("customer_id") int id){
+        boolean deleted = customerService.delete(id);
+        return "redirect:/customerTable";
+    }
+
+    //Tager til side, der giver input muligheder for at opdatere en given repair, ud fra den repair man trykker 'update' på i 'customerTable'
+    @GetMapping("/updateCustomer/{customer_id}")
+    public String updateCustomer(@PathVariable("customer_id") int id,Model model){
+        model.addAttribute("customer",customerService.findById(id));
+        return "home/updateCustomer";
+    }
+    //Sender de opdaterede information til database via et DML statement, ud fra den givende input
+    @PostMapping("/updateCustomer")
+    public String updateRepair(@ModelAttribute Customer customer){
+        customerService.update(customer.getCustomer_id(), customer);
+        return "redirect:/customerTable";
+    }
+    /*
+    *
+    *   Motorhome del
+    *
+    */
     @GetMapping("/motorhomeTable")
     public String motorhomeTable(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchall();
@@ -62,8 +102,34 @@ public class HomeController {
 
     @PostMapping("/createMotorhome")
     public String createMotorhome(@ModelAttribute Motorhome motorhome) {
-        motorhomeService.addMotorhome(motorhome);
+        motorhomeService.add(motorhome);
         return "redirect:/motorhomeTable";
+    }
+
+    @GetMapping("/viewOneMotorhome/{motorhome_id}")
+    public String viewOneMotorhome(@PathVariable("motorhome_id") int motorhome_id, Model model){
+        model.addAttribute(motorhomeService.findById(motorhome_id));
+        return "home/viewOneMotorhome";
+    }
+    @GetMapping("/updateMotorhome/{motorhome_id}")
+    public String updateMotorhome(@PathVariable("motorhome_id") int motorhome_id, Model model){
+        model.addAttribute(motorhomeService.findById(motorhome_id));
+        return "home/updateMotorhome";
+    }
+    @PostMapping("/updateMotorhome")
+    public String updateMotorhome(@ModelAttribute Motorhome motorhome){
+        motorhomeService.update(motorhome);
+        return "redirect:/motorhomeTable";
+    }
+    @GetMapping("/deleteMotorhome/{motorhome_id}")
+    public String delete(@PathVariable("motorhome_id") int motorhome_id){
+        boolean deleted = motorhomeService.delete(motorhome_id);
+        if(deleted){
+            return "redirect:/";
+        }
+        else{
+            return "redirect:/";
+        }
     }
 
     /*
@@ -77,7 +143,7 @@ public class HomeController {
         model.addAttribute("invoices", invoiceList);
         return "home/invoiceTable";
     }
-
+  
     // Returnerer fra et givent punkt til invoieTable side
     @PostMapping("/invoiceTable")
     public String invoiceTable() {
@@ -89,8 +155,7 @@ public class HomeController {
     public String createInvoice() {
         return "home/createInvoice";
     }
-
-//    returnerer fra /createInvoice siden og creater den nye invoice data, med de informationer der er tastet ind
+    // returnerer fra /createInvoice siden og creater den nye invoice data, med de informationer der er tastet ind
     // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
     @PostMapping("/createInvoice")
     public String createInvoice(@ModelAttribute Invoice invoice) {
@@ -142,7 +207,6 @@ public class HomeController {
     public String createContract() {
         return "home/createContract";
     }
-
     //Metoden til at lave et contract objekt, udregne den samlede pris og tilføje det til databasen
     @PostMapping("/createContract")
     public String createContract(@ModelAttribute Contract contract){
@@ -158,11 +222,53 @@ public class HomeController {
         return "home/viewOneContract";
     }
 
+    //Denne metode bruges hvis man vælger at annullere en kontrakt.
     @GetMapping("/cancelContract/{contract_id}")
     public String cancelContract(@PathVariable("contract_id") int contract_id, Model model){
+        //Tilføjer den contract som har fået ændret sin pris efter annullering
         model.addAttribute("contract",contractService.cancelContract(contract_id));
         return "home/cancelledContract";
+    }
 
+    /*
+        Hvis det bliver annulleringen bliver bekræftet opdateres databasen med denne metode
+        Der bliver parameter overført to ting til metoden. kontraktens id og kontraktens nye pris
+        Først finder den konktrakten fra databasen ud fra id'et og laver et nyt kontrakt objekt
+        så bruges der en set funktion til at ændre kontraktens pris til det der bliver parameteroverført
+        objektet bliver så brugt til at opdatere databasen ligesom der bliver gjort i updatedContract metoden nedenfor
+    */
+    @GetMapping("/cancelContract/confirmCancellation/{id}/{price}")
+    public String confirmCancellation(@PathVariable int id, @PathVariable double price){
+        Contract con = (Contract) contractService.findById(id);
+        con.setContract_rent_price(price);
+        contractService.update(con);
+        //invoice skal ændres/laves her.
+        return "redirect:/contractTable";
+    }
+
+    @GetMapping("/updateContract/{contract_id}")
+    public String updateContract(@PathVariable("contract_id") int contract_id, Model model){
+        model.addAttribute("contract", contractService.findById(contract_id));
+        return "home/updateContract";
+    }
+
+    @PostMapping("/updatedContract")
+    public String updatedContract(@ModelAttribute Contract contract){
+        List<Double> priceAndDateDiff = contractService.calculateRentPeriodAndPrice(contract);
+        contract.calculatePrice(priceAndDateDiff);
+        contractService.update(contract);
+        return "redirect:/contractTable";
+    }
+
+    @GetMapping("/deleteContract/{contract_id}")
+    public String deleteContract(@PathVariable("contract_id") int contract_id){
+        boolean deleted = contractService.delete(contract_id);
+        if(deleted){
+            return "redirect:/contractTable";
+        }
+        else{
+            return "redirect:/contractTable";
+        }
     }
 
     /*
@@ -181,6 +287,7 @@ public class HomeController {
     public String returnFromRepair(){
         return "redirect:/";
     }
+
     //Tager dig til createRepair html side, så man kan indsætte data
     @GetMapping("/createRepair")
     public String createRepair() {
@@ -192,4 +299,56 @@ public class HomeController {
         repairService.addRepair(repair);
         return "redirect:/repairTable";
     }
+
+    //Tager til side, der giver input muligheder for at opdatere en given repair, ud fra den repair man trykker 'update' på i 'repairTable'
+    @GetMapping("/updateRepair/{repair_id}")
+    public String updateRepair(@PathVariable("repair_id") int id,Model model){
+        model.addAttribute("repairs",repairService.findById(id));
+        return "home/updateRepair";
+    }
+    //Sender de opdaterede information til database via et DML statement, ud fra den givende input
+    @PostMapping("/updateRepair")
+    public String updateRepair(@ModelAttribute Repair repair){
+        repairService.update(repair.getRepair_id(), repair);
+        return "redirect:/repairTable";
+    }
+
+    //Går til side der viser fulde information om en given repair, ud fra den repair man trykker 'view' på i 'repairTable'
+    @GetMapping("/viewRepair/{repair_id}")
+    public String viewRepair(@PathVariable("repair_id") int id, Model model){
+        model.addAttribute("repair",repairService.findById(id));
+        return "home/viewRepair";
+    }
+    //Returnere til 'repairTable' ved at trykke 'return' i view siden.
+    @PostMapping("/viewRepair")
+    public String viewRepair(){
+        return "redirect:/repairTable";
+    }
+
+    //Fjerne repair instance, fra siden og sletter det i DB via et DML DELETE statement.
+    @GetMapping("/deleteRepair/{repair_id}")
+    public String deleteRepair(@PathVariable("repair_id") int id){
+        boolean deleted = repairService.delete(id);
+        return "redirect:/repairTable";
+    }
+
+    /*
+    *
+    *   Customer del
+    *
+    */
+
+
+//    //Står for at lave et nyt repair objekt ud fra indsat data, ved tryk på
+//    @PostMapping("/createRepair")
+//    public String createRepair(@ModelAttribute Repair repair){
+//        repairService.addRepair(repair);
+//        return "redirect:/repairTable";
+//    }
+//
+
+//
+
+
+
 }
