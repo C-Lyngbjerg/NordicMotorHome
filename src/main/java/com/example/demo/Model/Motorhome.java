@@ -18,14 +18,13 @@ public class Motorhome {
     @Size(min=1,max=15)
     private String motorhome_brand;
     @NotNull
-    @Positive
     @Min(100)
     private int motorhome_room_height;
     @NotNull
     @Size(min=1,max=15)
     private String motorhome_model;
     @NotNull
-    @Positive
+    @Min(0)
     private int motorhome_odometer;
     @NotNull
     @Positive

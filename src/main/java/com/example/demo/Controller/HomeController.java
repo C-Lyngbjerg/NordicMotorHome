@@ -112,7 +112,7 @@ public class HomeController implements WebMvcConfigurer {
     @GetMapping("/motorhomeTable")
     public String motorhomeTable(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchall();
-        model.addAttribute("motorhome", motorhomeList);
+        model.addAttribute("motorhomes", motorhomeList);
         return "home/motorhomeTable";
     }
     @PostMapping("/motorhomeTable")
