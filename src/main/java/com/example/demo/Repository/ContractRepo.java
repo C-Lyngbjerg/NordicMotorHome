@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ContractRepo implements RepositoryI{
+public class ContractRepo{
 
     @Autowired
-            // template håndtere vores connection og statements til databasen.
+    // template håndtere vores connection og statements til databasen.
     JdbcTemplate template;
     // Vores fetchAll metode henter alle kontrakterne og mapper database resultsettet i en collection. fetchAll metoden bliver brugt i homecontrolleren.
     public List<Contract> fetchAll(){
@@ -34,10 +34,10 @@ public class ContractRepo implements RepositoryI{
     public Object findById(int id){
         String sql = "SELECT * FROM contracts WHERE contract_id = ?";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
-        Contract con =template.queryForObject(sql, rowMapper,id);
+        Contract con =template.queryForObject(sql,rowMapper,id);
         return con;
     }
-    // Denne metode bruger prepared statement til at slette en kontrakt med det parameteroverføte id.
+    // Denne metode bruger prepared statement til at slette en kontrakt med det parameteroverførte id.
     // SQL statementet findet matchet med id'et og sletter.( i tvivl om < 0 ?)
     public Boolean delete(int id){
         String sql = "DELETE FROM contracts WHERE contract_id = ?";

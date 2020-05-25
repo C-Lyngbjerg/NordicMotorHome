@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Hygge onkel</title>
+    <title>Create Motorhome</title>
 </head>
 <body>
 <a href = "/createMotorhome">
@@ -25,13 +25,13 @@
         <td th:text="${motorhome.motorhome_model}"/>
 
         <td>
-            <a style="text-decoration: none" th:href="@{'/viewOne/'+${motorhome.motorhome_reg_number}}">
-                <button class="btn", id="btn-viewOne">View</button>
+            <a style="text-decoration: none" th:href="@{'/viewOneMotorhome/'+${motorhome.motorhome_id}}">
+                <button class="btn", id="btn-viewOne">View Details</button>
             </a>
-            <a style="text-decoration: none" th:href="@{'/delete/'+${motorhome.motorhome_reg_number}}">
+            <a style="text-decoration: none" th:href="@{'/deleteMotorhome/'+${motorhome.motorhome_id}}">
                 <button class="btn", id="btn-delete">Delete</button>
             </a>
-            <a style="text-decoration: none" th:href="@{'/update/'+${motorhome.motorhome_reg_number}}">
+            <a style="text-decoration: none" th:href="@{'/updateMotorhome/'+${motorhome.motorhome_id}}">
                 <button class="btn", id="btn-update">Update info</button>
             </a>
         </td>

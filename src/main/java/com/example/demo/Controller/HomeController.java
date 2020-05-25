@@ -66,10 +66,34 @@ public class HomeController {
 
     @PostMapping("/createMotorhome")
     public String createMotorhome(@ModelAttribute Motorhome motorhome) {
-        motorhomeService.addMotorhome(motorhome);
+        motorhomeService.add(motorhome);
         return "redirect:/motorhomeTable";
     }
-
+    @GetMapping("/viewOneMotorhome/{motorhome_id}")
+    public String viewOneMotorhome(@PathVariable("motorhome_id") int motorhome_id, Model model){
+        model.addAttribute(motorhomeService.findById(motorhome_id));
+        return "home/viewOneMotorhome";
+    }
+    @GetMapping("/updateMotorhome/{motorhome_id}")
+    public String updateMotorhome(@PathVariable("motorhome_id") int motorhome_id, Model model){
+        model.addAttribute(motorhomeService.findById(motorhome_id));
+        return "home/updateMotorhome";
+    }
+    @PostMapping("/updateMotorhome")
+    public String updateMotorhome(@ModelAttribute Motorhome motorhome){
+        motorhomeService.update(motorhome);
+        return "redirect:/motorhomeTable";
+    }
+    @GetMapping("/deleteMotorhome/{motorhome_id}")
+    public String delete(@PathVariable("motorhome_id") int motorhome_id){
+        boolean deleted = motorhomeService.delete(motorhome_id);
+        if(deleted){
+            return "redirect:/";
+        }
+        else{
+            return "redirect:/";
+        }
+    }
     //TODO
     //TODO Lav udregning af ekstra omkostninger i forbindelse med 400 km om dagen i gennemsnit.
     //TODO Lav udregning af ekstra omkostninger i forbindelse med hvorvidt tank er under 50%

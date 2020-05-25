@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MotorhomeRepo{
+public class MotorhomeRepo implements RepositoryI {
     @Autowired
     JdbcTemplate template;
 
@@ -20,27 +20,33 @@ public class MotorhomeRepo{
         return template.query(sql,rowMapper);
     }
 
-    public Motorhome addMotorhome(Motorhome motorhome){
+    public Object add(Object obj){
+        Motorhome mot = (Motorhome) obj;
         String sql = "INSERT INTO motorhomes (motorhome_id, motorhome_reg_number, motorhome_brand, motorhome_room_height, motorhome_model, motorhome_odometer, type_id) VALUES (?,?,?,?,?,?,?)";
-        template.update(sql,motorhome.getMotorhome_id(), motorhome.getMotorhome_reg_number(),motorhome.getMotorhome_brand(),motorhome.getMotorhome_room_heigth(),motorhome.getMotorhome_model(),motorhome.getMotorhome_odometer(),motorhome.getType_id());
+        template.update(sql,mot.getMotorhome_id(), mot.getMotorhome_reg_number(),mot.getMotorhome_brand(),mot.getMotorhome_room_height(),mot.getMotorhome_model(),mot.getMotorhome_odometer(),mot.getType_id());
         return null;
     }
 
-    public Motorhome findMotorhomeById(int id){
+    public Object findById(int id){
         String sql = "SELECT * FROM motorhomes WHERE motorhome_id = ?";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
-        Motorhome motorhome = template.queryForObject(sql,rowMapper);
+        Motorhome motorhome = template.queryForObject(sql,rowMapper,id);
         return motorhome;
     }
 
-    public Boolean deleteMotorhome(int id){
+    public Boolean delete(int id){
         String sql = "DELETE FROM motorhomes WHERE motorhome_id = ?";
+        //String sql2 = "DELETE FROM contracts WHERE motorhome_id = ?";
+        //String sql3 = "DELETE FROM invoices WHERE contract_id IN (SELECT contract_id FROM contracts WHERE motorhome_id =?";
+        //template.update(sql3, id);
+        //template.update(sql2, id);
         return template.update(sql,id) < 0;
     }
 
-    public Motorhome updateMotorhome(int id, Motorhome motorhome){
-        String sql = "UPDATE motorhomes SET motorhome_id = ?,motorhome_reg_number = ?, motorhome_brand = ?, motorhome_room_height = ?, motorhome_model = ?, motorhome_odometer = ?, type_id = ? WHERE motorhome_reg_number = ?";
-        template.update(sql,motorhome.getMotorhome_id(),motorhome.getMotorhome_reg_number(),motorhome.getMotorhome_brand(),motorhome.getMotorhome_room_heigth(),motorhome.getMotorhome_model(),motorhome.getMotorhome_odometer(),motorhome.getType_id(), motorhome.getMotorhome_reg_number());
+    public Object update(Object obj){
+        Motorhome mot = (Motorhome) obj;
+        String sql = "UPDATE motorhomes SET motorhome_id = ?,motorhome_reg_number = ?, motorhome_brand = ?, motorhome_room_height = ?, motorhome_model = ?, motorhome_odometer = ?, type_id = ? WHERE motorhome_id = ?";
+        template.update(sql,mot.getMotorhome_id(),mot.getMotorhome_reg_number(),mot.getMotorhome_brand(),mot.getMotorhome_room_height(),mot.getMotorhome_model(),mot.getMotorhome_odometer(),mot.getType_id(), mot.getMotorhome_id());
         return null;
     }
 }
