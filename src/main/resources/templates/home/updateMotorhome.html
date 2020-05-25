@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Details</title>
+</head>
+<body>
+<h1>Edit Motorhome</h1>
+<form action="/updateMotorhome" method="post">
+    <table id="submitTable" style="width: 22%">
+        <thead>
+        <tr>
+            <th>Info</th>
+            <th>Input</th>
+        </tr>
+        </thead>
+        <tbody style="text-align: left">
+        <tr>
+            <td>
+                <label>Motorhome ID</label>
+            </td>
+            <td>
+                <input type="text" name="motorhome_id" th:value="${motorhome.motorhome_id}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Motorhome registration number</label>
+            </td>
+            <td>
+                <input type="text" name="motorhome_reg_number" th:value="${motorhome.motorhome_reg_number}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Brand</label>
+            </td>
+            <td>
+                <input type="text" name="motorhome_brand" th:value="${motorhome.motorhome_brand}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Height from floor to ceiling in cm</label>
+            </td>
+            <td>
+                <input type="text" name="motorhome_room_height" th:value="${motorhome.motorhome_room_height}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Model</label>
+            </td>
+            <td>
+                <input type="text" name="motorhome_model" th:value="${motorhome.motorhome_model}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Odometer</label>
+            </td>
+            <td>
+                <input type="text" name="motorhome_odometer" th:value="${motorhome.motorhome_odometer}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Type ID</label>
+            </td>
+            <td>
+                <input type="text" name="type_id" th:value="${motorhome.type_id}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <input type="submit" value="Save changes">
+</form>
+
+</body>
+</html>

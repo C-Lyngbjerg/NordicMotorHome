@@ -13,6 +13,5 @@ public interface RepositoryI {
 
     public Object findById(int id);
 
-
     public Object update(Object obj);
 }

@@ -16,19 +16,19 @@ public class MotorhomeService {
         return motorhomeRepo.fetchAll();
     }
 
-    public Motorhome addMotorhome(Motorhome motorhome){
-        return motorhomeRepo.addMotorhome(motorhome);
+    public Object add(Motorhome motorhome){
+        return motorhomeRepo.add(motorhome);
     }
 
-    public Motorhome findMotorhomeById(int id){
-        return motorhomeRepo.findMotorhomeById(id);
+    public Object findById(int id){
+        return motorhomeRepo.findById(id);
     }
 
-    public Boolean deleteMotorhome(int id){
-        return motorhomeRepo.deleteMotorhome(id);
+    public Boolean delete(int id){
+        return motorhomeRepo.delete(id);
     }
 
-    public Motorhome updateMotorhome(int id, Motorhome motorhome){
-        return motorhomeRepo.updateMotorhome(id,motorhome);
+    public Object update(Motorhome motorhome){
+        return motorhomeRepo.update(motorhome);
     }
 }

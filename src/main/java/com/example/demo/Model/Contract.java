@@ -179,19 +179,19 @@ public class Contract {
     public void calculatePrice(List<Double> dateAndPrice){
         double totalPrice = seasonCheck(dateAndPrice);
         //en masse if-statements som tilføjer prisen for alt extra indhold som bliver lejet.
-        if(contract_extra_bike_rack){
+        if(contract_extra_bike_rack != false){
             totalPrice += 200;
         }
-        if (contract_extra_bed_sheets){
+        if (contract_extra_bed_sheets != false){
             totalPrice += 150;
         }
-        if (contract_extra_child_seat){
+        if (contract_extra_child_seat != false){
             totalPrice += 200;
         }
-        if (contract_extra_picnic_table){
+        if (contract_extra_picnic_table != false){
             totalPrice += 100;
         }
-        if (contract_extra_chairs){
+        if (contract_extra_chairs != false){
             totalPrice += 200;
         }
         totalPrice += (this.contract_pick_up_distance + this.contract_drop_off_distance) * 0.7;
