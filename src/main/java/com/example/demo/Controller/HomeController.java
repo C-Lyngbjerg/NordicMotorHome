@@ -5,15 +5,19 @@ import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.validation.Valid;
 import java.util.List;
 //Spring frameworks MVC
 @Controller
-public class HomeController {
+public class HomeController implements WebMvcConfigurer {
     @Autowired
     CustomerService customerService;
     @Autowired
@@ -25,36 +29,48 @@ public class HomeController {
     @Autowired
     RepairService repairService;
 
-//TODO kig på at indbygge knapper til valg af zipkode og andre ting du ved bro
-
+    //TODO kig på at indbygge knapper til valg af zipkode og andre ting du ved bro
+    //TODO check up på hvad denne gør
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/index").setViewName("index");
+    }
     @GetMapping("/")
     public String index() {
         return "home/index";
     }
-
+    //Laver et table af customer objekterne fra databasen der bliver vist til brugeren af systemet
     @GetMapping("/customerTable")
     public String customerTable(Model model) {
         List<Customer> customerList = customerService.fetchAll();
         model.addAttribute("customers", customerList);
         return "home/customerTable";
     }
-    //
+    //returnere til customerTable.html, når man trykker på den tilknyttede 'return' knap
     @PostMapping("/customerTable")
     public String returnFromTable(){
         return "redirect:/";
     }
+    // Directer bruger til createCustomer.html, hvor man kan inputte data til at lave en customer
+    // Customer objekt bliver taget med her, for at blive brugt under Springs indbygget inputvalidering.
     @GetMapping("/createCustomer")
-    public String createCustomer() {
+    public String createCustomer(Customer customer) {
         return "home/createCustomer";
     }
-    //
+    //Laver et customer objekt ud fra indtastet information i createCustomer.html
+    //Bruger et 'BindingResult' objekt, der indeholder nødvendige behaviour og state for brug af Springs Validator.
+    //@Valid er en notation der bliver brugt til at sige til programmet at den skal opfylde validation notationen i customer klassen.
     @PostMapping("/createCustomer")
-    public String createCustomer(@ModelAttribute Customer customer) {
+    public String createCustomer(@ModelAttribute @Valid Customer customer, BindingResult bindingResult) {
+        //hvis der er en error, så gå tilbage til createCustomer.html for at prøve igen, med beskrivende error messages
+        if(bindingResult.hasErrors()){
+            return "home/createCustomer";
+        }
         customerService.add(customer);
         return "redirect:/customerTable";
     }
     //Går til side der viser fulde information om en given repair, ud fra den repair man trykker 'view' på i 'repairTable'
-    @GetMapping("/viewCustomer/{customer_id}") //TODO lortet gider ikke at vise city, nationality og zip code
+    @GetMapping("/viewCustomer/{customer_id}")
     public String viewCustomer(@PathVariable("customer_id") int id, Model model){
         model.addAttribute("customer",customerService.findById(id));
         return "home/viewCustomer";
@@ -80,7 +96,10 @@ public class HomeController {
     }
     //Sender de opdaterede information til database via et DML statement, ud fra den givende input
     @PostMapping("/updateCustomer")
-    public String updateRepair(@ModelAttribute Customer customer){
+    public String updateRepair(@ModelAttribute @Valid Customer customer, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "home/updateCustomer";
+        }
         customerService.update(customer);
         return "redirect:/customerTable";
     }
@@ -290,12 +309,15 @@ public class HomeController {
 
     //Tager dig til createRepair html side, så man kan indsætte data
     @GetMapping("/createRepair")
-    public String createRepair() {
+    public String createRepair(Repair repair) {
         return "home/createRepair";
     }
     //Står for at lave et nyt repair objekt ud fra indsat data, ved tryk på
     @PostMapping("/createRepair")
-    public String createRepair(@ModelAttribute Repair repair){
+    public String createRepair(@ModelAttribute @Valid Repair repair,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "home/createRepair";
+        }
         repairService.add(repair);
         return "redirect:/repairTable";
     }
@@ -303,12 +325,15 @@ public class HomeController {
     //Tager til side, der giver input muligheder for at opdatere en given repair, ud fra den repair man trykker 'update' på i 'repairTable'
     @GetMapping("/updateRepair/{repair_id}")
     public String updateRepair(@PathVariable("repair_id") int id,Model model){
-        model.addAttribute("repairs",repairService.findById(id));
+        model.addAttribute("repair",repairService.findById(id));
         return "home/updateRepair";
     }
     //Sender de opdaterede information til database via et DML statement, ud fra den givende input
     @PostMapping("/updateRepair")
-    public String updateRepair(@ModelAttribute Repair repair){
+    public String updateRepair(@ModelAttribute @Valid Repair repair,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "home/updateRepair";
+        }
         repairService.update(repair);
         return "redirect:/repairTable";
     }

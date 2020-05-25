@@ -5,48 +5,57 @@
     <title>Update Customer</title>
 </head>
 <body>
-<h1>Repair update</h1>
+<h1>Customer update</h1>
 <table>
-    <form action="/updateCustomer" method="post">
+    <form action="#" th:action="@{/updateCustomer}" th:object="${customer}" method="post">
         <tr style="display: none">
             <td><label>Customer id</label></td>
             <td><input type="text" name="customer_id" th:value="${customer.customer_id}"><br></td>
         </tr>
         <tr>
             <td><label>First name</label></td>
-            <td><input type="text" name="customer_first_name" th:value="${customer.customer_first_name}"><br></td>
+            <td><input type="text" th:field="*{customer_first_name}" th:value="${customer.customer_first_name}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_first_name')}" th:errors="*{customer_first_name}"></td>
         </tr>
         <tr>
             <td><label>last name</label></td>
-            <td><input type="text" name="customer_last_name" th:value="${customer.customer_last_name}"><br></td>
+            <td><input type="text" th:field="*{customer_last_name}" th:value="${customer.customer_last_name}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_last_name')}" th:errors="*{customer_last_name}"></td>
         </tr>
         <tr>
             <td><label>Address</label></td>
-            <td><input type="text" name="customer_address" th:value="${customer.customer_address}"><br></td>
+            <td><input type="text" th:field="*{customer_address}" th:value="${customer.customer_address}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_address')}" th:errors="*{customer_address}"></td>
         </tr>
         <tr>
             <td ><label>Drivers license number</label></td>
-            <td><input type="text" name="customer_drivers_license" th:value="${customer.customer_drivers_license}"><br></td>
+            <td><input type="text" th:field="*{customer_drivers_license}" th:value="${customer.customer_drivers_license}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_drivers_license')}" th:errors="*{customer_drivers_license}"></td>
         </tr>
         <tr>
             <td><label>License type</label></td>
-            <td><input type="text" name="customer_license_type" th:value="${customer.customer_license_type}"><br></td>
+            <td><input type="text" th:field="*{customer_license_type}" th:value="${customer.customer_license_type}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_license_type')}" th:errors="*{customer_license_type}"></td>
         </tr>
         <tr>
             <td><label>Phone number</label></td>
-            <td><input type="text" name="customer_phone" th:value="${customer.customer_phone}"><br></td>
+            <td><input type="text" th:field="*{customer_phone}" th:value="${customer.customer_phone}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_phone')}" th:errors="*{customer_phone}"></td>
         </tr>
         <tr>
             <td><label>Nationality</label></td>
-            <td><input type="text" name="customer_nationality" th:value="${customer.customer_nationality}"><br></td>
+            <td><input type="text" th:field="*{customer_nationality}" th:value="${customer.customer_nationality}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_nationality')}" th:errors="*{customer_nationality}"></td>
         </tr>
         <tr>
             <td><label>City</label></td>
-            <td><input type="text" name="customer_city" th:value="${customer.customer_city}"><br></td>
+            <td><input type="text" th:field="*{customer_city}" th:value="${customer.customer_city}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_city')}" th:errors="*{customer_city}"></td>
         </tr>
         <tr>
             <td><label>Zip code</label></td>
-            <td><input type="text" name="customer_zip_code" th:value="${customer.customer_zip_code}"><br></td>
+            <td><input type="text" th:field="*{customer_zip_code}" th:value="${customer.customer_zip_code}"><br></td>
+            <td th:if="${#fields.hasErrors('customer_zip_code')}" th:errors="*{customer_zip_code}"></td>
         </tr>
         <tr>
             <td><input class="returnButton" type="submit" value="Update"></td>

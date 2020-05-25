@@ -7,22 +7,25 @@
 <body>
     <h1>Repair update</h1>
     <table>
-        <form action="/updateRepair" method="post">
+        <form action="#" th:action="@{/updateRepair}" th:object="${repair}" method="post">
             <tr style="display: none">
                 <td ><label>Repair id</label></td>
-                <td><input type="text" name="repair_id" th:value="${repairs.repair_id}"><br></td>
+                <td><input type="text" name="repair_id" th:value="${repair.repair_id}"><br></td>
             </tr>
             <tr>
                 <td><label>Repair description</label></td>
-                <td><input type="text" name="repair_description" th:value="${repairs.repair_description}"><br></td>
+                <td><input type="text" th:field="*{repair_description}" th:value="${repair.repair_description}"><br></td>
+                <td th:if="${#fields.hasErrors('repair_description')}" th:errors="*{repair_description}"></td>
             </tr>
             <tr>
                 <td><label>Repair date</label></td>
-                <td><input type="text" name="repair_date" th:value="${repairs.repair_date}"><br></td>
+                <td><input type="text" th:field="*{repair_date}" th:value="${repair.repair_date}"><br></td>
+                <td th:if="${#fields.hasErrors('repair_date')}" th:errors="*{repair_date}"></td>
             </tr>
             <tr>
                 <td><label>Motorhome id</label></td>
-                <td><input type="text" name="motorhome_id" th:value="${repairs.motorhome_id}"><br></td>
+                <td><input type="text" th:field="*{motorhome_id}" th:value="${repair.motorhome_id}"><br></td>
+                <td th:if="${#fields.hasErrors('motorhome_id')}" th:errors="*{motorhome_id}"></td>
             </tr>
             <tr>
                 <td><input class="returnButton" type="submit" value="Update"></td>

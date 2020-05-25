@@ -2,13 +2,22 @@ package com.example.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Repair {
     @Id
     private int repair_id;
+    @NotNull
+    @Size(min=10,max=50,message="Please make an short and precise description (10-50 characters)")
     private String repair_description;
+    @NotNull
+    @Size(min=10,max=10,message="Must be in dateformat: YYYY-MM-DD")
     private String repair_date;
+    @NotNull
+    @Positive
     private int motorhome_id;
 
     public Repair() {
