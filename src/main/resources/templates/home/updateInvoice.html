@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <form action="/updateInvoice" method="post">
+        <tr style="display:none">
+            <td><label>Invoice Id</label></td>
+            <td><input type="text" name="invoice_id" th:value="${invoice.invoice_id}"><br></td>
+        </tr>
+        <tr>
+            <td><label>Contract Id</label></td>
+            <td><input type="text" name="contract_id" th:value="${invoice.contract_id}"><br></td>
+        </tr>
+        <tr style="display: none">
+            <td><label>Distance Driven</label></td>
+            <td><input type="text" name="invoice_distance_driven" th:value="${invoice.invoice_distance_driven}"><br></td>
+        </tr>
+        <tr style="display: none">
+            <td><label>Odometer End</label></td>
+            <td><input type="text" name="invoice_odometer_end" th:value="${invoice.invoice_odometer_end}"><br></td>
+        </tr>
+        <tr style="display: none">
+            <td><label>Days rented</label></td>
+            <td><input type="text" name="invoice_rent_days" th:value="${invoice.invoice_rent_days}"><br></td>
+        </tr>
+        <tr>
+            <td><label>Fuel Gage Under 50%</label></td>
+            <td><input type="text" name="invoice_fuel_gage" th:value="${invoice.invoice_fuel_gage}"><br></td>
+        </tr>
+        <tr style="display: none">
+            <td><label>Total Price</label></td>
+            <td><input type="text" name="invoice_total_price" th:value="${invoice.invoice_total_price}"><br></td>
+        </tr>
+        <tr>
+            <td><input class="returnButton" type="submit" value="Update"></td>
+        </tr>
+    </form>
+</table>
+</body>
+</html>

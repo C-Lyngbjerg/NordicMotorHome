@@ -21,7 +21,7 @@ public class InvoiceRepo implements RepositoryI{
     fra databasen.
  */
     public List<Invoice> fetchAll(){
-        String sql = "SELECT invoice_id, invoice_total_price, i.invoice_odometer_end - con.contract_odometer_start AS invoice_distance_driven,(SELECT DATEDIFF(contract_end_date,contract_start_date) FROM contracts WHERE contracts.contract_id = i.contract_id) AS invoice_rent_days,i.invoice_odometer_end,i.contract_id FROM invoices i JOIN contracts con ON i.contract_id = con.contract_id";
+        String sql = "SELECT invoice_id, invoice_total_price, i.invoice_odometer_end - con.contract_odometer_start AS invoice_distance_driven,(SELECT DATEDIFF(contract_end_date,contract_start_date) FROM contracts WHERE contracts.contract_id = i.contract_id) AS invoice_rent_days,i.invoice_odometer_end,i.invoice_fuel_gage,i.contract_id FROM invoices i JOIN contracts con ON i.contract_id = con.contract_id";
         RowMapper<Invoice> rowMapper = new BeanPropertyRowMapper<>(Invoice.class);
         return template.query(sql, rowMapper);
     }
@@ -34,7 +34,7 @@ public class InvoiceRepo implements RepositoryI{
     }
     //Søger databasen efter et specifikt datasæt, der i dette tilfælde er en specifik invoice, via dens primary key (invoice_id)
     public Invoice findById(int id){
-        String sql = "SELECT * FROM invoices WHERE invoice_id = ?";
+        String sql = "SELECT invoice_id, invoice_total_price, i.invoice_odometer_end - con.contract_odometer_start AS invoice_distance_driven,(SELECT DATEDIFF(contract_end_date,contract_start_date) FROM contracts WHERE contracts.contract_id = i.contract_id) AS invoice_rent_days,i.invoice_odometer_end,i.invoice_fuel_gage,i.contract_id FROM invoices i JOIN contracts con ON i.contract_id = con.contract_id WHERE i.invoice_id = ?";
         RowMapper<Invoice> rowMapper = new BeanPropertyRowMapper<>(Invoice.class);
         Invoice invoice = template.queryForObject(sql, rowMapper,id);
         return invoice;

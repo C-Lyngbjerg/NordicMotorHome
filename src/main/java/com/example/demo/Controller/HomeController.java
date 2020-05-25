@@ -117,8 +117,8 @@ public class HomeController {
     }
 
     @GetMapping("/updateInvoice/{invoice_id}")
-    public String updateCar(@PathVariable("invoice_id") int id, Model model){
-        model.addAttribute("car",invoiceService.findById(id));
+    public String updateInvoice(@PathVariable("invoice_id") int id, Model model){
+        model.addAttribute("invoice",invoiceService.findById(id));
         return "home/updateInvoice";
     }
 

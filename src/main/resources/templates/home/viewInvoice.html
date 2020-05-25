@@ -12,9 +12,10 @@
         <th>Invoice Id</th>
         <th>Contract Id</th>
         <th>Distance Driven</th>
+        <th>Odometer at End</th>
         <th>Days rented</th>
         <th>Fuel gage under 50%</th>
-<!--        <th>Total Price</th>-->
+        <th>Total Price</th>
     </tr>
     </thead>
     <tbody>
@@ -22,12 +23,16 @@
         <td><span th:text="${invoice.invoice_id}"></span></td>
         <td><span th:text="${invoice.contract_id}"></span></td>
         <td><span th:text="${invoice.invoice_distance_driven}"></span></td>
+        <td><span th:text="${invoice.invoice_odometer_end}"></span></td>
         <td><span th:text="${invoice.invoice_rent_days}"></span></td>
         <td><span th:text="${invoice.invoice_fuel_gage}"></span></td>
-<!--        <td><span th:text="${invoice.invoice_total_price}"></span></td>-->
+        <td><span th:text="${invoice.invoice_total_price}"></span></td>
     </tr>
     </tbody>
 </table>
+<form action="/viewInvoice/" method="post">
+    <input class="returnButton" type="submit" value="Return">
+</form>
 </body>
 </html>
 

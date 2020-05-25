@@ -69,7 +69,7 @@ public class Invoice {
             invoice_total_price = 0.0;
         }
         //Antal km kørt divideret med antal leje dage giver den daglige distance kørt i gennemsnit
-        double distance_per_day = invoice_distance_driven / invoice_rent_days;
+        double distance_per_day = (double) invoice_distance_driven / (double)invoice_rent_days;
         //Hvis gennemsnit er over 400, betyder det at der vil være omkostninger der skal omregnes,
         //Hvis det er under 400 i gennemsnit, vil der ikke være grund til at lave noget computing og ignorere det
         if(distance_per_day > 400){
@@ -79,20 +79,6 @@ public class Invoice {
     }
 
     public void setInvoice_total_price(double invoice_total_price) {
-        invoice_total_price = 0.0;
-        //Hvis gas tank er under 50% (sat som en boolean til at være true) vil der blive lagt 70 til total price
-        if(isInvoice_fuel_gage()){
-            invoice_total_price += 70.0;
-        }else{
-            invoice_total_price = 0.0;
-        }
-        //Antal km kørt divideret med antal leje dage giver den daglige distance kørt i gennemsnit
-        double distance_per_day = (double) invoice_distance_driven / (double)invoice_rent_days;
-        //Hvis gennemsnit er over 400, betyder det at der vil være omkostninger der skal omregnes,
-        //Hvis det er under 400 i gennemsnit, vil der ikke være grund til at lave noget computing og ignorere det
-        if(distance_per_day > 400){
-            invoice_total_price += (double)(distance_per_day-400)*invoice_rent_days;
-        }
         this.invoice_total_price = invoice_total_price;
     }
 
@@ -104,7 +90,7 @@ public class Invoice {
         this.invoice_distance_driven = invoice_distance_driven;
     }
 
-    public boolean isInvoice_fuel_gage() { return true; }
+    public boolean isInvoice_fuel_gage() { return invoice_fuel_gage; }
 
     public void setInvoice_fuel_gage(boolean invoice_fuel_gage) { this.invoice_fuel_gage = invoice_fuel_gage; }
 
@@ -116,4 +102,5 @@ public class Invoice {
         this.invoice_rent_days = invoice_rent_days;
     }
 
+//    private void
 }
