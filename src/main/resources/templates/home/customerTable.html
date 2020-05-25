@@ -22,20 +22,22 @@
         <td th:text="${customer.customer_id}"/>
         <td th:text="${customer.customer_first_name}"/>
         <td th:text="${customer.customer_last_name}"/>
-
         <td>
-            <a style="text-decoration: none" th:href="@{'/viewOne/'+${customer.customer_id}}">
-                <button class="btn", id="btn-viewOne">View</button>
+            <a style="text-decoration: none" th:href="@{'/viewCustomer/'+${customer.customer_id}}">
+                <button>View</button>
             </a>
-            <a style="text-decoration: none" th:href="@{'/delete/'+${customer.customer_id}}">
-                <button class="btn", id="btn-delete">Delete</button>
+            <a style="text-decoration: none" th:href="@{'/deleteCustomer/'+${customer.customer_id}}">
+                <button>Delete</button>
             </a>
-            <a style="text-decoration: none" th:href="@{'/update/'+${customer.customer_id}}">
-                <button class="btn", id="btn-update">Update info</button>
+            <a style="text-decoration: none" th:href="@{'/updateCustomer/'+${customer.customer_id}}">
+                <button>Update info</button>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
+<form action="/customerTable/" method="post">
+    <input class="returnButton" type="submit" value="Return">
+</form>
 </body>
 </html>

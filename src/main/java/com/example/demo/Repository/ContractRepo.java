@@ -46,13 +46,13 @@ public class ContractRepo{
         String sql = "DELETE FROM contracts WHERE contract_id = ?";
         return template.update(sql, id) < 0;
     }
+  
     /*Denne metode vælge via prepared sql statement en kontrakt med det parameteroverførte id og giver mulighed for at ændre i informationer.
     Den displayer alle informationerne og gemmer efterfølgende det der står, ændret eller uændret.*/
     public Object update(Object obj){
         Contract con = (Contract) obj;
         String sql = "UPDATE contracts SET contract_rent_price = ?,contract_start_date = ?,contract_end_date = ?,contract_odometer_start = ?,contract_extra_bike_rack = ?,contract_extra_bed_sheets = ?,contract_extra_child_seat = ?,contract_extra_picnic_table = ?,contract_extra_chairs = ?,customer_id = ?,motorhome_id = ? WHERE contract_id = ?";
         template.update(sql,con.getContract_rent_price(),con.getContract_start_date(),con.getContract_end_date(),con.getContract_odometer_start(),con.isContract_extra_bike_rack(),con.isContract_extra_bed_sheets(),con.isContract_extra_child_seat(),con.isContract_extra_picnic_table(),con.isContract_extra_chairs(),con.getCustomer_id(),con.getMotorhome_id(), con.getContract_id());
-
         return null;
     }
 

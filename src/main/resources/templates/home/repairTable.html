@@ -21,17 +21,17 @@
         <td th:text="${repair.repair_id}"/>
         <td th:text="${repair.repair_description}"/>
         <td th:text="${repair.repair_date}"/>
-<!--        <td>-->
-<!--            <a style="text-decoration: none" th:href="@{'/viewOne/'+${motorhome.motorhome_reg_number}}">-->
-<!--                <button class="btn", id="btn-viewOne">View</button>-->
-<!--            </a>-->
-<!--            <a style="text-decoration: none" th:href="@{'/delete/'+${motorhome.motorhome_reg_number}}">-->
-<!--                <button class="btn", id="btn-delete">Delete</button>-->
-<!--            </a>-->
-<!--            <a style="text-decoration: none" th:href="@{'/update/'+${motorhome.motorhome_reg_number}}">-->
-<!--                <button class="btn", id="btn-update">Update info</button>-->
-<!--            </a>-->
-<!--        </td>-->
+        <td>
+            <a style="text-decoration: none" th:href="@{'/viewRepair/'+${repair.repair_id}}">
+                <button>View</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/deleteRepair/'+${repair.repair_id}}">
+                <button>Delete</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/updateRepair/'+${repair.repair_id}}">
+                <button>Update info</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>
