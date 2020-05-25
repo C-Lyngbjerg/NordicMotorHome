@@ -22,7 +22,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="invoice: ${invoices}">
+    <tr th:each="invoice: ${invoice}">
         <td th:text="${invoice.invoice_id}"/>
         <td th:text="${invoice.contract_id}"/>
         <td th:text="${invoice.invoice_total_price}"/>

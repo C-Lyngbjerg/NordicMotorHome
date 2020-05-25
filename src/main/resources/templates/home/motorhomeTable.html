@@ -19,11 +19,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="motorhome: ${motorhomes}">
-        <td th:text="${motorhomes.motorhome_reg_number}"/>
-        <td th:text="${motorhomes.type_description}"/>
-        <td th:text="${motorhomes.motorhome_brand}"/>
-        <td th:text="${motorhomes.motorhome_model}"/>
+    <tr th:each="motorhome: ${motorhome}">
+        <td th:text="${motorhome.motorhome_reg_number}"/>
+        <td th:text="${motorhome.type_description}"/>
+        <td th:text="${motorhome.motorhome_brand}"/>
+        <td th:text="${motorhome.motorhome_model}"/>
 
         <td>
             <a style="text-decoration: none" th:href="@{'/viewOneMotorhome/'+${motorhome.motorhome_id}}">

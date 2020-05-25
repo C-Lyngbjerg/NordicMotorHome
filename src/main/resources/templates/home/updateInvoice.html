@@ -6,35 +6,40 @@
 </head>
 <body>
 <table>
-    <form action="/updateInvoice" method="post">
+    <form action="#" th:action="@{/updateInvoice}" th:object="${invoice}" method="post">
         <tr style="display:none">
             <td><label>Invoice Id</label></td>
             <td><input type="text" name="invoice_id" th:value="${invoice.invoice_id}"><br></td>
+            <td th:if="${#fields.hasErrors('invoice_id')}" th:errors="*{invoice_id}"></td>
         </tr>
         <tr>
             <td><label>Contract Id</label></td>
-            <td><input type="text" name="contract_id" th:value="${invoice.contract_id}"><br></td>
+            <td><input type="text" th:field="*{contract_id}" th:value="${invoice.contract_id}"><br></td>
+            <td th:if="${#fields.hasErrors('contract_id')}" th:errors="*{contract_id}"></td>
         </tr>
         <tr style="display: none">
             <td><label>Distance Driven</label></td>
-            <td><input type="text" name="invoice_distance_driven" th:value="${invoice.invoice_distance_driven}"><br></td>
+            <td><input type="text" th:field="*{invoice_distance_driven}" th:value="${invoice.invoice_distance_driven}"><br></td>
+            <td th:if="${#fields.hasErrors('invoice_distance_driven')}" th:errors="*{invoice_distance_driven}"></td>
         </tr>
         <tr style="display: none">
             <td><label>Odometer End</label></td>
-            <td><input type="text" name="invoice_odometer_end" th:value="${invoice.invoice_odometer_end}"><br></td>
+            <td><input type="text" th:field="*{invoice_odometer_end}" th:value="${invoice.invoice_odometer_end}"><br></td>
+            <td th:if="${#fields.hasErrors('invoice_odometer_end')}" th:errors="*{invoice_odometer_end}"></td>
         </tr>
         <tr style="display: none">
             <td><label>Days rented</label></td>
-            <td><input type="text" name="invoice_rent_days" th:value="${invoice.invoice_rent_days}"><br></td>
+            <td><input type="text" th:field="*{invoice_rent_days}" th:value="${invoice.invoice_rent_days}"><br></td>
+            <td th:if="${#fields.hasErrors('invoice_rent_days')}" th:errors="*{invoice_rent_days}"></td>
         </tr>
         <tr>
             <td><label>Fuel Gage Under 50%</label></td>
 <!--            <td><input type="text" name="invoice_fuel_gage" th:value="${invoice.invoice_fuel_gage}"><br></td>-->
-            <td><input type="checkbox" name="invoice_fuel_gage" value="1"><br></td>
+            <td><input type="checkbox" th:field="*{invoice_fuel_gage}" value="1"><br></td>
         </tr>
         <tr style="display: none">
             <td><label>Total Price</label></td>
-            <td><input type="text" name="invoice_total_price" th:value="${invoice.invoice_total_price}"><br></td>
+            <td><input type="text" th:field="*{invoice_total_price}" th:value="${invoice.invoice_total_price}"><br></td>
         </tr>
         <tr>
             <td><input class="returnButton" type="submit" value="Update"></td>

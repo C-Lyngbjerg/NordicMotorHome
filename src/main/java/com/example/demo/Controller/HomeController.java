@@ -112,7 +112,7 @@ public class HomeController implements WebMvcConfigurer {
     @GetMapping("/motorhomeTable")
     public String motorhomeTable(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchall();
-        model.addAttribute("motorhomes", motorhomeList);
+        model.addAttribute("motorhome", motorhomeList);
         return "home/motorhomeTable";
     }
     @PostMapping("/motorhomeTable")
@@ -125,6 +125,7 @@ public class HomeController implements WebMvcConfigurer {
         return "home/createMotorhome";
     }
 
+    //TODO den gider ikke returnere til motorhomeTable
     @PostMapping("/createMotorhome")
     public String createMotorhome(@ModelAttribute @Valid Motorhome motorhome,BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
@@ -168,12 +169,12 @@ public class HomeController implements WebMvcConfigurer {
     /*
     * Invoice del
     */
-
+    // TODO Fuelgage knappen virker ikke som den skal under 'Create invoice' Den sætter det til falsk lige meget hvad
     // Create invoice table i html filen 'invoiceTable'
     @GetMapping("/invoiceTable")
     public String invoiceTable(Model model) {
         List<Invoice> invoiceList = invoiceService.fetchAll();
-        model.addAttribute("invoices", invoiceList);
+        model.addAttribute("invoice", invoiceList);
         return "home/invoiceTable";
     }
   
@@ -185,10 +186,11 @@ public class HomeController implements WebMvcConfigurer {
 
     // Går til createInvoice siden, hvor man kan lave en ny invoice
     @GetMapping("/createInvoice")
-    public String createInvoice(Model model) {
+    public String createInvoice(Model model,Invoice invoice) {
         createCon(model);
         return "home/createInvoice";
     }
+
     public String createCon(Model model){
         List<Contract> contractList = contractService.fetchAll();
         model.addAttribute("contracts", contractList);
@@ -198,7 +200,11 @@ public class HomeController implements WebMvcConfigurer {
     // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
 
     @PostMapping("/createInvoice")
-    public String createInvoice(@ModelAttribute Invoice invoice) {
+    public String createInvoice(@ModelAttribute @Valid Invoice invoice,BindingResult bindingResult,Model model) {
+        if(bindingResult.hasErrors()){
+            createCon(model);
+            return "home/createInvoice";
+        }
         invoiceService.add(invoice);
         return "redirect:/invoiceTable";
     }
@@ -228,7 +234,10 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @PostMapping("/updateInvoice")
-    public String updateInvoice(@ModelAttribute Invoice invoice){
+    public String updateInvoice(@ModelAttribute @Valid Invoice invoice, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "home/invoiceTable";
+        }
         invoiceService.update(invoice);
         return "redirect:/invoiceTable";
     }
@@ -265,7 +274,10 @@ public class HomeController implements WebMvcConfigurer {
 
     //Metoden til at lave et contract objekt, udregne den samlede pris og tilføje det til databasen
     @PostMapping("/finalizeContract")
-    public String finalizeContract(@ModelAttribute Contract contract){
+    public String finalizeContract(@ModelAttribute @Valid Contract contract, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "home/createContract";
+        }
         List<Double> datesAndPrice = contractService.calculateRentPeriodAndPrice(contract); // metoden retunere en list som indenholder den daglige pris for lejet og samlet antaldage lejeperioden er på
         contract.calculatePrice(datesAndPrice);// Listen der blev inisaliseret før bliver parameter overført til at kunne udregne den totale pris for udlejningsperioden
         contractService.add(contract);//contracten bliver tilføjet til databasen
@@ -312,8 +324,11 @@ public class HomeController implements WebMvcConfigurer {
         return "home/updateContract";
     }
 
-    @PostMapping("/updatedContract")
-    public String updatedContract(@ModelAttribute Contract contract){
+    @PostMapping("/updateContract")
+    public String updatedContract(@ModelAttribute Contract contract,BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "home/updateContract";
+        }
         List<Double> priceAndDateDiff = contractService.calculateRentPeriodAndPrice(contract);
         contract.calculatePrice(priceAndDateDiff);
         contractService.update(contract);

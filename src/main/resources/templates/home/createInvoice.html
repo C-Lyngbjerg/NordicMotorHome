@@ -9,10 +9,11 @@
     <td>
         <h1> Create new invoice </h1>
         <table>
-            <form action="/createInvoice" method="post">
-                <tr>
+            <form action="#" th:action="@{/createInvoice}" th:object="${invoice}" method="post">
+                <tr style="display: none">
                     <td><label>Enter invoice ID</label></td>
-                    <td><input type="text" name="invoice_id" placeholder="ID"><br></td>
+                    <td><input type="text" th:field="*{invoice_id}" placeholder="ID"><br></td>
+                    <td th:if="${#fields.hasErrors('invoice_id')}" th:errors="*{invoice_id}"></td>
                 </tr>
         <!--        <tr>-->
         <!--            <td ><label>Enter total price</label></td>-->
@@ -24,15 +25,18 @@
         <!--        </tr>-->
                 <tr>
                     <td><label>Enter odometer end</label></td>
-                    <td><input type="text" name="invoice_odometer_end" placeholder="Odometer End"><br></td>
+                    <td><input type="text" th:field="*{invoice_odometer_end}" placeholder="Odometer End"><br></td>
+                    <td th:if="${#fields.hasErrors('invoice_odometer_end')}" th:errors="*{invoice_odometer_end}"></td>
                 </tr>
                 <tr>
                     <td><label>Enter contract ID</label></td>
-                    <td><input type="text" name="contract_id" placeholder="ID"><br></td>
+                    <td><input type="text" th:field="*{contract_id}" placeholder="ID"><br></td>
+                    <td th:if="${#fields.hasErrors('contract_id')}" th:errors="*{contract_id}"></td>
                 </tr>
                 <tr>
                     <td><label>Enter fuel gage</label></td>
-                    <td><input type="checkbox" name="invoice_fuel_gage" value="1"><br></td>
+                    <td><input type="checkbox" th:field="*{invoice_fuel_gage}" value="1"><br></td>
+                    <td th:if="${#fields.hasErrors('invoice_fuel_gage')}" th:errors="*{invoice_fuel_gage}"></td>
                 </tr>
                 <tr>
                     <td><input class="returnButton" type="submit" value="Create"></td>
