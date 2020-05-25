@@ -203,13 +203,23 @@ public class HomeController {
         model.addAttribute("contracts", contractList);
         return "home/contractTable";
     }
+
+    @GetMapping("/selectRentDays")
+    public String selectRentDays(){
+        return "home/selectRentDays";
+    }
+
     @GetMapping("/createContract")
-    public String createContract() {
+    public String createContract(@ModelAttribute Contract contract, Model motorhomeModel, Model contractModel) {
+        List<Motorhome> motorhomeList = motorhomeService.findAvailable(contract.getContract_start_date(),contract.getContract_end_date());
+        motorhomeModel.addAttribute("motorhomeList", motorhomeList);
+        contractModel.addAttribute("contract", contract);
         return "home/createContract";
     }
+
     //Metoden til at lave et contract objekt, udregne den samlede pris og tilføje det til databasen
-    @PostMapping("/createContract")
-    public String createContract(@ModelAttribute Contract contract){
+    @PostMapping("/finalizeContract")
+    public String finalizeContract(@ModelAttribute Contract contract){
         List<Double> datesAndPrice = contractService.calculateRentPeriodAndPrice(contract); // metoden retunere en list som indenholder den daglige pris for lejet og samlet antaldage lejeperioden er på
         contract.calculatePrice(datesAndPrice);// Listen der blev inisaliseret før bliver parameter overført til at kunne udregne den totale pris for udlejningsperioden
         contractService.add(contract);//contracten bliver tilføjet til databasen

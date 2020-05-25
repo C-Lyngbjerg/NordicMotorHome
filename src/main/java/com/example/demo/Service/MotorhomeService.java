@@ -31,4 +31,8 @@ public class MotorhomeService {
     public Object update(Motorhome motorhome){
         return motorhomeRepo.update(motorhome);
     }
+
+    public List<Motorhome> findAvailable(String startDate, String endDate){
+        return motorhomeRepo.findAvailable(startDate,endDate);
+    }
 }

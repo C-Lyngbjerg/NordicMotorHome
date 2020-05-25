@@ -49,4 +49,10 @@ public class MotorhomeRepo implements RepositoryI {
         template.update(sql,mot.getMotorhome_id(),mot.getMotorhome_reg_number(),mot.getMotorhome_brand(),mot.getMotorhome_room_height(),mot.getMotorhome_model(),mot.getMotorhome_odometer(),mot.getType_id(), mot.getMotorhome_id());
         return null;
     }
+
+    public List<Motorhome> findAvailable(String startDate, String endDate){
+        String sql = "SELECT motorhome_id FROM motorhomes WHERE motorhome_id NOT IN (SELECT motorhome_id FROM contracts WHERE ? BETWEEN contract_start_date AND contract_end_date OR ? BETWEEN contract_start_date AND contract_end_date OR ? >= contract_start_date AND ? <= contract_end_date)";
+        RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
+        return template.query(sql,rowMapper,startDate,endDate,startDate,endDate);
+    }
 }
