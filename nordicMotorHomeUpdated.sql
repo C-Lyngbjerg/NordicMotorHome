@@ -51,6 +51,7 @@ CREATE TABLE motorhomes
     motorhome_room_height INT NOT NULL,
     motorhome_model VARCHAR(45) NOT NULL,
     motorhome_odometer INT NOT NULL,
+
     type_id INT NOT NULL,
     CONSTRAINT motorhomes_fk_mh_types
 		FOREIGN KEY (type_id) REFERENCES mh_types (type_id)
@@ -79,8 +80,11 @@ CREATE TABLE contracts
     contract_odometer_start INT NOT NULL,
     contract_extra_bike_rack TINYINT NOT NULL,
     contract_extra_child_seat TINYINT NOT NULL,
+    contract_extra_bed_sheets TINYINT NOT NULL,
     contract_extra_picnic_table TINYINT NOT NULL,
     contract_extra_chairs TINYINT NOT NULL,
+    contract_pick_up_distance INT NOT NULL,
+    contract_drop_off_distance INT NOT NULL,
     customer_id INT NOT NULL,
     motorhome_id INT NOT NULL,
     CONSTRAINT contracts_fk_customers
@@ -128,8 +132,8 @@ INSERT INTO repairs VALUES
 (1, 'shits fucked yo', '2020-02-22', 1);
 
 INSERT INTO contracts VALUES
-(1, 9999, '2020-01-01', '2020-01-02', 1, 1, 0, 1, 0, 1,'1'),
-(2, 5555, '2020-02-02', '2020-02-03', 1, 0, 1, 0, 1, 1,'2');
+(1, 9999, '2020-01-01', '2020-01-02', 100, true, false, true, false, false, 35, 0, 1, 1),
+(2, 5555, '2020-02-02', '2020-02-03', 20, true, false, false, false, false, 0, 45, 2, 2);
 
 INSERT INTO invoices VALUES
 (1,0,0,500,0,1,0);
