@@ -14,23 +14,28 @@
     <tr>
         <th>Contract Id</th>
         <th>Customer Id</th>
+        <th>Motorhome Id</th>
         <th>Motorhome Registration Number</th>
+        <th>Rental price</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="contract: ${contracts}">
         <td th:text="${contract.contract_id}"/>
         <td th:text="${contract.customer_id}"/>
+        <td th:text="${contract.motorhome_id}"/>
         <td th:text="${contract.motorhome_reg_number}"/>
+        <td th:text="${contract.contract_rent_price}"/>
+
 
         <td>
             <a style="text-decoration: none" th:href="@{'/viewOneContract/'+${contract.contract_id}}">
                 <button class="btn", id="btn-viewOne">View</button>
             </a>
-            <a style="text-decoration: none" th:href="@{'/delete/'+${contract.contract_id}}">
+            <a style="text-decoration: none" th:href="@{'/deleteContract/'+${contract.contract_id}}">
                 <button class="btn", id="btn-delete">Delete</button>
             </a>
-            <a style="text-decoration: none" th:href="@{'/update/'+${contract.contract_id}}">
+            <a style="text-decoration: none" th:href="@{'/updateContract/'+${contract.contract_id}}">
                 <button class="btn", id="btn-update">Update info</button>
             </a>
             <a style="text-decoration: none" th:href="@{'cancelContract/'+${contract.contract_id}}">
