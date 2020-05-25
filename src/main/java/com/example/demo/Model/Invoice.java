@@ -14,18 +14,20 @@ public class Invoice {
     private int invoice_rent_days;
     private int contract_id;
     private boolean invoice_fuel_gage;
+
 //TODO Kig lige op på hvordan Spring frameworket bruger constructors
 // Indeholder en tom og en "fuld" constructor, da Spring anvender den tomme
+
     public Invoice() {
     }
     public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven,int invoice_odometer_end, int invoice_rent_days, boolean invoice_fuel_gage){
         this.invoice_id = invoice_id;
         this.contract_id = contract_id;
-        this.invoice_total_price = invoice_total_price;
         this.invoice_distance_driven = invoice_distance_driven;
         this.invoice_odometer_end = invoice_odometer_end;
         this.invoice_fuel_gage = invoice_fuel_gage;
         this.invoice_rent_days = invoice_rent_days;
+        this.invoice_total_price = invoice_total_price;
     }
 
     public int getInvoice_id() {
@@ -66,8 +68,8 @@ public class Invoice {
         }else{
             invoice_total_price = 0.0;
         }
-        //Antal km kørt divideret med antal leje dage giver den daglige distance kørt i gennemsnit  noice
-        int distance_per_day = invoice_distance_driven / invoice_rent_days;
+        //Antal km kørt divideret med antal leje dage giver den daglige distance kørt i gennemsnit
+        double distance_per_day = (double) invoice_distance_driven / (double)invoice_rent_days;
         //Hvis gennemsnit er over 400, betyder det at der vil være omkostninger der skal omregnes,
         //Hvis det er under 400 i gennemsnit, vil der ikke være grund til at lave noget computing og ignorere det
         if(distance_per_day > 400){
@@ -88,7 +90,7 @@ public class Invoice {
         this.invoice_distance_driven = invoice_distance_driven;
     }
 
-    public boolean isInvoice_fuel_gage() { return true; }
+    public boolean isInvoice_fuel_gage() { return invoice_fuel_gage; }
 
     public void setInvoice_fuel_gage(boolean invoice_fuel_gage) { this.invoice_fuel_gage = invoice_fuel_gage; }
 
@@ -100,4 +102,5 @@ public class Invoice {
         this.invoice_rent_days = invoice_rent_days;
     }
 
+//    private void
 }

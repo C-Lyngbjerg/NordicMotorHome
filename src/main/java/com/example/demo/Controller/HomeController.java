@@ -136,14 +136,15 @@ public class HomeController {
     * Invoice del
     */
 
-    //Create invoice table i html filen 'invoiceTable'
+    // Create invoice table i html filen 'invoiceTable'
     @GetMapping("/invoiceTable")
     public String invoiceTable(Model model) {
         List<Invoice> invoiceList = invoiceService.fetchAll();
         model.addAttribute("invoices", invoiceList);
         return "home/invoiceTable";
     }
-    //Returnere fra et givent punkt til invoieTable side
+  
+    // Returnerer fra et givent punkt til invoieTable side
     @PostMapping("/invoiceTable")
     public String invoiceTable() {
         return "redirect:/";
@@ -158,7 +159,37 @@ public class HomeController {
     // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
     @PostMapping("/createInvoice")
     public String createInvoice(@ModelAttribute Invoice invoice) {
-        invoiceService.addInvoice(invoice);
+        invoiceService.add(invoice);
+        return "redirect:/invoiceTable";
+    }
+
+    @PostMapping("/viewInvoice")
+    public String viewInvoice(){
+        return "redirect:/invoiceTable";
+    }
+
+    //Show info about the chosen invoice on a new site called "viewInvoice"
+    @GetMapping("/viewInvoice/{invoice_id}")
+    public String viewInvoice(@PathVariable("invoice_id") int id, Model model){
+        model.addAttribute("invoice", invoiceService.findById(id));
+        return "home/viewInvoice";
+    }
+
+    @GetMapping("/deleteInvoice/{invoice_id}")
+    public String deleteInvoice(@PathVariable("invoice_id") int id){
+        invoiceService.delete(id);
+        return "redirect:/invoiceTable";
+    }
+
+    @GetMapping("/updateInvoice/{invoice_id}")
+    public String updateInvoice(@PathVariable("invoice_id") int id, Model model){
+        model.addAttribute("invoice",invoiceService.findById(id));
+        return "home/updateInvoice";
+    }
+
+    @PostMapping("/updateInvoice")
+    public String updateInvoice(@ModelAttribute Invoice invoice){
+        invoiceService.updateInvoice(invoice.getInvoice_id(), invoice);
         return "redirect:/invoiceTable";
     }
 
@@ -239,6 +270,7 @@ public class HomeController {
             return "redirect:/contractTable";
         }
     }
+
     /*
      * Repair del
      */
