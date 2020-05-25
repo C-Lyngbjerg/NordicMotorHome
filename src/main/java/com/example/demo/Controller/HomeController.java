@@ -95,6 +95,11 @@ public class HomeController {
         model.addAttribute("motorhomes", motorhomeList);
         return "home/motorhomeTable";
     }
+    @PostMapping("/motorhomeTable")
+    public String motorhomeTable() {
+        return "redirect:/";
+    }
+
     @GetMapping("/createMotorhome")
     public String createMotorhome() {
         return "home/createMotorhome";
@@ -111,6 +116,11 @@ public class HomeController {
         model.addAttribute(motorhomeService.findById(motorhome_id));
         return "home/viewOneMotorhome";
     }
+    @PostMapping("/viewOneMotorhome")
+    public String viewOneMotorhome() {
+        return "redirect:/motorhomeTable";
+    }
+
     @GetMapping("/updateMotorhome/{motorhome_id}")
     public String updateMotorhome(@PathVariable("motorhome_id") int motorhome_id, Model model){
         model.addAttribute(motorhomeService.findById(motorhome_id));
@@ -203,6 +213,12 @@ public class HomeController {
         model.addAttribute("contracts", contractList);
         return "home/contractTable";
     }
+
+    @PostMapping("/contractTable")
+    public String contractTable() {
+        return "redirect:/";
+    }
+
     @GetMapping("/createContract")
     public String createContract() {
         return "home/createContract";
@@ -220,6 +236,10 @@ public class HomeController {
     public String viewOneContract(@PathVariable("contract_id") int contract_id, Model model){
         model.addAttribute(contractService.findById(contract_id));
         return "home/viewOneContract";
+    }
+    @PostMapping("/viewOneContract")
+    public String viewOneContract() {
+        return "redirect:/contractTable";
     }
 
     //Denne metode bruges hvis man vælger at annullere en kontrakt.
@@ -271,9 +291,9 @@ public class HomeController {
         }
     }
 
-    /*
-     * Repair del
-     */
+    /* *********** *
+     * Repair del  *
+     ************* */
 
     //står for at lave og vise de tilgængelige repair objekter, til html side 'repairTable'
     @GetMapping("/repairTable")
