@@ -29,7 +29,7 @@ public class InvoiceRepo implements RepositoryI{
     public Invoice add(Object object){
         String sql = "INSERT INTO invoices (invoice_id,invoice_total_price,invoice_distance_driven,invoice_odometer_end,contract_id, invoice_rent_days, invoice_fuel_gage) VALUES (?,?,?,?,?,?,?)";
         Invoice invoice = (Invoice) object;
-        template.update(sql,invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(), invoice.isInvoice_fuel_gage(), invoice.getInvoice_rent_days());
+        template.update(sql,invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(),invoice.getInvoice_rent_days(),invoice.isInvoice_fuel_gage());
         return null;
     }
     //Søger databasen efter et specifikt datasæt, der i dette tilfælde er en specifik invoice, via dens primary key (invoice_id)
