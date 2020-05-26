@@ -12,17 +12,18 @@ import java.util.List;
 
 @Entity
 public class Contract {
+    public interface dateValidation{};
     @Id
     @NotNull
     @Min(1)
     private int contract_id;
     @NotNull
     private double contract_rent_price;
-    @NotNull
-    @Size(min=10,max=10)
+    @NotNull(groups= {dateValidation.class})
+    @Size(min=10,max=10,groups= {dateValidation.class})
     private String contract_start_date;
-    @NotNull
-    @Size(min=10,max=10)
+    @NotNull(groups= {dateValidation.class})
+    @Size(min=10,max=10,groups= {dateValidation.class})
     private String contract_end_date;
     @NotNull
     @Positive

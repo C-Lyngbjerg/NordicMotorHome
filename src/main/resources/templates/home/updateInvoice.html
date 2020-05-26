@@ -22,7 +22,7 @@
             <td><input type="text" th:field="*{invoice_distance_driven}" th:value="${invoice.invoice_distance_driven}"><br></td>
             <td th:if="${#fields.hasErrors('invoice_distance_driven')}" th:errors="*{invoice_distance_driven}"></td>
         </tr>
-        <tr style="display: none">
+        <tr>
             <td><label>Odometer End</label></td>
             <td><input type="text" th:field="*{invoice_odometer_end}" th:value="${invoice.invoice_odometer_end}"><br></td>
             <td th:if="${#fields.hasErrors('invoice_odometer_end')}" th:errors="*{invoice_odometer_end}"></td>

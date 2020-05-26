@@ -5,11 +5,14 @@ import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -126,7 +129,7 @@ public class HomeController implements WebMvcConfigurer {
         return "home/createMotorhome";
     }
 
-    //TODO den gider ikke returnere til motorhomeTable
+    //TODO den gider ikke returnere til motorhomeTable, fix dette
     @PostMapping("/createMotorhome")
     public String createMotorhome(@ModelAttribute @Valid Motorhome motorhome,BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
@@ -260,7 +263,7 @@ public class HomeController implements WebMvcConfigurer {
 
 
     @GetMapping("/selectRentDays")
-    public String selectRentDays(){
+    public String selectRentDays(Contract contract){
         return "home/selectRentDays";
     }
   
@@ -270,7 +273,10 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @GetMapping("/createContract")
-    public String createContract(@ModelAttribute Contract contract, Model motorhomeModel, Model contractModel) {
+    public String createContract(@ModelAttribute @Validated(Contract.dateValidation.class) Contract contract, Model motorhomeModel, Model contractModel, BindingResult bindingResult) {
+//        if(bindingResult.hasErrors()){
+//            return "home/selectRentDays";
+//        }
         List<Motorhome> motorhomeList = motorhomeService.findAvailable(contract.getContract_start_date(),contract.getContract_end_date());
         motorhomeModel.addAttribute("motorhomeList", motorhomeList);
         contractModel.addAttribute("contract", contract);
@@ -279,10 +285,10 @@ public class HomeController implements WebMvcConfigurer {
 
     //Metoden til at lave et contract objekt, udregne den samlede pris og tilføje det til databasen
     @PostMapping("/finalizeContract")
-    public String finalizeContract(@ModelAttribute @Valid Contract contract, BindingResult bindingResult){
-        if(bindingResult.hasErrors()) {
-            return "home/createContract";
-        }
+    public String finalizeContract(@ModelAttribute /*@Valid*/ Contract contract, BindingResult bindingResult){
+//        if(bindingResult.hasErrors()) {
+//            return "home/createContract";
+//        }
         List<Double> datesAndPrice = contractService.calculateRentPeriodAndPrice(contract); // metoden retunere en list som indenholder den daglige pris for lejet og samlet antaldage lejeperioden er på
         contract.calculatePrice(datesAndPrice);// Listen der blev inisaliseret før bliver parameter overført til at kunne udregne den totale pris for udlejningsperioden
         contractService.add(contract);//contracten bliver tilføjet til databasen
