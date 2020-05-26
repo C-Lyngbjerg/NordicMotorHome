@@ -2,25 +2,22 @@ package com.example.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 public class Motorhome {
     @Id
     private int motorhome_id;
-    @NotNull
+    @NotBlank
     @Size(min=1,max=15)
     private String motorhome_reg_number;
-    @NotNull
+    @NotBlank
     @Size(min=1,max=15)
     private String motorhome_brand;
     @NotNull
     @Min(100)
     private int motorhome_room_height;
-    @NotNull
+    @NotBlank
     @Size(min=1,max=15)
     private String motorhome_model;
     @NotNull
@@ -29,7 +26,7 @@ public class Motorhome {
     @NotNull
     @Positive
     private int type_id;
-    @NotNull
+    @NotBlank
     @Size(min=1,max=50)
     private String type_description;
     @NotNull

@@ -3,6 +3,7 @@ package com.example.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
@@ -13,6 +14,7 @@ import java.util.List;
 public class Contract {
     @Id
     @NotNull
+    @Min(1)
     private int contract_id;
     @NotNull
     private double contract_rent_price;

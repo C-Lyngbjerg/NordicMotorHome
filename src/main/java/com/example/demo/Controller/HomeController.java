@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
 import java.util.List;
+
 //Spring frameworks MVC
 @Controller
 public class HomeController implements WebMvcConfigurer {
@@ -131,8 +132,9 @@ public class HomeController implements WebMvcConfigurer {
         if(bindingResult.hasErrors()){
             return "home/createMotorhome";
         }
-        motorhomeService.add(motorhome);
-        return "redirect:/motorhomeTable";
+            motorhomeService.add(motorhome);
+            return "redirect:/motorhomeTable";
+
     }
 
     @GetMapping("/viewOneMotorhome/{motorhome_id}")
@@ -151,7 +153,10 @@ public class HomeController implements WebMvcConfigurer {
         return "home/updateMotorhome";
     }
     @PostMapping("/updateMotorhome")
-    public String updateMotorhome(@ModelAttribute Motorhome motorhome){
+    public String updateMotorhome(@ModelAttribute @Valid Motorhome motorhome, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "home/updateMotorhome";
+        }
         motorhomeService.update(motorhome);
         return "redirect:/motorhomeTable";
     }

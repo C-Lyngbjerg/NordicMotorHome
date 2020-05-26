@@ -25,7 +25,7 @@ public class Invoice {
     @Min(0)
     private int invoice_rent_days;
     @NotNull
-    @Positive
+    @Min(1)
     private int contract_id;
     @NotNull
     private boolean invoice_fuel_gage;
