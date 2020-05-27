@@ -1,36 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create new motorhome</title>
 </head>
 <body>
-<h1> Create new motorhome </h1>
+<h1>Create new motorhome</h1>
 <table>
-    <form action="/createMotorhome" method="post">
+    <form action="#" th:action="@{/createMotorhome}" th:object="${motorhome}" method="post">
+        <tr style="display: none">
+            <td><label>Motorhome id</label></td>
+            <td><input type="text" name="motorhome_id" placeholder="Id"><br></td>
+        </tr>
         <tr>
-            <td><label>Enter registration number</label></td>
-            <td><input type="text" name="motorhome_reg_number" placeholder="Reg. number"><br></td>
+            <td><label>Registration number</label></td>
+            <td><input type="text" th:field="*{motorhome_reg_number}" placeholder="Registration number"><br></td>
+            <td th:if="${#fields.hasErrors('motorhome_reg_number')}" th:errors="*{motorhome_reg_number}"></td>
         </tr>
         <tr>
             <td><label>Enter type</label></td>
-            <td><input type="text" name="type_id" placeholder="Type"><br></td>
+            <td><input type="text" th:field="*{type_id}" placeholder="Type"><br></td>
+            <td th:if="${#fields.hasErrors('type_id')}" th:errors="*{type_id}"></td>
         </tr>
         <tr>
             <td><label>Enter brand</label></td>
-            <td><input type="text" name="motorhome_brand" placeholder="Brand"><br></td>
+            <td><input type="text" th:field="*{motorhome_brand}" placeholder="Brand"><br></td>
+            <td th:if="${#fields.hasErrors('motorhome_brand')}" th:errors="*{motorhome_brand}"></td>
         </tr>
         <tr>
             <td><label>Enter model</label></td>
-            <td><input type="text" name="motorhome_model" placeholder="Model"><br></td>
+            <td><input type="text" th:field="*{motorhome_model}" placeholder="Model"><br></td>
+            <td th:if="${#fields.hasErrors('motorhome_model')}" th:errors="*{motorhome_model}"></td>
         </tr>
         <tr>
             <td><label>Enter room height</label></td>
-            <td><input type="text" name="motorhome_room_height" placeholder="Room height"><br></td>
+            <td><input type="text" th:field="*{motorhome_room_height}" placeholder="Room height"><br></td>
+            <td th:if="${#fields.hasErrors('motorhome_room_height')}" th:errors="*{motorhome_room_height}"></td>
         </tr>
         <tr>
             <td><label>Enter odometer value</label></td>
-            <td><input type="text" name="motorhome_odometer" placeholder="Odometer value"><br></td>
+            <td><input type="text" th:field="*{motorhome_odometer}" placeholder="Odometer value"><br></td>
+            <td th:if="${#fields.hasErrors('motorhome_odometer')}" th:errors="*{motorhome_odometer}"></td>
         </tr>
         <tr>
             <td><input class="returnButton" type="submit" value="Create"></td>

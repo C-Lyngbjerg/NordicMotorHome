@@ -3,27 +3,56 @@ package com.example.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 public class Contract {
+    public interface dateValidation{};
     @Id
+    @NotNull
+    @Min(1)
     private int contract_id;
+    @NotNull
     private double contract_rent_price;
+    @NotNull(groups= {dateValidation.class})
+    @Size(min=10,max=10,groups= {dateValidation.class})
     private String contract_start_date;
+    @NotNull(groups= {dateValidation.class})
+    @Size(min=10,max=10,groups= {dateValidation.class})
     private String contract_end_date;
+    @NotNull
+    @Positive
     private int contract_odometer_start;
+    @NotNull
+    @Size(min=5,max=15)
     private String motorhome_reg_number;
+    @NotNull
     private boolean contract_extra_bike_rack;
+    @NotNull
     private boolean contract_extra_child_seat;
+    @NotNull
     private boolean contract_extra_bed_sheets;
+    @NotNull
     private boolean contract_extra_picnic_table;
+    @NotNull
     private boolean contract_extra_chairs;
+    @NotNull
+    @Positive
     private int customer_id;
+    @NotNull
+    @Positive
     private int motorhome_id;
+    @NotNull
+    @Positive
     private int dateDiff;
+    @NotNull
     private double contract_pick_up_distance;
+    @NotNull
     private double contract_drop_off_distance;
 
     public Contract() {

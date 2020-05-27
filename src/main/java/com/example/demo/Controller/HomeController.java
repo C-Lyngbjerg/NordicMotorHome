@@ -5,16 +5,20 @@ import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
 import java.util.List;
+
 //Spring frameworks MVC
 @Controller
 public class HomeController implements WebMvcConfigurer {
@@ -30,6 +34,7 @@ public class HomeController implements WebMvcConfigurer {
     RepairService repairService;
 
     //TODO kig på at indbygge knapper til valg af zipkode og andre ting du ved bro
+
     //TODO check up på hvad denne gør
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -111,7 +116,7 @@ public class HomeController implements WebMvcConfigurer {
     @GetMapping("/motorhomeTable")
     public String motorhomeTable(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchall();
-        model.addAttribute("motorhomes", motorhomeList);
+        model.addAttribute("motorhome", motorhomeList);
         return "home/motorhomeTable";
     }
     @PostMapping("/motorhomeTable")
@@ -120,14 +125,19 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @GetMapping("/createMotorhome")
-    public String createMotorhome() {
+    public String createMotorhome(Motorhome motorhome) {
         return "home/createMotorhome";
     }
 
+    //TODO den gider ikke returnere til motorhomeTable, fix dette
     @PostMapping("/createMotorhome")
-    public String createMotorhome(@ModelAttribute Motorhome motorhome) {
-        motorhomeService.add(motorhome);
-        return "redirect:/motorhomeTable";
+    public String createMotorhome(@ModelAttribute @Valid Motorhome motorhome,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "home/createMotorhome";
+        }
+            motorhomeService.add(motorhome);
+            return "redirect:/motorhomeTable";
+
     }
 
     @GetMapping("/viewOneMotorhome/{motorhome_id}")
@@ -146,7 +156,10 @@ public class HomeController implements WebMvcConfigurer {
         return "home/updateMotorhome";
     }
     @PostMapping("/updateMotorhome")
-    public String updateMotorhome(@ModelAttribute Motorhome motorhome){
+    public String updateMotorhome(@ModelAttribute @Valid Motorhome motorhome, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "home/updateMotorhome";
+        }
         motorhomeService.update(motorhome);
         return "redirect:/motorhomeTable";
     }
@@ -164,12 +177,12 @@ public class HomeController implements WebMvcConfigurer {
     /*
     * Invoice del
     */
-
+    // TODO Fuelgage knappen virker ikke som den skal under 'Create invoice' Den sætter det til falsk lige meget hvad
     // Create invoice table i html filen 'invoiceTable'
     @GetMapping("/invoiceTable")
     public String invoiceTable(Model model) {
         List<Invoice> invoiceList = invoiceService.fetchAll();
-        model.addAttribute("invoices", invoiceList);
+        model.addAttribute("invoice", invoiceList);
         return "home/invoiceTable";
     }
   
@@ -181,10 +194,11 @@ public class HomeController implements WebMvcConfigurer {
 
     // Går til createInvoice siden, hvor man kan lave en ny invoice
     @GetMapping("/createInvoice")
-    public String createInvoice(Model model) {
+    public String createInvoice(Model model,Invoice invoice) {
         createCon(model);
         return "home/createInvoice";
     }
+
     public String createCon(Model model){
         List<Contract> contractList = contractService.fetchAll();
         model.addAttribute("contracts", contractList);
@@ -194,7 +208,11 @@ public class HomeController implements WebMvcConfigurer {
     // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
 
     @PostMapping("/createInvoice")
-    public String createInvoice(@ModelAttribute Invoice invoice) {
+    public String createInvoice(@ModelAttribute @Valid Invoice invoice,BindingResult bindingResult,Model model) {
+        if(bindingResult.hasErrors()){
+            createCon(model);
+            return "home/createInvoice";
+        }
         invoiceService.add(invoice);
         return "redirect:/invoiceTable";
     }
@@ -224,7 +242,10 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @PostMapping("/updateInvoice")
-    public String updateInvoice(@ModelAttribute Invoice invoice){
+    public String updateInvoice(@ModelAttribute @Valid Invoice invoice, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "home/invoiceTable";
+        }
         invoiceService.update(invoice);
         return "redirect:/invoiceTable";
     }
@@ -242,7 +263,7 @@ public class HomeController implements WebMvcConfigurer {
 
 
     @GetMapping("/selectRentDays")
-    public String selectRentDays(){
+    public String selectRentDays(Contract contract){
         return "home/selectRentDays";
     }
   
@@ -252,7 +273,10 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @GetMapping("/createContract")
-    public String createContract(@ModelAttribute Contract contract, Model motorhomeModel, Model contractModel) {
+    public String createContract(@ModelAttribute @Validated(Contract.dateValidation.class) Contract contract, Model motorhomeModel, Model contractModel, BindingResult bindingResult) {
+//        if(bindingResult.hasErrors()){
+//            return "home/selectRentDays";
+//        }
         List<Motorhome> motorhomeList = motorhomeService.findAvailable(contract.getContract_start_date(),contract.getContract_end_date());
         motorhomeModel.addAttribute("motorhomeList", motorhomeList);
         contractModel.addAttribute("contract", contract);
@@ -261,7 +285,10 @@ public class HomeController implements WebMvcConfigurer {
 
     //Metoden til at lave et contract objekt, udregne den samlede pris og tilføje det til databasen
     @PostMapping("/finalizeContract")
-    public String finalizeContract(@ModelAttribute Contract contract){
+    public String finalizeContract(@ModelAttribute /*@Valid*/ Contract contract, BindingResult bindingResult){
+//        if(bindingResult.hasErrors()) {
+//            return "home/createContract";
+//        }
         List<Double> datesAndPrice = contractService.calculateRentPeriodAndPrice(contract); // metoden retunere en list som indenholder den daglige pris for lejet og samlet antaldage lejeperioden er på
         contract.calculatePrice(datesAndPrice);// Listen der blev inisaliseret før bliver parameter overført til at kunne udregne den totale pris for udlejningsperioden
         contractService.add(contract);//contracten bliver tilføjet til databasen
@@ -308,8 +335,11 @@ public class HomeController implements WebMvcConfigurer {
         return "home/updateContract";
     }
 
-    @PostMapping("/updatedContract")
-    public String updatedContract(@ModelAttribute Contract contract){
+    @PostMapping("/updateContract")
+    public String updatedContract(@ModelAttribute Contract contract,BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "home/updateContract";
+        }
         List<Double> priceAndDateDiff = contractService.calculateRentPeriodAndPrice(contract);
         contract.calculatePrice(priceAndDateDiff);
         contractService.update(contract);
