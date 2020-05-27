@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="MyCSS.css">
+    <link rel="stylesheet" href="TableManager.css">
     <meta charset="UTF-8">
     <title>Invoices</title>
 </head>
 <body>
 <h1>Invoice menu</h1>
 <a href = "/createInvoice">
-    <button>Create new invoice</button>
+    <button class="btn">Create new invoice</button>
 </a>
+<div class="table-wrapper">
+    <div class="table-scroll">
 <table>
     <thead>
     <tr>
@@ -33,20 +37,22 @@
 
         <td>
            <a style="text-decoration: none" th:href="@{'/viewInvoice/'+${invoice.invoice_id}}">
-                <button class="btn", id="btn-viewOne">View</button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/deleteInvoice/'+${invoice.invoice_id}}">
-                <button class="btn", id="btn-delete">Delete</button>
+                <button class="btn">View</button>
             </a>
             <a style="text-decoration: none" th:href="@{'/updateInvoice/'+${invoice.invoice_id}}">
-                <button class="btn", id="btn-update">Update info</button>
+                <button class="btn">Update info</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/deleteInvoice/'+${invoice.invoice_id}}">
+                <button class="btn1">Delete</button>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
+    </div>
+</div>
 <form action="/invoiceTable/" method="post">
-    <input class="returnButton" type="submit" value="Return">
+    <input class="btn" type="submit" value="Return">
 </form>
 </body>
 </html>

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="MyCSS.css">
+    <link rel="stylesheet" href="TableManager.css">
     <meta charset="UTF-8">
     <title>Contract Table</title>
 </head>
 <h1>Contract table</h1>
 <body>
 <a href = "/selectRentDays">
-    <button>Create new contract</button>
+    <button class="btn">Create new contract</button>
 </a>
+<div class="table-wrapper">
+    <div class="table-scroll">
 <table>
     <thead>
     <tr>
@@ -30,23 +34,25 @@
 
         <td>
             <a style="text-decoration: none" th:href="@{'/viewOneContract/'+${contract.contract_id}}">
-                <button class="btn", id="btn-viewOne">View</button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/deleteContract/'+${contract.contract_id}}">
-                <button class="btn", id="btn-delete">Delete</button>
+                <button class="btn">View</button>
             </a>
             <a style="text-decoration: none" th:href="@{'/updateContract/'+${contract.contract_id}}">
-                <button class="btn", id="btn-update">Update info</button>
+                <button class="btn">Update info</button>
             </a>
             <a style="text-decoration: none" th:href="@{'cancelContract/'+${contract.contract_id}}">
-                <button class="btn", id="btn-cancel">Cancel contract</button>
+                <button class="btn">Cancel contract</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/deleteContract/'+${contract.contract_id}}">
+                <button class="btn1">Delete</button>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
+    </div>
+</div>
 <form action="/contractTable/" method="post">
-    <input class="returnButton" type="submit" value="Return">
+    <input class="btn" type="submit" value="Return">
 </form>
 </body>
 </html>

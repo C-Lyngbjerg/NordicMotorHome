@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="MyCSS.css">
+    <link rel="stylesheet" href="TableManager.css">
     <meta charset="UTF-8">
     <title>Repair Table</title>
 </head>
 <body>
+<h1>Repair Table</h1>
 <a href = "/createRepair">
-    <button>Create new repair</button>
+    <button class="btn">Create new repair</button>
 </a>
+<div class="table-wrapper">
+    <div class="table-scroll">
 <table>
     <thead>
     <tr>
@@ -23,20 +28,22 @@
         <td th:text="${repair.repair_date}"/>
         <td>
             <a style="text-decoration: none" th:href="@{'/viewRepair/'+${repair.repair_id}}">
-                <button>View</button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/deleteRepair/'+${repair.repair_id}}">
-                <button>Delete</button>
+                <button class="btn">View</button>
             </a>
             <a style="text-decoration: none" th:href="@{'/updateRepair/'+${repair.repair_id}}">
-                <button>Update info</button>
+                <button class="btn">Update info</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/deleteRepair/'+${repair.repair_id}}">
+                <button class="btn1">Delete</button>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
+</div>
+</div>
 <form action="/repairTable/" method="post">
-    <input class="returnButton" type="submit" value="Return">
+    <input class="btn" type="submit" value="Return">
 </form>
 </body>
 </html>

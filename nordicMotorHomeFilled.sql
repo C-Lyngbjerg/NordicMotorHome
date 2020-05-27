@@ -88,7 +88,8 @@ CREATE TABLE contracts
     customer_id INT NOT NULL,
     motorhome_id INT NOT NULL,
     CONSTRAINT contracts_fk_customers
-		FOREIGN KEY (customer_id) REFERENCES customers (customer_id),
+		FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
+		ON CASCADE,
 	CONSTRAINT contracts_fk_motorhomes
 		FOREIGN KEY (motorhome_id) REFERENCES motorhomes (motorhome_id)
 );
@@ -106,6 +107,7 @@ CREATE TABLE invoices
     invoice_fuel_gage BOOLEAN NOT NULL,
     CONSTRAINT invoices_fk_contracts
 		FOREIGN KEY (contract_id) REFERENCES contracts (contract_id)
+	    ON CASCADE
 );
 
 

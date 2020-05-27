@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="MyCSS.css">
+    <link rel="stylesheet" href="TableManager.css">
     <meta charset="UTF-8">
     <title>Customer Table</title>
 </head>
 <body>
 <h1>Customer menu</h1>
 <a href = "/createCustomer">
-    <button>Create new customer</button>
+    <button class="btn">Create new customer</button>
 </a>
+<div class="table-wrapper">
+<div class="table-scroll">
 <table>
     <thead>
     <tr>
@@ -24,20 +28,22 @@
         <td th:text="${customer.customer_last_name}"/>
         <td>
             <a style="text-decoration: none" th:href="@{'/viewCustomer/'+${customer.customer_id}}">
-                <button>View</button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/deleteCustomer/'+${customer.customer_id}}">
-                <button>Delete</button>
+                <button class="btn" >View</button>
             </a>
             <a style="text-decoration: none" th:href="@{'/updateCustomer/'+${customer.customer_id}}">
-                <button>Update info</button>
+                <button class="btn" >Update info</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/deleteCustomer/'+${customer.customer_id}}">
+                <button class="btn1" >Delete</button>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
+    </div>
+</div>
 <form action="/customerTable/" method="post">
-    <input class="returnButton" type="submit" value="Return">
+    <input class="btn" type="submit" value="Return">
 </form>
 </body>
 </html>

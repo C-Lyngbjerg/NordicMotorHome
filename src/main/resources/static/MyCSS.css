@@ -1,0 +1,60 @@
+body{
+    font-family: Cambria;
+    background-color: #D4D8E9;
+}
+.returnButton{
+    background-color: #3C5898;;
+    border-radius: 25px;
+    font-family: Cambria;
+    border: 1px solid darkslateblue;
+    padding: 10px;
+    margin: 12px;
+}
+h1{
+    text-align: center;
+}
+table{
+    border-collapse: collapse;
+    width: 50%;
+    margin: 20px 0px 0px 0px;
+}
+th{
+    background-color: #3C5898;
+    color:white;
+}
+td, th{
+    border: 2px solid black;
+    text-align: left;
+    padding: 2px;
+    color:black;
+}
+.btn{
+    background-color:#3C5898;
+    color:white;
+    border: 1px solid darkslateblue;
+    padding: 7px 10px;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+}
+button{
+    text-decoration: none;
+    font-family: Cambria;
+}
+.btn:hover{
+    background-color: seagreen;
+    box-shadow: dimgrey 3px 3px 3px;
+}
+.btn1{
+    background-color:#3C5898;
+    color:white;
+    border: 1px solid darkslateblue;
+    padding: 7px 10px;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+}
+.btn1:hover{
+    background-color: darkred;
+    box-shadow: dimgrey 3px 3px 3px;
+}

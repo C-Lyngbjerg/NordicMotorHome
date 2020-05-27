@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="MyCSS.css">
+    <link rel="stylesheet" href="TableManager.css">
     <meta charset="UTF-8">
     <title>Motorhome table</title>
 </head>
 <body>
 <h1>Motorhome menu</h1>
 <a href = "/createMotorhome">
-    <button>Create new motorhome</button>
+    <button class="btn">Create new motorhome</button>
 </a>
+<div class="table-wrapper">
+    <div class="table-scroll">
 <table>
     <thead>
     <tr>
@@ -27,20 +31,22 @@
 
         <td>
             <a style="text-decoration: none" th:href="@{'/viewOneMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="btn", id="btn-viewOne">View Details</button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/deleteMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="btn", id="btn-delete">Delete</button>
+                <button class="btn">View Details</button>
             </a>
             <a style="text-decoration: none" th:href="@{'/updateMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="btn", id="btn-update">Update info</button>
+                <button class="btn">Update info</button>
+            </a>
+            <a style="text-decoration: none" th:href="@{'/deleteMotorhome/'+${motorhome.motorhome_id}}">
+                <button class="btn1">Delete</button>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
+    </div>
+</div>
 <form action="/motorhomeTable/" method="post">
-    <input class="returnButton" type="submit" value="Return">
+    <input class="btn" type="submit" value="Return">
 </form>
 </body>
 </html>

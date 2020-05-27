@@ -1,0 +1,25 @@
+.table-wrapper {
+    position:relative;
+}
+.table-scroll {
+    height:332px;
+    overflow: auto;
+    margin-top:20px;
+}
+td, th{
+    border: 1px solid #3C5898 ;
+    text-align: left;
+    padding: 2px;
+    color:black;
+}
+tr:nth-child(Even){
+    background-color:#9CB2CE;
+}
+th{
+    font-family: Cambria;
+    background-color: #3C5898;
+    color:white;
+}
+.left{
+    width: 100%;
+}
