@@ -58,3 +58,17 @@ button{
     background-color: darkred;
     box-shadow: dimgrey 3px 3px 3px;
 }
+.btn2{
+    background-color:#3C5898;
+    color:white;
+    border: 1px solid darkslateblue;
+    padding: 7px 10px;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+    float:left;
+}
+.btn2:hover{
+    background-color: darkred;
+    box-shadow: dimgrey 3px 3px 3px;
+}
