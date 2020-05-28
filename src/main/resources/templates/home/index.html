@@ -4,11 +4,38 @@
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="IndexStyle.css">
+    <link rel="stylesheet" href="NavBar.css">
     <meta charset="UTF-8">
     <title>Nordic Motorhome Rental</title>
 </head>
 <body>
+<div class="navbar">
+    <a href="/">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Menu
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+            <a href="/customerTable">Customers</a>
+            <a href="/contractTable">Contracts</a>
+            <a href="/invoiceTable">Invoices</a>
+            <a href="/motorhomeTable">Motorhomes</a>
+            <a href="/repairTable">Repairs</a>
+        </div>
+    </div>
+    <a href="/AboutUs">About Us</a>
+</div>
 <h1> Nordic Motorhome Rental </h1>
+<div class="wrapper">
+<pre>
+asdasd
+asdasd
+asdasd
+asdasdasd
+asdasd
+asdasdasd
+</pre>
+</div>
 
 <div class="wrapper">
 <div class="div1">
@@ -16,25 +43,25 @@
         <tr>
             <td>
     <a style="text-decoration: none" href = "/customerTable">
-        <button class="btn"><img src="customerIcon.png" alt="" width="55 px" height="70 px">See all customers</button>
+        <button class="forsideBtn"><img src="customerIcon.png" alt="" width="55 px" height="70 px" align="left">Customers</button>
     </a></td>
             <td>
     <a style="text-decoration: none" href = "/invoiceTable">
-        <button class="btn" ><img src="invoiceIcon.png" alt="" width="55 px" height="70 px">See all invoices</button>
+        <button class="forsideBtn" ><img src="invoiceIcon.png" alt="" width="55 px" height="70 px" align="left">Invoices</button>
     </a></td>
         </tr>
         <tr>
         <td>
     <a style="text-decoration: none" href = "/contractTable">
-        <button class="btn"><img src="contractIcon.png" alt="" width="55 px" height="70 px">See all contracts</button>
+        <button class="forsideBtn"><img src="contractIcon.png" alt="" width="55 px" height="70 px" align="left">Contracts</button>
     </a>
         </td>
         <td>
-        <a style="text-decoration: none" href = "/repairTable">
-            <button class="btn"> <img src="repairIcon.png" alt="" width="55 px" height="33 px">Repairs</button>
+        <a style="text-decoration: none" href = "/motorhomeTable">
+            <button style="height:42px" class="forsideBtn"><img src="motorhomeIcon.png" alt="" width="55 px" height="33px" align="left">Motorhomes</button>
         </a>
-       <a style="text-decoration: none" href = "/motorhomeTable">
-            <button class="btn"><img src="motorhomeIcon.png" alt="" width="55 px" height="33px">Motorhomes</button>
+        <a style="text-decoration: none" href = "/repairTable">
+            <button style="height:42px" class="forsideBtn"> <img src="repairIcon.png" alt="" width="42 px" height="30 px" align="left">Repairs</button>
         </a>
         </td>
         </tr>
@@ -42,7 +69,7 @@
 </div>
 </div>
 
-
+<img id="Logo" src="" alt="Logo" style="opacity: 45%; position: fixed; bottom: 0px; right: 0px; width: 20%; height:20%">
 
 </body>
 </html>

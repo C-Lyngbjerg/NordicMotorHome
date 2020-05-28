@@ -5,6 +5,7 @@
     width: 800px;
     height: 100px;
     display: inline-block;
+    padding:10px;
 }
 .div2{
     width: 500px;
@@ -16,4 +17,20 @@ table{
 }
 td{
     width:25%;
+    border-collapse: collapse;
+    border: none;
+}
+.forsideBtn{
+    background-color:#3C5898;
+    color:white;
+    border: 1px solid darkslateblue;
+    padding: 7px 10px;
+    text-align: center;
+    margin: 3px;
+    border-radius: 10px;
+    width:90%
+}
+.forsideBtn:hover{
+    background-color: seagreen;
+    box-shadow: dimgrey 3px 3px 3px;
 }

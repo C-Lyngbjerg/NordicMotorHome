@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="icon" href="/Logo.png">
+    <link rel="stylesheet" href="/MyCSS.css">
+    <link rel="stylesheet" href="/TableManager.css">
+    <link rel="stylesheet" href="/NavBar.css">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div class="navbar">
+    <a href="/">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Menu
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+            <a href="/customerTable">Customers</a>
+            <a href="/contractTable">Contracts</a>
+            <a href="/invoiceTable">Invoices</a>
+            <a href="/motorhomeTable">Motorhomes</a>
+            <a href="/repairTable">Repairs</a>
+        </div>
+    </div>
+    <a href="/AboutUs">About Us</a>
+</div>
 <table>
     <form action="#" th:action="@{/updateInvoice}" th:object="${invoice}" method="post">
         <tr style="display:none">
@@ -42,7 +62,7 @@
             <td><input type="text" th:field="*{invoice_total_price}" th:value="${invoice.invoice_total_price}"><br></td>
         </tr>
         <tr>
-            <td><input class="returnButton" type="submit" value="Update"></td>
+            <td><input class="btn" type="submit" value="Update"></td>
         </tr>
     </form>
 </table>
