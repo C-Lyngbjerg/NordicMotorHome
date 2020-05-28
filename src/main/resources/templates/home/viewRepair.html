@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="icon" href="/Logo.png">
+    <link rel="stylesheet" href="/MyCSS.css">
+    <link rel="stylesheet" href="/TableManager.css">
+    <link rel="stylesheet" href="/NavBar.css">
     <meta charset="UTF-8">
     <title>View Repair</title>
 </head>
 <body>
+<div class="navbar">
+    <a href="/">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Menu
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+            <a href="/customerTable">Customers</a>
+            <a href="/contractTable">Contracts</a>
+            <a href="/invoiceTable">Invoices</a>
+            <a href="/motorhomeTable">Motorhomes</a>
+            <a href="/repairTable">Repairs</a>
+        </div>
+    </div>
+    <a href="/AboutUs">About Us</a>
+</div>
 <h1>Repair details</h1>
     <pre>
 <b>Repair id:</b> <i><span th:text="${repair.repair_id}"/></i>
@@ -12,8 +32,9 @@
 <b>Date:</b> <i><span th:text="${repair.repair_date}"/></i>
 <b>Motorhome id:</b> <i><span th:text="${repair.motorhome_id}"/></i>
     <form action="/viewRepair/" method="post">
-        <input class="returnButton" type="submit" value="Return">
+        <input class="btn" type="submit" value="Return">
     </form>
     </pre>
+<img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>
