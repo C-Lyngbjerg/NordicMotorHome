@@ -54,7 +54,7 @@
         <td th:text="${invoice.invoice_rent_days}"/>
         <td th:text="${invoice.invoice_fuel_gage}"/>
 
-        <td>
+        <td style="width:40%">
            <a style="text-decoration: none" th:href="@{'/viewInvoice/'+${invoice.invoice_id}}">
                 <button class="btn">View</button>
             </a>
