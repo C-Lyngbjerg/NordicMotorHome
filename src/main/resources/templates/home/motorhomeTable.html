@@ -27,7 +27,7 @@
 </div>
 <h1>Motorhome menu</h1>
 <a href = "/createMotorhome">
-    <button class="btn">Create new motorhome</button>
+    <button class="button"><span>Create new motorhome</span></button>
 </a>
 <div class="table-wrapper">
     <div class="table-scroll">
@@ -49,13 +49,13 @@
 
         <td>
             <a style="text-decoration: none" th:href="@{'/viewOneMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="btn">View Details</button>
+                <button class="button"><span>View Details</span></button>
             </a>
             <a style="text-decoration: none" th:href="@{'/updateMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="btn">Update info</button>
+                <button class="button"><span>Update info</span></button>
             </a>
             <a style="text-decoration: none" th:href="@{'/deleteMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="btn1">Delete</button>
+                <button class="button1"><span>Delete</span></button>
             </a>
         </td>
     </tr>
@@ -64,7 +64,7 @@
     </div>
 </div>
 <form action="/motorhomeTable/" method="post">
-    <input class="btn" type="submit" value="Return">
+    <input class="button" type="submit" value="Return">
 </form>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>

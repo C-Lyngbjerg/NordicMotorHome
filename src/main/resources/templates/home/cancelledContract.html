@@ -43,10 +43,10 @@
     <br>
     <p>Are you sure you want to cancel this contract?</p>
     <a style="text-decoration: none" th:href="@{confirmCancellation/{id}/{price}(id = ${contract.contract_id}, price = ${contract.contract_rent_price})}">
-        <button class="btn">Confirm</button>
+        <button class="button"><span>Confirm</span></button>
     </a>
     <a style="text-decoration: none" href = "/contractTable">
-        <button class="btn">Return to contracts table</button>
+        <button class="button"><span>Return to contracts table</span></button>
     </a>
 </table>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
