@@ -335,11 +335,11 @@ public class HomeController implements WebMvcConfigurer {
         return "home/updateContract";
     }
 
-    @PostMapping("/updateContract")
+    @PostMapping("/updatedContract")
     public String updatedContract(@ModelAttribute Contract contract,BindingResult bindingResult){
-        if(bindingResult.hasErrors()) {
-            return "home/updateContract";
-        }
+//        if(bindingResult.hasErrors()) {
+//            return "home/updateContract";
+//        }
         List<Double> priceAndDateDiff = contractService.calculateRentPeriodAndPrice(contract);
         contract.calculatePrice(priceAndDateDiff);
         contractService.update(contract);
