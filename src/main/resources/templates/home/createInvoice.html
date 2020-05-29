@@ -23,10 +23,11 @@
             <a href="/repairTable">Repairs</a>
         </div>
     </div>
-    <a href="/AboutUs">About Us</a>
 </div>
-<table style="width:100%">
-    <td>
+
+
+<table style="width:100%; border: none">
+    <td style="width:50%; border: none">
         <h1> Create new invoice </h1>
         <table>
             <form action="#" th:action="@{/createInvoice}" th:object="${invoice}" method="post">
@@ -59,15 +60,15 @@
                     <td th:if="${#fields.hasErrors('invoice_fuel_gage')}" th:errors="*{invoice_fuel_gage}"></td>
                 </tr>
                 <tr>
-                    <td><input class="btn" type="submit" value="Create"></td>
+                    <td style="border: none"><input class="btn" type="submit" value="Create"></td>
                 </tr>
             </form>
         </table>
     </td>
-    <td>
+    <td style="border: none">
         <h1> Available contracts </h1>
 
-        <table>
+        <table style="width:100%">
             <thead>
             <tr>
                 <th>Contract Id</th>
