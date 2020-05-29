@@ -35,46 +35,86 @@ td, th{
     color:black;
 }
 .btn{
-    background-color:#3C5898;
-    color:white;
-    border: 1px solid darkslateblue;
+    border: none;
+    color: white;
     padding: 7px 10px;
     text-align: center;
-    margin: 10px;
+}
+.button {
+    display: inline-block;
     border-radius: 10px;
-}
-button{
-    text-decoration: none;
+    background-color: #3C5898;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
     font-family: Cambria;
+    padding: 7px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
 }
-.btn:hover{
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+.button:hover span {
+    padding-right: 25px;
+}
+.button:hover {
     background-color: seagreen;
     box-shadow: dimgrey 3px 3px 3px;
 }
-.btn1{
-    background-color:#3C5898;
-    color:white;
-    border: 1px solid darkslateblue;
-    padding: 7px 10px;
-    text-align: center;
-    margin: 10px;
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+.button1 {
+    display: inline-block;
     border-radius: 10px;
-}
-.btn1:hover{
-    background-color: darkred;
-    box-shadow: dimgrey 3px 3px 3px;
-}
-.btn2{
-    background-color:#3C5898;
-    color:white;
-    border: 1px solid darkslateblue;
-    padding: 7px 10px;
+    background-color: #3C5898;
+    border: none;
+    color: #FFFFFF;
     text-align: center;
-    margin: 10px;
-    border-radius: 10px;
-    float:left;
+    font-size: 16px;
+    font-family: Cambria;
+    padding: 7px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
 }
-.btn2:hover{
-    background-color: darkred;
+.button1 span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+.button1 span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+.button1:hover span {
+    padding-right: 25px;
+}
+.button1:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+.button1:hover {
+    background-color: red;
     box-shadow: dimgrey 3px 3px 3px;
 }

@@ -28,11 +28,11 @@
 
 <h1>Invoice menu</h1>
 <a href = "/createInvoice">
-    <button class="btn">Create new invoice</button>
+    <button class="button"><span>Create new invoice</span></button>
 </a>
 <div class="table-wrapper">
     <div class="table-scroll">
-<table>
+<table id="contractTableWidth">
     <thead>
     <tr>
         <th>Invoice Id</th>
@@ -56,13 +56,13 @@
 
         <td style="width:40%">
            <a style="text-decoration: none" th:href="@{'/viewInvoice/'+${invoice.invoice_id}}">
-                <button class="btn">View</button>
+                <button class="button"><span>View</span></button>
             </a>
             <a style="text-decoration: none" th:href="@{'/updateInvoice/'+${invoice.invoice_id}}">
-                <button class="btn">Update info</button>
+                <button class="button"><span>Update info</span></button>
             </a>
             <a style="text-decoration: none" th:href="@{'/deleteInvoice/'+${invoice.invoice_id}}">
-                <button class="btn1">Delete</button>
+                <button class="button1"><span>Delete</span></button>
             </a>
         </td>
     </tr>
@@ -71,7 +71,7 @@
     </div>
 </div>
 <form action="/invoiceTable/" method="post">
-    <input class="btn" type="submit" value="Return">
+    <input class="button" type="submit" value="Return">
 </form>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
