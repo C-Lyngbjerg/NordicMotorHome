@@ -1,50 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="icon" href="/Logo.png">
+    <link rel="stylesheet" href="/MyCSS.css">
+    <link rel="stylesheet" href="/TableManager.css">
+    <link rel="stylesheet" href="/NavBar.css">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div class="navbar">
+    <a href="/">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Menu
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+            <a href="/customerTable">Customers</a>
+            <a href="/contractTable">Contracts</a>
+            <a href="/invoiceTable">Invoices</a>
+            <a href="/motorhomeTable">Motorhomes</a>
+            <a href="/repairTable">Repairs</a>
+        </div>
+    </div>
+</div>
+
+
 <table>
     <form action="#" th:action="@{/updateInvoice}" th:object="${invoice}" method="post">
-        <tr style="display:none">
-            <td><label>Invoice Id</label></td>
-            <td><input type="text" name="invoice_id" th:value="${invoice.invoice_id}"><br></td>
-            <td th:if="${#fields.hasErrors('invoice_id')}" th:errors="*{invoice_id}"></td>
-        </tr>
-        <tr>
-            <td><label>Contract Id</label></td>
-            <td><input type="text" th:field="*{contract_id}" th:value="${invoice.contract_id}"><br></td>
-            <td th:if="${#fields.hasErrors('contract_id')}" th:errors="*{contract_id}"></td>
-        </tr>
         <tr style="display: none">
             <td><label>Distance Driven</label></td>
             <td><input type="text" th:field="*{invoice_distance_driven}" th:value="${invoice.invoice_distance_driven}"><br></td>
             <td th:if="${#fields.hasErrors('invoice_distance_driven')}" th:errors="*{invoice_distance_driven}"></td>
         </tr>
         <tr>
+            <td><label>Contract Id</label></td>
+            <td><input type="text" th:field="*{contract_id}" th:value="${invoice.contract_id}"><br></td>
+            <td th:if="${#fields.hasErrors('contract_id')}" th:errors="*{contract_id}"></td>
+        </tr>
+        <tr>
             <td><label>Odometer End</label></td>
             <td><input type="text" th:field="*{invoice_odometer_end}" th:value="${invoice.invoice_odometer_end}"><br></td>
             <td th:if="${#fields.hasErrors('invoice_odometer_end')}" th:errors="*{invoice_odometer_end}"></td>
+        </tr>
+        <tr>
+            <td><label>Fuel Gage Under 50%</label></td>
+            <td><input type="checkbox" th:field="*{invoice_fuel_gage}" value="1"><br></td>
         </tr>
         <tr style="display: none">
             <td><label>Days rented</label></td>
             <td><input type="text" th:field="*{invoice_rent_days}" th:value="${invoice.invoice_rent_days}"><br></td>
             <td th:if="${#fields.hasErrors('invoice_rent_days')}" th:errors="*{invoice_rent_days}"></td>
         </tr>
-        <tr>
-            <td><label>Fuel Gage Under 50%</label></td>
-<!--            <td><input type="text" name="invoice_fuel_gage" th:value="${invoice.invoice_fuel_gage}"><br></td>-->
-            <td><input type="checkbox" th:field="*{invoice_fuel_gage}" value="1"><br></td>
-        </tr>
         <tr style="display: none">
             <td><label>Total Price</label></td>
             <td><input type="text" th:field="*{invoice_total_price}" th:value="${invoice.invoice_total_price}"><br></td>
         </tr>
+        <tr style="display:none">
+            <td><label>Invoice Id</label></td>
+            <td><input type="text" name="invoice_id" th:value="${invoice.invoice_id}"><br></td>
+            <td th:if="${#fields.hasErrors('invoice_id')}" th:errors="*{invoice_id}"></td>
+        </tr>
+        <tr></tr>
         <tr>
-            <td><input class="returnButton" type="submit" value="Update"></td>
+            <td style="border: none"><input class="btn" type="submit" value="Update"></td>
         </tr>
     </form>
 </table>
+<img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>
