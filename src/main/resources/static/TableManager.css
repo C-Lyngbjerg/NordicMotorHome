@@ -20,6 +20,12 @@ th{
     background-color: #3C5898;
     color:white;
 }
-.left{
-    width: 100%;
+#wrapper{
+    display: flex;
+}
+#first {
+    width:65%;
+}
+#second {
+    width:35%;
 }
