@@ -23,8 +23,9 @@
             <a href="/repairTable">Repairs</a>
         </div>
     </div>
-    <a href="/AboutUs">About Us</a>
 </div>
+
+
 <h1>Repair menu</h1>
 <table>
     <form action="#" th:action="@{/createRepair}" th:object="${repair}" method="post">
@@ -49,7 +50,7 @@
             <td th:if="${#fields.hasErrors('motorhome_id')}" th:errors="*{motorhome_id}"></td>
         </tr>
         <tr>
-            <td><input class="btn" type="submit" value="Create"></td>
+            <td style="border: none"><input class="btn" type="submit" value="Create"></td>
         </tr>
     </form>
 </table>

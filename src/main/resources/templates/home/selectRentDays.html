@@ -23,14 +23,19 @@
             <a href="/repairTable">Repairs</a>
         </div>
     </div>
-    <a href="/AboutUs">About Us</a>
 </div>
+  
+  
+<div class="wrapper">
+    <h1>Input start og end date</h1>
+    <p>!-- Lad input bokse stå nice</p>
 <form action="#" th:action="@{/createContract}" th:object="${contract}" method="get">
     <tr>
         <td><label>Enter start date</label></td>
         <td><input type="text" th:field="*{contract_start_date}" placeholder="Start date (YYYY-MM-DD)"><br></td>
         <td th:if="${#fields.hasErrors('contract_start_date')}" th:errors="*{contract_start_date}"></td>
     </tr>
+    <br>
     <tr>
         <td><label>Enter end date</label></td>
         <td><input type="text" th:field="*{contract_end_date}" placeholder="End date (YYYY-MM-DD)"><br></td>
@@ -40,6 +45,7 @@
         <td><input class="button" type="submit" value="Create"></td>
     </tr>
 </form>
+</div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>

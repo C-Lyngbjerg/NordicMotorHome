@@ -20,6 +20,17 @@ th{
     background-color: #3C5898;
     color:white;
 }
+
 #contractTableWidth {
     width: 70%;
+}
+
+#wrapper{
+    display: flex;
+}
+#first {
+    width:65%;
+}
+#second {
+    width:35%;
 }

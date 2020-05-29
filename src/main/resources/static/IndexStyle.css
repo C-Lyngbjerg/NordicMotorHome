@@ -1,6 +1,10 @@
 .wrapper{
     text-align: center;
 }
+.wrapper1{
+    text-align: center;
+    overflow:hidden;
+}
 .div1{
     width: 800px;
     height: 100px;
