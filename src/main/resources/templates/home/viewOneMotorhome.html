@@ -27,35 +27,45 @@
 
 
 <h1>Motorhome Details</h1>
-
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Registration Number</th>
-        <th>Brand</th>
-        <th>Height floor to ceiling in cm</th>
-        <th>Model</th>
-        <th>Odometer</th>
-        <th>Type</th>
-        <th>Type Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><span th:text="${motorhome.motorhome_id}"></span></td>
-        <td><span th:text="${motorhome.motorhome_reg_number}"></span></td>
-        <td><span th:text="${motorhome.motorhome_brand}"></span></td>
-        <td><span th:text="${motorhome.motorhome_room_height}"></span></td>
-        <td><span th:text="${motorhome.motorhome_model}"></span></td>
-        <td><span th:text="${motorhome.motorhome_odometer}"></span></td>
-        <td><span th:text="${motorhome.type_id}"></span></td>
-    </tr>
-    </tbody>
-</table>
-<form action="/viewOneMotorhome/" method="post">
-    <input class="button" type="submit" value="Return">
-</form>
+<div class="wrapper">
+    <div style="width: 800px; height: 100px; display: inline-block; padding:10px;" >
+        <table style="border-collapse: collapse; width: 50%; margin: 20px 0px 0px 0px; margin:auto; ">
+            <tbody style="margi: auto">
+            <tr>
+                <td class="infoBox"><label>Motorhome ID</label></td>
+                <td><span th:text="${motorhome.motorhome_id}"></span></td>
+            </tr>
+            <tr>
+                <td class="infoBox"> <label>Registration number</label></td>
+                <td><span th:text="${motorhome.motorhome_reg_number}"></span></td>
+            </tr>
+            <tr>
+                <td class="infoBox">Brand</td>
+                <td><span th:text="${motorhome.motorhome_brand}"></td>
+            </tr>
+            <tr>
+                <td class="infoBox">Room height</td>
+                <td><span th:text="${motorhome.motorhome_room_height}"></span></td>
+            </tr>
+            <tr>
+                <td class="infoBox">Model</td>
+                <td><span th:text="${motorhome.motorhome_model}"></span></td>
+            </tr>
+            <tr>
+                <td class="infoBox"><label>Odometer</label></td>
+                <td><span th:text="${motorhome.motorhome_odometer}"></span></td>
+            </tr>
+            <tr>
+                <td class="infoBox"><label>Type</label></td>
+                <td><span th:text="${motorhome.type_id}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+        <form action="/viewOneMotorhome/" method="post">
+            <input class="button" type="submit" value="Return">
+        </form>
+    </div>
+</div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>
