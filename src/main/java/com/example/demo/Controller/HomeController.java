@@ -272,10 +272,10 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @GetMapping("/createContract")
-    public String createContract(@ModelAttribute @Validated(Contract.dateValidation.class) Contract contract, Model motorhomeModel, Model contractModel, BindingResult bindingResult) {
-//        if(bindingResult.hasErrors()){
-//            return "home/selectRentDays";
-//        }
+    public String createContract(@ModelAttribute Contract contract, Model motorhomeModel, Model contractModel) {
+        if(!(contract.validateDates())){
+            return "home/contractDateInputError";
+        }
         List<Motorhome> motorhomeList = motorhomeService.findAvailable(contract.getContract_start_date(),contract.getContract_end_date());
         motorhomeModel.addAttribute("motorhomeList", motorhomeList);
         contractModel.addAttribute("contract", contract);
