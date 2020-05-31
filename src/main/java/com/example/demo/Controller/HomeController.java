@@ -178,7 +178,6 @@ public class HomeController implements WebMvcConfigurer {
     /*
     * Invoice del
     */
-    // TODO Fuelgage knappen virker ikke som den skal under 'Create invoice' Den sætter det til falsk lige meget hvad
     // Create invoice table i html filen 'invoiceTable'
     @GetMapping("/invoiceTable")
     public String invoiceTable(Model model) {
@@ -193,13 +192,13 @@ public class HomeController implements WebMvcConfigurer {
         return "redirect:/";
     }
 
-    // Går til createInvoice siden, hvor man kan lave en ny invoice
+    // Går til createInvoice siden, hvor man kan lave en ny invoice og kalder createCon metoden, der laver et contract
+    // table på samme side, så man kan se hvilke contract ids der findes.
     @GetMapping("/createInvoice")
     public String createInvoice(Model model,Invoice invoice) {
         createCon(model);
         return "home/createInvoice";
     }
-
     public String createCon(Model model){
         List<Contract> contractList = contractService.fetchAll();
         model.addAttribute("contracts", contractList);
@@ -209,13 +208,12 @@ public class HomeController implements WebMvcConfigurer {
     // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
 
     @PostMapping("/createInvoice")
-    public String createInvoice(@ModelAttribute @Valid Invoice invoice,BindingResult bindingResult,Model model) {
-        if(bindingResult.hasErrors()){
-            createCon(model);
-            return "home/createInvoice";
+    public String createInvoice(@ModelAttribute Invoice invoice,Model model) {
+        if(invoiceService.checkContractId(invoice.getContract_id())){
+            invoiceService.add(invoice);
+            return "redirect:/invoiceTable";
         }
-        invoiceService.add(invoice);
-        return "redirect:/invoiceTable";
+        return "home/invalidContractID";
     }
 
     @PostMapping("/viewInvoice")

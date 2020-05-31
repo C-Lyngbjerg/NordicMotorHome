@@ -1,7 +1,9 @@
 package com.example.demo.Repository;
 
+import com.example.demo.Model.Contract;
 import com.example.demo.Model.Invoice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -53,5 +55,18 @@ public class InvoiceRepo implements RepositoryI{
         String sql = "UPDATE invoices SET invoice_id = ?, invoice_total_price = ?, invoice_distance_driven = ?,invoice_odometer_end = ?,contract_id = ?, invoice_fuel_gage = ?, invoice_rent_days = ? WHERE invoice_id = ?";
         template.update(sql, invoice.getInvoice_id(),invoice.getInvoice_total_price(),invoice.getInvoice_distance_driven(),invoice.getInvoice_odometer_end(),invoice.getContract_id(), invoice.isInvoice_fuel_gage(), invoice.getInvoice_rent_days(),invoice.getInvoice_id());
         return null;
+    }
+    public Boolean checkContractId(int contract_id){
+        String sql = "SELECT contract_id FROM contracts WHERE contract_id = ?";
+        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
+        /*if((template.queryForObject(sql, rowMapper, contract_id)) == null){
+            return false;
+        }*/
+        try{
+            template.queryForObject(sql, rowMapper, contract_id);
+        } catch (DataAccessException e) {
+            return false;
+        }
+        return true;
     }
 }
