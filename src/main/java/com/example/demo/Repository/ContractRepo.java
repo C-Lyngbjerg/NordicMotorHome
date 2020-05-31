@@ -16,6 +16,7 @@ public class ContractRepo{
     @Autowired
     // template håndtere vores connection og statements til databasen.
     JdbcTemplate template;
+
     // Vores fetchAll metode henter alle kontrakterne og mapper database resultsettet i en collection. fetchAll metoden bliver brugt i homecontrolleren.
     public List<Contract> fetchAll(){
         String sql = "SELECT * FROM contracts c JOIN motorhomes m ON c.motorhome_id = m.motorhome_id ORDER BY contract_id";
@@ -101,6 +102,4 @@ public class ContractRepo{
         //Ændringen bliver ikke opdateret til databasen endnu. den retuneres bare
         return con;
     }
-
-
 }
