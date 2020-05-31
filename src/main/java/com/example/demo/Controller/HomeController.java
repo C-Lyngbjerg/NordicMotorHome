@@ -62,9 +62,10 @@ public class HomeController implements WebMvcConfigurer {
     public String createCustomer(Customer customer) {
         return "home/createCustomer";
     }
-    //Laver et customer objekt ud fra indtastet information i createCustomer.html
-    //Bruger et 'BindingResult' objekt, der indeholder nødvendige behaviour og state for brug af Springs Validator.
-    //@Valid er en notation der bliver brugt til at sige til programmet at den skal opfylde validation notationen i customer klassen.
+    /*Laver et customer objekt ud fra indtastet information i createCustomer.html
+    Bruger et 'BindingResult' objekt, der indeholder nødvendige behaviour og state for brug af Springs Validator.
+    @Valid er en notation der bliver brugt til at sige til programmet at den skal opfylde validation notationen i customer klassen.
+    */
     @PostMapping("/createCustomer")
     public String createCustomer(@ModelAttribute @Valid Customer customer, BindingResult bindingResult) {
         //hvis der er en error, så gå tilbage til createCustomer.html for at prøve igen, med beskrivende error messages
