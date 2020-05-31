@@ -27,20 +27,53 @@
 
 
 <h1>Customer info</h1>
-<pre>
-<b>Customer id:</b> <i><span th:text="${customer.customer_id}"/></i>
-<b>Name:</b> <i><span th:text="${customer.customer_first_name}"/> <span th:text="${customer.customer_last_name}"/></i>
-<b>Address:</b> <i><span th:text="${customer.customer_address}"/></i>
-<b>Driver license number:</b> <i><span th:text="${customer.customer_drivers_license}"/></i>
-<b>Driver license type:</b> <i><span th:text="${customer.customer_license_type}"/></i>
-<b>Phone number:</b> <i><span th:text="${customer.customer_phone}"/></i>
-<b>Nationality:</b> <i><span th:text="${customer.customer_nationality}"/></i>
-<b>City:</b> <i><span th:text="${customer.customer_city}"/></i>
-<b>Zip code:</b> <i><span th:text="${customer.customer_zip_code}"/></i>
-    <form action="/viewCustomer/" method="post">
-        <input class="button" type="submit" value="Return">
-    </form>
-    </pre>
+<div class="wrapper">
+    <div style="width: 800px; height: 100px; display: inline-block; padding:10px;" >
+        <table style="border-collapse: collapse; width: 50%; margin: 20px 0px 0px 0px; margin:auto; ">
+            <tbody style="margi: auto">
+            <tr>
+                <td class="infoBox"><label>Customer ID</label></td>
+                <td><span th:text="${customer.customer_id}"/></td>
+            </tr>
+            <tr>
+                <td class="infoBox"> <label>Name</label></td>
+                <td><span th:text="${customer.customer_first_name}"/> <span th:text="${customer.customer_last_name}"/></td>
+            </tr>
+            <tr>
+                <td class="infoBox">Address</td>
+                <td><span th:text="${customer.customer_address}"/></td>
+            </tr>
+            <tr>
+                <td class="infoBox">Driver license number</td>
+                <td><span th:text="${customer.customer_drivers_license}"/></td>
+            </tr>
+            <tr>
+                <td class="infoBox">Driver license type</td>
+                <td><span th:text="${customer.customer_license_type}"/></td>
+            </tr>
+            <tr>
+                <td class="infoBox"><label>Phone number</label></td>
+                <td><span th:text="${customer.customer_phone}"/></td>
+            </tr>
+            <tr>
+                <td class="infoBox"><label>Nationality</label></td>
+                <td><span th:text="${customer.customer_nationality}"/></td>
+            </tr>
+            <tr>
+                <td class="infoBox"><label>City</label></td>
+                <td>><span th:text="${customer.customer_city}"/></td>
+            </tr>
+            <tr>
+                <td class="infoBox"><label>Zip code</label></td>
+                <td><span th:text="${customer.customer_zip_code}"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <form action="/viewCustomer/" method="post">
+            <input class="button" type="submit" value="Return">
+        </form>
+    </div>
+</div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>

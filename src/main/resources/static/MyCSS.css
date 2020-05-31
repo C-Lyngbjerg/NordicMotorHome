@@ -118,3 +118,6 @@ td, th{
     background-color: red;
     box-shadow: dimgrey 3px 3px 3px;
 }
+.infoBox{
+    font-weight: bold;
+}
