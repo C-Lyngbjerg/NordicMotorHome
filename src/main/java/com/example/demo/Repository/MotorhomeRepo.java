@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MotorhomeRepo implements RepositoryI {
+public class MotorhomeRepo implements RepositoryI { //WO, JT & CB
     @Autowired
     JdbcTemplate template;
 
@@ -50,7 +50,7 @@ public class MotorhomeRepo implements RepositoryI {
         return null;
     }
 
-    public List<Motorhome> findAvailable(String startDate, String endDate){
+    public List<Motorhome> findAvailable(String startDate, String endDate){ //WO
         String sql = "SELECT motorhome_id,motorhome_reg_number FROM motorhomes WHERE motorhome_id NOT IN (SELECT motorhome_id FROM contracts WHERE ? BETWEEN contract_start_date AND contract_end_date OR ? BETWEEN contract_start_date AND contract_end_date OR ? >= contract_start_date AND ? <= contract_end_date)";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(sql,rowMapper,startDate,endDate,startDate,endDate);

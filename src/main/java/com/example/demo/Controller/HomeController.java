@@ -21,7 +21,7 @@ import java.util.List;
 
 //Spring frameworks MVC
 @Controller
-public class HomeController implements WebMvcConfigurer {
+public class HomeController implements WebMvcConfigurer { // Alle
     @Autowired
     CustomerService customerService;
     @Autowired
@@ -44,6 +44,14 @@ public class HomeController implements WebMvcConfigurer {
     public String index() {
         return "home/index";
     }
+
+
+    /*
+     *
+     *   Customer del
+     *
+     */
+
     //Laver et table af customer objekterne fra databasen der bliver vist til brugeren af systemet
     @GetMapping("/customerTable")
     public String customerTable(Model model) {
@@ -51,6 +59,7 @@ public class HomeController implements WebMvcConfigurer {
         model.addAttribute("customers", customerList);
         return "home/customerTable";
     }
+
     //returnere til customerTable.html, når man trykker på den tilknyttede 'return' knap
     @PostMapping("/customerTable")
     public String returnFromTable(){
@@ -109,11 +118,15 @@ public class HomeController implements WebMvcConfigurer {
         customerService.update(customer);
         return "redirect:/customerTable";
     }
+
+
+
     /*
-    *
-    *   Motorhome del
-    *
-    */
+     *
+     *   Motorhome del
+     *
+     */
+
     @GetMapping("/motorhomeTable")
     public String motorhomeTable(Model model) {
         List<Motorhome> motorhomeList = motorhomeService.fetchall();
@@ -175,11 +188,16 @@ public class HomeController implements WebMvcConfigurer {
         }
     }
 
+
+
     /*
-    * Invoice del
-    */
+     *
+     * Invoice del
+     *
+     */
+
     // Create invoice table i html filen 'invoiceTable'
-    @GetMapping("/invoiceTable")
+    @GetMapping("/invoiceTable")// WO & CB
     public String invoiceTable(Model model) {
         List<Invoice> invoiceList = invoiceService.fetchAll();
         model.addAttribute("invoice", invoiceList);
@@ -187,19 +205,19 @@ public class HomeController implements WebMvcConfigurer {
     }
   
     // Returnerer fra et givent punkt til invoieTable side
-    @PostMapping("/invoiceTable")
+    @PostMapping("/invoiceTable")// WO
     public String invoiceTable() {
         return "redirect:/";
     }
 
     // Går til createInvoice siden, hvor man kan lave en ny invoice og kalder createCon metoden, der laver et contract
     // table på samme side, så man kan se hvilke contract ids der findes.
-    @GetMapping("/createInvoice")
+    @GetMapping("/createInvoice")// WO & CB
     public String createInvoice(Model model,Invoice invoice) {
         createCon(model);
         return "home/createInvoice";
     }
-    public String createCon(Model model){
+    public String createCon(Model model){ // CB
         List<Contract> contractList = contractService.fetchAll();
         model.addAttribute("contracts", contractList);
         return "home/createInvoice";
@@ -207,7 +225,7 @@ public class HomeController implements WebMvcConfigurer {
     // returnerer fra /createInvoice siden og creater den nye invoice data, med de informationer der er tastet ind
     // Dette bliver gjort ved hjælp af @ModelAttribute der derefter tilføje data til databasen, via add() i invoiceRepo klasse.
 
-    @PostMapping("/createInvoice")
+    @PostMapping("/createInvoice") // WO & CB
     public String createInvoice(@ModelAttribute Invoice invoice,Model model) {
         if(invoiceService.checkContractId(invoice.getContract_id())){
             invoiceService.add(invoice);
@@ -216,31 +234,31 @@ public class HomeController implements WebMvcConfigurer {
         return "home/invalidContractID";
     }
 
-    @PostMapping("/viewInvoice")
+    @PostMapping("/viewInvoice")// WO
     public String viewInvoice(){
         return "redirect:/invoiceTable";
     }
 
     //Show info about the chosen invoice on a new site called "viewInvoice"
-    @GetMapping("/viewInvoice/{invoice_id}")
+    @GetMapping("/viewInvoice/{invoice_id}")// WO
     public String viewInvoice(@PathVariable("invoice_id") int id, Model model){
         model.addAttribute("invoice", invoiceService.findById(id));
         return "home/viewInvoice";
     }
 
-    @GetMapping("/deleteInvoice/{invoice_id}")
+    @GetMapping("/deleteInvoice/{invoice_id}") // WO
     public String deleteInvoice(@PathVariable("invoice_id") int id){
         invoiceService.delete(id);
         return "redirect:/invoiceTable";
     }
 
-    @GetMapping("/updateInvoice/{invoice_id}")
+    @GetMapping("/updateInvoice/{invoice_id}")// WO & CB
     public String updateInvoice(@PathVariable("invoice_id") int id, Model model){
         model.addAttribute("invoice",invoiceService.findById(id));
         return "home/updateInvoice";
     }
 
-    @PostMapping("/updateInvoice")
+    @PostMapping("/updateInvoice")// WO & CB
     public String updateInvoice(@ModelAttribute @Valid Invoice invoice, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "home/invoiceTable";
@@ -249,9 +267,14 @@ public class HomeController implements WebMvcConfigurer {
         return "redirect:/invoiceTable";
     }
 
+
+
     /*
+     *
      * Contract del
+     *
      */
+
 
     @GetMapping("/contractTable")
     public String contractTable(Model model){
@@ -356,30 +379,32 @@ public class HomeController implements WebMvcConfigurer {
         }
     }
 
+
     /* *********** *
      * Repair del  *
      ************* */
 
+
     //står for at lave og vise de tilgængelige repair objekter, til html side 'repairTable'
-    @GetMapping("/repairTable")
+    @GetMapping("/repairTable") // WO
     public String createRepair(Model model){
         List<Repair> repairList = repairService.fetchAll();
         model.addAttribute("repairs", repairList);
         return "home/repairTable";
     }
     //Returnere fra et givent punkt i repair del, ved tryk på en return knap
-    @PostMapping("/repairTable")
+    @PostMapping("/repairTable")// WO
     public String returnFromRepair(){
         return "redirect:/";
     }
 
     //Tager dig til createRepair html side, så man kan indsætte data
-    @GetMapping("/createRepair")
+    @GetMapping("/createRepair")// WO
     public String createRepair(Repair repair) {
         return "home/createRepair";
     }
     //Står for at lave et nyt repair objekt ud fra indsat data, ved tryk på
-    @PostMapping("/createRepair")
+    @PostMapping("/createRepair")// WO
     public String createRepair(@ModelAttribute @Valid Repair repair,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "home/createRepair";
@@ -389,13 +414,13 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     //Tager til side, der giver input muligheder for at opdatere en given repair, ud fra den repair man trykker 'update' på i 'repairTable'
-    @GetMapping("/updateRepair/{repair_id}")
+    @GetMapping("/updateRepair/{repair_id}")// WO
     public String updateRepair(@PathVariable("repair_id") int id,Model model){
         model.addAttribute("repair",repairService.findById(id));
         return "home/updateRepair";
     }
     //Sender de opdaterede information til database via et DML statement, ud fra den givende input
-    @PostMapping("/updateRepair")
+    @PostMapping("/updateRepair")// WO
     public String updateRepair(@ModelAttribute @Valid Repair repair,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "home/updateRepair";
@@ -405,41 +430,21 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     //Går til side der viser fulde information om en given repair, ud fra den repair man trykker 'view' på i 'repairTable'
-    @GetMapping("/viewRepair/{repair_id}")
+    @GetMapping("/viewRepair/{repair_id}")// WO
     public String viewRepair(@PathVariable("repair_id") int id, Model model){
         model.addAttribute("repair",repairService.findById(id));
         return "home/viewRepair";
     }
     //Returnere til 'repairTable' ved at trykke 'return' i view siden.
-    @PostMapping("/viewRepair")
+    @PostMapping("/viewRepair")// WO
     public String viewRepair(){
         return "redirect:/repairTable";
     }
 
     //Fjerne repair instance, fra siden og sletter det i DB via et DML DELETE statement.
-    @GetMapping("/deleteRepair/{repair_id}")
+    @GetMapping("/deleteRepair/{repair_id}")// WO
     public String deleteRepair(@PathVariable("repair_id") int id){
         boolean deleted = repairService.delete(id);
         return "redirect:/repairTable";
     }
-
-    /*
-    *
-    *   Customer del
-    *
-    */
-
-
-//    //Står for at lave et nyt repair objekt ud fra indsat data, ved tryk på
-//    @PostMapping("/createRepair")
-//    public String createRepair(@ModelAttribute Repair repair){
-//        repairService.addRepair(repair);
-//        return "redirect:/repairTable";
-//    }
-//
-
-//
-
-
-
 }

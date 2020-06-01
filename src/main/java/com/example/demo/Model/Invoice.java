@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
-public class Invoice {
+public class Invoice { // WO & CB
 
     @Id
     @NotNull
@@ -33,8 +33,9 @@ public class Invoice {
 //TODO Kig lige op på hvordan Spring frameworket bruger constructors
 // Indeholder en tom og en "fuld" constructor, da Spring anvender den tomme
 
-    public Invoice() {
+    public Invoice() {// WO & CB
     }
+    // WO & CB
     public Invoice(int invoice_id, int contract_id, double invoice_total_price,int invoice_distance_driven,int invoice_odometer_end, int invoice_rent_days, boolean invoice_fuel_gage){
         this.invoice_id = invoice_id;
         this.contract_id = contract_id;
@@ -47,25 +48,25 @@ public class Invoice {
 
     public int getInvoice_id() {
         return invoice_id;
-    }
+    }// WO & CB
     public void setInvoice_id(int invoice_id) {
         this.invoice_id = invoice_id;
-    }
+    }// WO & CB
     public int getInvoice_odometer_end() {
         return invoice_odometer_end;
-    }
+    }// WO & CB
 
-    public void setInvoice_odometer_end(int invoice_odometer_end) {
+    public void setInvoice_odometer_end(int invoice_odometer_end) {// WO & CB
         this.invoice_odometer_end = invoice_odometer_end;
     }
 
     public int getContract_id() {
         return contract_id;
-    }
+    }// WO & CB
 
     public void setContract_id(int contract_id) {
         this.contract_id = contract_id;
-    }
+    }// WO & CB
 /*
  * Udregner den totale pris kunden skal betale ved aflevering af autocamper.
  * Dette er ekstra omkostninger, der indeholder:
@@ -75,7 +76,7 @@ public class Invoice {
  * Da spring bruger getters, til at lave object via rowMapper, bliver dette lavet ved initialisation af objektet.
  */
 
-    public double getInvoice_total_price() {
+    public double getInvoice_total_price() { //CB
         invoice_total_price = 0.0;
         //Hvis gas tank er under 50% (sat som en boolean til at være true) vil der blive lagt 70 til total price
         if(isInvoice_fuel_gage()){
@@ -93,29 +94,29 @@ public class Invoice {
         return invoice_total_price;
     }
 
-    public void setInvoice_total_price(double invoice_total_price) {
+    public void setInvoice_total_price(double invoice_total_price) {// WO & CB
         this.invoice_total_price = invoice_total_price;
     }
 
     public int getInvoice_distance_driven() {
         return invoice_distance_driven;
-    }
+    }// WO & CB
 
-    public void setInvoice_distance_driven(int invoice_distance_driven) {
+    public void setInvoice_distance_driven(int invoice_distance_driven) {// WO & CB
         this.invoice_distance_driven = invoice_distance_driven;
     }
 
-    public boolean isInvoice_fuel_gage() { return invoice_fuel_gage; }
+    public boolean isInvoice_fuel_gage() { return invoice_fuel_gage; }// WO & CB
 
-    public void setInvoice_fuel_gage(boolean invoice_fuel_gage) { this.invoice_fuel_gage = invoice_fuel_gage; }
+    public void setInvoice_fuel_gage(boolean invoice_fuel_gage) { this.invoice_fuel_gage = invoice_fuel_gage; }// WO & CB
 
     public int getInvoice_rent_days() {
         return invoice_rent_days;
-    }
+    }// WO & CB
 
     public void setInvoice_rent_days(int invoice_rent_days) {
         this.invoice_rent_days = invoice_rent_days;
-    }
+    }// WO & CB
 
 
 
