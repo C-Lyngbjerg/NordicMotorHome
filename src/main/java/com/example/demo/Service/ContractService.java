@@ -12,31 +12,31 @@ public class ContractService {
     @Autowired
     ContractRepo repo;
 
-    public List<Contract> fetchAll(){
+    public List<Contract> fetchAll(){ // Lavet JT og SR
         return repo.fetchAll();
     }
   
-    public Object add(Object obj){
+    public Object add(Object obj){ //Lavet af JT og SR
         return repo.add(obj);
     }
   
-    public Object findById(int id){
+    public Object findById(int id){ // lavet af JT
         return repo.findById(id);
     }
   
-    public Boolean delete(int id){
+    public Boolean delete(int id){ // Lavet af JT
         return repo.delete(id);
     }
 
-    public Object update(Object obj){
+    public Object update(Object obj){ // Lavet af JT og SR
         return repo.update(obj);
     }
   
-    public List<Double> calculateRentPeriodAndPrice(Contract con){
+    public List<Double> calculateRentPeriodAndPrice(Contract con){ // Lavet af JT og SR
         return repo.calculateRentPeriodAndPrice(con);
     }
   
-    public Contract cancelContract(int id){
+    public Contract cancelContract(int id){ // Lavet af JT
         return repo.cancelContract(id);
     }
   

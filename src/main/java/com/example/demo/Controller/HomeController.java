@@ -271,7 +271,7 @@ public class HomeController implements WebMvcConfigurer {
         return "redirect:/";
     }
 
-    @GetMapping("/createContract")
+    @GetMapping("/createContract") // Lavet af JT og SR
     public String createContract(@ModelAttribute @Validated(Contract.dateValidation.class) Contract contract, Model motorhomeModel, Model contractModel, BindingResult bindingResult) {
 //        if(bindingResult.hasErrors()){
 //            return "home/selectRentDays";
@@ -283,7 +283,7 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     //Metoden til at lave et contract objekt, udregne den samlede pris og tilføje det til databasen
-    @PostMapping("/finalizeContract")
+    @PostMapping("/finalizeContract") // Lavet af JT og SR
     public String finalizeContract(@ModelAttribute /*@Valid*/ Contract contract, BindingResult bindingResult){
 //        if(bindingResult.hasErrors()) {
 //            return "home/createContract";
@@ -294,18 +294,18 @@ public class HomeController implements WebMvcConfigurer {
         return "redirect:/contractTable";
     }
 
-    @GetMapping("/viewOneContract/{contract_id}")
+    @GetMapping("/viewOneContract/{contract_id}") // lavet af JT
     public String viewOneContract(@PathVariable("contract_id") int contract_id, Model model){
         model.addAttribute(contractService.findById(contract_id));
         return "home/viewOneContract";
     }
-    @PostMapping("/viewOneContract")
+    @PostMapping("/viewOneContract") // Lavet af JT
     public String viewOneContract() {
         return "redirect:/contractTable";
     }
 
     //Denne metode bruges hvis man vælger at annullere en kontrakt.
-    @GetMapping("/cancelContract/{contract_id}")
+    @GetMapping("/cancelContract/{contract_id}") // lavet af JT
     public String cancelContract(@PathVariable("contract_id") int contract_id, Model model){
         //Tilføjer den contract som har fået ændret sin pris efter annullering
         model.addAttribute("contract",contractService.cancelContract(contract_id));
@@ -319,7 +319,7 @@ public class HomeController implements WebMvcConfigurer {
         så bruges der en set funktion til at ændre kontraktens pris til det der bliver parameteroverført
         objektet bliver så brugt til at opdatere databasen ligesom der bliver gjort i updatedContract metoden nedenfor
     */
-    @GetMapping("/cancelContract/confirmCancellation/{id}/{price}")
+    @GetMapping("/cancelContract/confirmCancellation/{id}/{price}") // Lavet af JT
     public String confirmCancellation(@PathVariable int id, @PathVariable double price){
         Contract con = (Contract) contractService.findById(id);
         con.setContract_rent_price(price);
@@ -328,13 +328,13 @@ public class HomeController implements WebMvcConfigurer {
         return "redirect:/contractTable";
     }
 
-    @GetMapping("/updateContract/{contract_id}")
+    @GetMapping("/updateContract/{contract_id}") // lavet af JT og SR
     public String updateContract(@PathVariable("contract_id") int contract_id, Model model){
         model.addAttribute("contract", contractService.findById(contract_id));
         return "home/updateContract";
     }
 
-    @PostMapping("/updatedContract")
+    @PostMapping("/updatedContract") // Lavet af JT og SR
     public String updatedContract(@ModelAttribute Contract contract,BindingResult bindingResult){
 //        if(bindingResult.hasErrors()) {
 //            return "home/updateContract";
@@ -345,7 +345,7 @@ public class HomeController implements WebMvcConfigurer {
         return "redirect:/contractTable";
     }
 
-    @GetMapping("/deleteContract/{contract_id}")
+    @GetMapping("/deleteContract/{contract_id}") // Lavet af JT
     public String deleteContract(@PathVariable("contract_id") int contract_id){
         boolean deleted = contractService.delete(contract_id);
         if(deleted){

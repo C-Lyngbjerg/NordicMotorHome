@@ -205,7 +205,7 @@ public class Contract {
     * I metoden calculatePrice findes prisen for hele lejeperioden
     * Dette inkluderer hvilke extra ting kunden vælger at leje, så som camping bord og stole
      */
-    public void calculatePrice(List<Double> dateAndPrice){
+    public void calculatePrice(List<Double> dateAndPrice){ // Lavet af JT og SR
         double totalPrice = seasonCheck(dateAndPrice);
         //en masse if-statements som tilføjer prisen for alt extra indhold som bliver lejet.
         if(contract_extra_bike_rack != false){
@@ -231,7 +231,7 @@ public class Contract {
     * seasonCheck metoden udregner den samlede pris for udlejningsperioden i de enkelte dages sæsonperiode
     * Den parametre overførte liste dateAndPrice indenholder 2 variabler: index plads 0 har den daglige pris og index plads 1 indenholder det samlede antal dage udlejningen varer.
     * */
-    public double seasonCheck(List<Double> dateAndPrice){
+    public double seasonCheck(List<Double> dateAndPrice){ // Lavet af JT og SR
         double totalPrice = 0;
         LocalDate startDate = LocalDate.parse(contract_start_date); //contractens String værdi bliver lavet om til en LocalDate objekt. Det gør at vi kan tjekke datoen lettere
         for(int i = 0; i < dateAndPrice.get(1) + 1; i++){  //vi tilføjer 1 til den samlede mængde af dage så den sidste dag også bliver regnet med.
