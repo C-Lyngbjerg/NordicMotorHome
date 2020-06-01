@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 @Entity
-public class Motorhome {
+public class Motorhome { // WO & CB
     @Id
     private int motorhome_id;
     @NotBlank

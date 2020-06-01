@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class InvoiceService {
+public class InvoiceService { // WO & CB
     @Autowired
     InvoiceRepo repo;
 
