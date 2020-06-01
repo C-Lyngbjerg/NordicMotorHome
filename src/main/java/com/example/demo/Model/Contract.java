@@ -249,4 +249,11 @@ public class Contract {
         }
         return totalPrice;
     }
+    public boolean validateDates(){
+        String pattern = "\\d{4}-\\d{2}-\\d{2}";
+        if(contract_start_date.matches(pattern) & contract_end_date.matches(pattern)){
+            return true;
+        }
+        return false;
+    }
 }

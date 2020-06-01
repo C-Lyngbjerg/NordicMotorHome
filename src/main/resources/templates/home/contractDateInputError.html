@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DateInputError</title>
 </head>
 <body>
 <div class="navbar">
@@ -24,27 +24,17 @@
         </div>
     </div>
 </div>
-  
-  
 <div class="wrapper">
-    <h1>Input start og end date</h1>
-<form action="#" th:action="@{/createContract}" th:object="${contract}" method="get">
-    <tr>
-        <td><label>Enter start date</label></td>
-        <td><input type="text" th:field="*{contract_start_date}" placeholder="Start date (YYYY-MM-DD)"><br></td>
-        <td th:if="${#fields.hasErrors('contract_start_date')}" th:errors="*{contract_start_date}"></td>
-    </tr>
-    <br>
-    <tr>
-        <td><label>Enter end date</label></td>
-        <td><input type="text" th:field="*{contract_end_date}" placeholder="End date (YYYY-MM-DD)"><br></td>
-        <td th:if="${#fields.hasErrors('contract_end_date')}" th:errors="*{contract_end_date}"></td>
-    </tr>
-    <tr>
-        <td><input class="button" type="submit" value="Create"></td>
-    </tr>
-</form>
+    <h1>You have an error in your date input</h1>
+    <div style="width: 800px; height: 100px; display: inline-block; padding:10px;" >
+        <h3>Please retry and choose a valid contract ID</h3>
+        <p>Remember to input it as the show date format</p>
+        <form action="/selectRentDays" method="get">
+            <input class="button" type="submit" value="Return">
+        </form>
+    </div>
 </div>
+
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>
