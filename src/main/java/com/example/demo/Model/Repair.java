@@ -7,7 +7,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Repair {
+public class Repair { // WO
     @Id
     private int repair_id;
     @NotNull
@@ -20,10 +20,10 @@ public class Repair {
     @Positive
     private int motorhome_id;
 
-    public Repair() {
+    public Repair() {// WO
     }
 
-    public Repair(int repair_id, String repair_description, String repair_date, int motorhome_id) {
+    public Repair(int repair_id, String repair_description, String repair_date, int motorhome_id) { // WO
         this.repair_id = repair_id;
         this.repair_description = repair_description;
         this.repair_date = repair_date;
@@ -32,33 +32,33 @@ public class Repair {
 
     public int getRepair_id() {
         return repair_id;
-    }
+    }// WO
 
     public void setRepair_id(int repair_id) {
         this.repair_id = repair_id;
-    }
+    }// WO
 
     public String getRepair_description() {
         return repair_description;
-    }
+    }// WO
 
     public void setRepair_description(String repair_description) {
         this.repair_description = repair_description;
-    }
+    }// WO
 
     public String getRepair_date() {
         return repair_date;
-    }
+    }// WO
 
     public void setRepair_date(String repair_date) {
         this.repair_date = repair_date;
-    }
+    }// WO
 
     public int getMotorhome_id() {
         return motorhome_id;
-    }
+    }// WO
 
     public void setMotorhome_id(int motorhome_id) {
         this.motorhome_id = motorhome_id;
-    }
+    }// WO
 }
