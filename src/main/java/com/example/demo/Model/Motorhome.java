@@ -2,45 +2,23 @@ package com.example.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.*;
 
 @Entity
 public class Motorhome { // WO & CB
     @Id
     private int motorhome_id;
-    @NotBlank
-    @Size(min=1,max=15)
     private String motorhome_reg_number;
-    @NotBlank
-    @Size(min=1,max=15)
     private String motorhome_brand;
-    @NotNull
-    @Min(100)
     private int motorhome_room_height;
-    @NotBlank
-    @Size(min=1,max=15)
     private String motorhome_model;
-    @NotNull
-    @Min(0)
     private int motorhome_odometer;
-    @NotNull
-    @Positive
     private int type_id;
-    @NotBlank
-    @Size(min=1,max=50)
     private String type_description;
-    @NotNull
-    @Positive
     private int type_price_per_day;
-    @NotNull
-    @Positive
     private int type_bed_count;
-    @NotNull
-    @Positive
     private int type_seat_count;
 
     public Motorhome(){
-
     }
 
     public Motorhome(int motorhome_id, String motorhome_reg_number, String motorhome_brand, int motorhome_room_height, String motorhome_model, int motorhome_odometer, int type_id, int type_price_per_day, int type_bed_count, int type_seat_count) {

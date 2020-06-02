@@ -28,40 +28,34 @@
 
 <h1>Create new motorhome</h1>
 <table>
-    <form action="#" th:action="@{/createMotorhome}" th:object="${motorhome}" method="post">
+    <form action="/createMotorhome" method="post">
         <tr style="display: none">
             <td><label>Motorhome id</label></td>
             <td><input type="text" name="motorhome_id" placeholder="Id"><br></td>
         </tr>
         <tr>
             <td><label>Registration number</label></td>
-            <td><input type="text" th:field="*{motorhome_reg_number}" placeholder="Registration number"><br></td>
-            <td th:if="${#fields.hasErrors('motorhome_reg_number')}" th:errors="*{motorhome_reg_number}"></td>
+            <td><input type="text" name="motorhome_reg_number" placeholder="Reg Number"><br></td>
         </tr>
         <tr>
             <td><label>Enter type</label></td>
-            <td><input type="text" th:field="*{type_id}" placeholder="Type"><br></td>
-            <td th:if="${#fields.hasErrors('type_id')}" th:errors="*{type_id}"></td>
+            <td><input type="text" name="type_id" placeholder="Type"><br></td>
         </tr>
         <tr>
             <td><label>Enter brand</label></td>
-            <td><input type="text" th:field="*{motorhome_brand}" placeholder="Brand"><br></td>
-            <td th:if="${#fields.hasErrors('motorhome_brand')}" th:errors="*{motorhome_brand}"></td>
+            <td><input type="text" name="motorhome_brand" placeholder="Brand"><br></td>
         </tr>
         <tr>
             <td><label>Enter model</label></td>
-            <td><input type="text" th:field="*{motorhome_model}" placeholder="Model"><br></td>
-            <td th:if="${#fields.hasErrors('motorhome_model')}" th:errors="*{motorhome_model}"></td>
+            <td><input type="text" name="motorhome_model" placeholder="Model"><br></td>
         </tr>
         <tr>
             <td><label>Enter room height</label></td>
-            <td><input type="text" th:field="*{motorhome_room_height}" placeholder="Room height"><br></td>
-            <td th:if="${#fields.hasErrors('motorhome_room_height')}" th:errors="*{motorhome_room_height}"></td>
+            <td><input type="text" name="motorhome_room_height" placeholder="Room height"><br></td>
         </tr>
         <tr>
             <td><label>Enter odometer value</label></td>
-            <td><input type="text" th:field="*{motorhome_odometer}" placeholder="Odometer value"><br></td>
-            <td th:if="${#fields.hasErrors('motorhome_odometer')}" th:errors="*{motorhome_odometer}"></td>
+            <td><input type="text" name="motorhome_odometer" placeholder="Odometer"><br></td>
         </tr>
         <tr>
             <td><input class="button" type="submit" value="Create"></td>
