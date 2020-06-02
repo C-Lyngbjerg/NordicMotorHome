@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS motorhomes;
 
 CREATE TABLE motorhomes
 (
-	motorhome_id INT UNIQUE PRIMARY KEY NOT NULL,
+	motorhome_id INT UNIQUE PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	motorhome_reg_number VARCHAR(45) NOT NULL,
     motorhome_brand VARCHAR(45) NOT NULL,
     motorhome_room_height INT NOT NULL,
@@ -67,6 +67,7 @@ repair_date DATE NOT NULL,
 motorhome_id INT NOT NULL,
 CONSTRAINT repairs_fk_motorhomes
 	FOREIGN KEY (motorhome_id) REFERENCES motorhomes (motorhome_id)
+
 );
 
 DROP TABLE IF EXISTS contracts;
@@ -89,7 +90,7 @@ CREATE TABLE contracts
     motorhome_id INT NOT NULL,
     CONSTRAINT contracts_fk_customers
 		FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
-		ON CASCADE,
+		ON DELETE CASCADE,
 	CONSTRAINT contracts_fk_motorhomes
 		FOREIGN KEY (motorhome_id) REFERENCES motorhomes (motorhome_id)
 );
@@ -107,7 +108,7 @@ CREATE TABLE invoices
     invoice_fuel_gage BOOLEAN NOT NULL,
     CONSTRAINT invoices_fk_contracts
 		FOREIGN KEY (contract_id) REFERENCES contracts (contract_id)
-	    ON CASCADE
+	    ON DELETE CASCADE
 );
 
 

@@ -23,7 +23,7 @@ public class MotorhomeRepo implements RepositoryI { //WO, JT & CB
     public Object add(Object obj){
         Motorhome mot = (Motorhome) obj;
         String sql = "INSERT INTO motorhomes (motorhome_id, motorhome_reg_number, motorhome_brand, motorhome_room_height, motorhome_model, motorhome_odometer, type_id) VALUES (?,?,?,?,?,?,?)";
-        template.update(sql,mot.getMotorhome_id(), mot.getMotorhome_reg_number(),mot.getMotorhome_brand(),mot.getMotorhome_room_height(),mot.getMotorhome_model(),mot.getMotorhome_odometer(),mot.getType_id());
+        template.update(sql,mot.getMotorhome_id(),mot.getMotorhome_reg_number(),mot.getMotorhome_brand(),mot.getMotorhome_room_height(),mot.getMotorhome_model(),mot.getMotorhome_odometer(),mot.getType_id());
         return null;
     }
 
