@@ -24,81 +24,68 @@
         </div>
     </div>
 </div>
-
   
 <h1>Create a new contract</h1>
 <div id="wrapper">
 <div id="first">
     <h2>Input contract data</h2><br>
-
-    <table action="#" th:action="@{/finalizeContract}" th:object="${contract}" method="post">
+<table>
+    <form action="/finalizeContract" method="post">
         <tr style="display:none">
-            <td ><label style="display: none">Enter start date</label></td>
-            <td  ><input style="display: none" type="text" th:field="*{contract_start_date}" th:value="${contract.contract_start_date}"><br></td>
-            <td th:if="${#fields.hasErrors('contract_start_date')}" th:errors="*{contract_start_date}"></td>
+            <td><label style="display: none">Enter start date</label></td>
+            <td><input style="display: none" type="text" name="contract_start_date" th:value="${contract.contract_start_date}"><br></td>
         </tr>
         <tr style="display:none">
             <td><label style="display: none">Enter end date</label></td>
-            <td><input style="display: none" type="text" th:field="*{contract_end_date}" th:value="${contract.contract_end_date}"><br></td>
-            <td th:if="${#fields.hasErrors('contract_end_date')}" th:errors="*{contract_end_date}"></td>
+            <td><input style="display: none" type="text" name="contract_end_date" th:value="${contract.contract_end_date}"><br></td>
         </tr>
         <tr>
             <td><label>Enter motorhomes odometer</label></td>
-            <td><input type="text" th:field="*{contract_odometer_start}" placeholder="km"><br></td>
-            <td th:if="${#fields.hasErrors('contract_odometer_start')}" th:errors="*{contract_odometer_start}"></td>
+            <td><input type="text" name="contract_odometer" th:value=0 placeholder="Odometer"><br></td>
         </tr>
         <tr>
             <td><label>Bike rack</label></td>
-            <td><input type="checkbox" th:field="*{contract_extra_bike_rack}" value="1"><br></td>
-            <td th:if="${#fields.hasErrors('contract_extra_bike_rack')}" th:errors="*{contract_extra_bike_rack}"></td>
+            <td><input type="checkbox" name="contract_extra_bike_rack" value="1"><br></td>
         </tr>
         <tr>
             <td><label>Bed sheets</label></td>
-            <td><input type="checkbox" th:field="*{contract_extra_bed_sheets}" value="1"><br></td>
-            <td th:if="${#fields.hasErrors('contract_extra_bed_sheets')}" th:errors="*{contract_extra_bed_sheets}"></td>
+            <td><input type="checkbox" name="contract_extra_bed_sheets" value="1"><br></td>
         </tr>
         <tr>
             <td><label>Child seat</label></td>
-            <td><input type="checkbox" th:field="*{contract_extra_child_seat}" value="1"><br></td>
-            <td th:if="${#fields.hasErrors('contract_extra_child_seat')}" th:errors="*{contract_extra_child_seat}"></td>
+            <td><input type="checkbox" name="contract_extra_child_seat" value="1"><br></td>
         </tr>
         <tr>
             <td><label>Picnic table</label></td>
-            <td><input type="checkbox" th:field="*{contract_extra_picnic_table}" value="1"><br></td>
-            <td th:if="${#fields.hasErrors('contract_extra_picnic_table')}" th:errors="*{contract_extra_picnic_table}"></td>
+            <td><input type="checkbox" name="contract_extra_picnic_table" value="1"><br></td>
         </tr>
         <tr>
             <td><label>Chairs</label></td>
-            <td><input type="checkbox" th:field="*{contract_extra_chairs}" value="1"><br></td>
-            <td th:if="${#fields.hasErrors('contract_extra_chairs')}" th:errors="*{contract_extra_chairs}"></td>
+            <td><input type="checkbox" name="contract_extra_chairs" value="1"><br></td>
         </tr>
         <tr>
             <td><label>Distance from pickup in km</label></td>
-            <td><input type="text" th:field="*{contract_pick_up_distance}" placeholder="kilometer"><br></td>
-            <td th:if="${#fields.hasErrors('contract_pick_up_distance')}" th:errors="*{contract_pick_up_distance}"></td>
+            <td><input type="text" name="contract_pick_up_distance" th:value=0 placeholder="kilometer"><br></td>
         </tr>
         <tr>
             <td><label>Distance from drop off in km</label></td>
-            <td><input type="text" th:field="*{contract_drop_off_distance}" placeholder="kilometer"><br></td>
-            <td th:if="${#fields.hasErrors('contract_drop_off_distance')}" th:errors="*{contract_drop_off_distance}"></td>
+            <td><input type="text" name="contract_drop_off_distance" th:value=0 placeholder="kilometer"><br></td>
         </tr>
         <tr>
             <td><label>Enter customer id</label></td>
-            <td><input type="text" th:field="*{customer_id}" placeholder="Customer Id"><br></td>
-            <td th:if="${#fields.hasErrors('customer_id')}" th:errors="*{customer_id}"></td>
+            <td><input type="text" name="customer_id" placeholder="Customer Id"><br></td>
         </tr>
         <tr>
             <td><label>Enter motorhome id</label></td>
-            <td><input type="text" th:field="*{motorhome_id}" placeholder="Motorhome id"><br></td>
-            <td th:if="${#fields.hasErrors('motorhome_id')}" th:errors="*{motorhome_id}"></td>
+            <td><input type="text" name="motorhome_id" placeholder="Motorhome id"><br></td>
         </tr>
 
         <tr>
 
             <td style="border: none"><input class="button" type="submit" value="Create"></td>
         </tr>
-    </table>
     </form>
+</table>
 </div>
     <div id="second">
 <div class="table-wrapper">
