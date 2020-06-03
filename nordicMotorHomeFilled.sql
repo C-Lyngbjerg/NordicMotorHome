@@ -10,7 +10,6 @@ CREATE TABLE zips
 (
 	zip_code INT PRIMARY KEY UNIQUE NOT NULL,
     zip_city VARCHAR(45) NOT NULL
-
 );
 
 DROP TABLE IF EXISTS customers;
@@ -51,7 +50,6 @@ CREATE TABLE motorhomes
     motorhome_room_height INT NOT NULL,
     motorhome_model VARCHAR(45) NOT NULL,
     motorhome_odometer INT NOT NULL,
-
     type_id INT NOT NULL,
     CONSTRAINT motorhomes_fk_mh_types
 		FOREIGN KEY (type_id) REFERENCES mh_types (type_id)
@@ -67,7 +65,7 @@ repair_date DATE NOT NULL,
 motorhome_id INT NOT NULL,
 CONSTRAINT repairs_fk_motorhomes
 	FOREIGN KEY (motorhome_id) REFERENCES motorhomes (motorhome_id)
-
+	DELETE ON CASCADE
 );
 
 DROP TABLE IF EXISTS contracts;
@@ -108,7 +106,7 @@ CREATE TABLE invoices
     invoice_fuel_gage BOOLEAN NOT NULL,
     CONSTRAINT invoices_fk_contracts
 		FOREIGN KEY (contract_id) REFERENCES contracts (contract_id)
-	    ON DELETE CASCADE
+		ON DELETE CASCADE
 );
 
 
