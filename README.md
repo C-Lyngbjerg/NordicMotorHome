@@ -15,8 +15,10 @@ så der ikke behøves at gøre det hved alle metoder.
 Der behøves dertil ikke at blive skrevet initialer ved alle metoder.
 Hvis der dertil er en der har lavet en metode selv, vil vedkommendes initial stå ud fra metode headeren
 
-<b>Kommentarer:</b><br>
-
+<b>Kommentarer:</b>
+Hvad angår kommentarer, så har vi gjort det, at de stedet hvor noget kode går igen
+skriver vi kun kommentar et af stederne. Dette sted vil være det første sted det
+fremkommer først. Rækkefølgen går fra top til bund i projektfolderen.
 
 
 <b>Hvordan hentes og køres dette projekt</b>
@@ -29,4 +31,5 @@ i Java projektet passer med ens eget i Workbench.
 
 Man er nu klar til at køre programmet og når man har trykket på run, 
 skal man åbne localhost:7575 i sin foretrukne browser.
+</pre>
 
