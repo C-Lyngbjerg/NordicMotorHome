@@ -24,10 +24,9 @@
         </div>
     </div>
 </div>
-
-
-<h1>Create new motorhome</h1>
-<table>
+<div style="width: 70%; float: left">
+    <h1 style=" width: 50%; text-align: left">Create new motorhome</h1>
+    <table>
     <form action="/createMotorhome" method="post">
         <tr>
             <td><label>Registration number</label></td>
@@ -53,11 +52,30 @@
             <td><label>Enter odometer value</label></td>
             <td><input type="text" name="motorhome_odometer" placeholder="Odometer"><br></td>
         </tr>
-        <tr>
-            <td><input class="button" type="submit" value="Create"></td>
+        <tr style="border: none">
+            <td style="border: none"><input class="button" type="submit" value="Create"></td>
         </tr>
     </form>
 </table>
+</div>
+<div style="width: 30%; float: right">
+        <h2>All types</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type ID</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="motorhome: ${types}">
+                    <td th:text="${motorhome.type_id}"/>
+                    <td th:text="${motorhome.type_description}"/>
+                </tr>
+            </tbody>
+        </table>
+    ></div>
+</div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>

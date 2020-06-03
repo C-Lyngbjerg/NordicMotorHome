@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.*;
+import com.example.demo.Repository.MotorhomeRepo;
 import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -134,7 +135,9 @@ public class HomeController implements WebMvcConfigurer { // Alle
     }
 
     @GetMapping("/createMotorhome")
-    public String createMotorhome() {
+    public String createMotorhome(Model model) {
+        List<Motorhome> typeList = motorhomeService.fetchTypes();
+        model.addAttribute("types",typeList);
         return "home/createMotorhome";
     }
 
@@ -352,7 +355,7 @@ public class HomeController implements WebMvcConfigurer { // Alle
 
     //står for at lave og vise de tilgængelige repair objekter, til html side 'repairTable'
     @GetMapping("/repairTable") // WO
-    public String createRepair(Model model){
+    public String repairTable(Model model){
         List<Repair> repairList = repairService.fetchAll();
         model.addAttribute("repairs", repairList);
         return "home/repairTable";
@@ -366,7 +369,9 @@ public class HomeController implements WebMvcConfigurer { // Alle
 
     //Tager dig til createRepair html side, så man kan indsætte data
     @GetMapping("/createRepair")// WO
-    public String createRepair(Repair repair) {
+    public String createRepair(Repair repair, Model model) {
+        List<Motorhome> motorhomeList = motorhomeService.fetchall();
+        model.addAttribute("motorhomes", motorhomeList);
         return "home/createRepair";
     }
 

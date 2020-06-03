@@ -25,8 +25,8 @@
     </div>
 </div>
 
-
-<h1>Repair menu</h1>
+<div style="width: 70%; float: left">
+<h1 style="text-align: left">Repair menu</h1>
 <table>
     <form action="#" th:action="@{/createRepair}" th:object="${repair}" method="post">
         <tr style="display: none">
@@ -57,6 +57,30 @@
 <form action="/repairTable/" method="post">
     <input class="button" type="submit" value="Return">
 </form>
+</div>
+<div style="width: 30%; float: right">
+    <h2>All motorhomes</h2>
+    <div class="table-scroll">
+    <table>
+        <thead>
+            <tr>
+                <th>Motorhome ID</th>
+                <th>Reg. number</th>
+                <th>Brand</th>
+                <th>Model</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="motorhome: ${motorhomes}">
+            <td th:text="${motorhome.motorhome_id}"/>
+            <td th:text="${motorhome.motorhome_reg_number}"/>
+            <td th:text="${motorhome.motorhome_brand}"/>
+            <td th:text="${motorhome.motorhome_model}"/>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>

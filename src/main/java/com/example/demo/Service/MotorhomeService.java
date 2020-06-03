@@ -35,4 +35,8 @@ public class MotorhomeService { // WO, JT & CB
     public List<Motorhome> findAvailable(String startDate, String endDate){
         return motorhomeRepo.findAvailable(startDate,endDate);
     }
+
+    public List<Motorhome> fetchTypes(){
+        return motorhomeRepo.fetchTypes();
+    }
 }
