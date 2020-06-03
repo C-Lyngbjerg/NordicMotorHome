@@ -259,7 +259,7 @@ public class HomeController implements WebMvcConfigurer { // Alle
     }
 
     @GetMapping("/selectRentDays")
-    public String selectRentDays(Contract contract){
+    public String selectRentDays(){
         return "home/selectRentDays";
     }
   
@@ -282,6 +282,9 @@ public class HomeController implements WebMvcConfigurer { // Alle
     //Metoden til at lave et contract objekt, udregne den samlede pris og tilføje det til databasen
     @PostMapping("/finalizeContract") // Lavet af JT og SR
     public String finalizeContract(@ModelAttribute Contract contract){
+//        if(contract.checkValues()){
+//            return "home/index";
+//        }
         List<Double> datesAndPrice = contractService.calculateRentPeriodAndPrice(contract); // metoden retunere en list som indenholder den daglige pris for lejet og samlet antaldage lejeperioden er på
         contract.calculatePrice(datesAndPrice);// Listen der blev inisaliseret før bliver parameter overført til at kunne udregne den totale pris for udlejningsperioden
         contractService.add(contract);//contracten bliver tilføjet til databasen
