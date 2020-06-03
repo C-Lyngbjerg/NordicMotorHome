@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Motorhome { // WO & CB
+public class Motorhome { // SR
     @Id
     private int motorhome_id;
     private String motorhome_reg_number;
@@ -18,6 +18,7 @@ public class Motorhome { // WO & CB
     private int type_bed_count;
     private int type_seat_count;
 
+    // Constructors
     public Motorhome(){
     }
 
@@ -34,10 +35,10 @@ public class Motorhome { // WO & CB
         this.type_seat_count = type_seat_count;
     }
 
+    //Getters og Setters
     public int getMotorhome_id() {
         return motorhome_id;
     }
-
     public void setMotorhome_id(int motorhome_id) {
         this.motorhome_id = motorhome_id;
     }
@@ -45,7 +46,6 @@ public class Motorhome { // WO & CB
     public String getType_description() {
         return type_description;
     }
-
     public void setType_description(String type_description) {
         this.type_description = type_description;
     }
@@ -53,7 +53,6 @@ public class Motorhome { // WO & CB
     public String getMotorhome_reg_number() {
         return motorhome_reg_number;
     }
-
     public void setMotorhome_reg_number(String motorhome_reg_number) {
         this.motorhome_reg_number = motorhome_reg_number;
     }
@@ -61,7 +60,6 @@ public class Motorhome { // WO & CB
     public String getMotorhome_brand() {
         return motorhome_brand;
     }
-
     public void setMotorhome_brand(String motorhome_brand) {
         this.motorhome_brand = motorhome_brand;
     }
@@ -69,7 +67,6 @@ public class Motorhome { // WO & CB
     public int getMotorhome_room_height() {
         return motorhome_room_height;
     }
-
     public void setMotorhome_room_height(int motorhome_room_heigth) {
         this.motorhome_room_height = motorhome_room_heigth;
     }
@@ -77,7 +74,6 @@ public class Motorhome { // WO & CB
     public String getMotorhome_model() {
         return motorhome_model;
     }
-
     public void setMotorhome_model(String motorhome_model) {
         this.motorhome_model = motorhome_model;
     }
@@ -85,7 +81,6 @@ public class Motorhome { // WO & CB
     public int getMotorhome_odometer() {
         return motorhome_odometer;
     }
-
     public void setMotorhome_odometer(int motorhome_odometer) {
         this.motorhome_odometer = motorhome_odometer;
     }
@@ -93,7 +88,6 @@ public class Motorhome { // WO & CB
     public int getType_id() {
         return type_id;
     }
-
     public void setType_id(int type_id) {
         this.type_id = type_id;
     }
@@ -101,7 +95,6 @@ public class Motorhome { // WO & CB
     public int getType_price_per_day() {
         return type_price_per_day;
     }
-
     public void setType_price_per_day(int type_price_per_day) {
         this.type_price_per_day = type_price_per_day;
     }
@@ -109,7 +102,6 @@ public class Motorhome { // WO & CB
     public int getType_bed_count() {
         return type_bed_count;
     }
-
     public void setType_bed_count(int type_bed_count) {
         this.type_bed_count = type_bed_count;
     }
@@ -117,7 +109,6 @@ public class Motorhome { // WO & CB
     public int getType_seat_count() {
         return type_seat_count;
     }
-
     public void setType_seat_count(int type_seat_count) {
         this.type_seat_count = type_seat_count;
     }

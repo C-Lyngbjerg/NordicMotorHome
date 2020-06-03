@@ -1,19 +1,13 @@
 package com.example.demo.Model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Contract {
-    public interface dateValidation{};
+
     @Id
     private int contract_id;
     private double contract_rent_price;
@@ -32,6 +26,7 @@ public class Contract {
     private double contract_pick_up_distance;
     private double contract_drop_off_distance;
 
+    //Contstructors
     public Contract() {
     }
 
@@ -49,11 +44,10 @@ public class Contract {
         this.customer_id = customer_id;
         this.motorhome_id = motorhome_id;
     }
-
+    // Getters og Setters
     public String getMotorhome_reg_number() {
         return motorhome_reg_number;
     }
-
     public void setMotorhome_reg_number(String motorhome_reg_number) {
         this.motorhome_reg_number = motorhome_reg_number;
     }
@@ -61,7 +55,6 @@ public class Contract {
     public double getContract_pick_up_distance() {
         return contract_pick_up_distance;
     }
-
     public void setContract_pick_up_distance(double contract_pick_up_distance) {
         this.contract_pick_up_distance = contract_pick_up_distance;
     }
@@ -69,7 +62,6 @@ public class Contract {
     public double getContract_drop_off_distance() {
         return contract_drop_off_distance;
     }
-
     public void setContract_drop_off_distance(double contract_drop_off_distance) {
         this.contract_drop_off_distance = contract_drop_off_distance;
     }
@@ -77,7 +69,6 @@ public class Contract {
     public int getDateDiff() {
         return dateDiff;
     }
-
     public void setDateDiff(int dateDiff) {
         this.dateDiff = dateDiff;
     }
@@ -85,7 +76,6 @@ public class Contract {
     public int getContract_id() {
         return contract_id;
     }
-
     public void setContract_id(int contract_id) {
         this.contract_id = contract_id;
     }
@@ -93,7 +83,6 @@ public class Contract {
     public double getContract_rent_price() {
         return contract_rent_price;
     }
-
     public void setContract_rent_price(double contract_rent_price) {
         this.contract_rent_price = contract_rent_price;
     }
@@ -101,7 +90,6 @@ public class Contract {
     public String getContract_start_date() {
         return contract_start_date;
     }
-
     public void setContract_start_date(String contract_start_date) {
         this.contract_start_date = contract_start_date;
     }
@@ -109,7 +97,6 @@ public class Contract {
     public String getContract_end_date() {
         return contract_end_date;
     }
-
     public void setContract_end_date(String contract_end_date) {
         this.contract_end_date = contract_end_date;
     }
@@ -117,7 +104,6 @@ public class Contract {
     public int getContract_odometer_start() {
         return contract_odometer_start;
     }
-
     public void setContract_odometer_start(int contract_odometer_start) {
         this.contract_odometer_start = contract_odometer_start;
     }
@@ -125,7 +111,6 @@ public class Contract {
     public boolean isContract_extra_bike_rack() {
         return contract_extra_bike_rack;
     }
-
     public void setContract_extra_bike_rack(boolean contract_extra_bike_rack) {
         this.contract_extra_bike_rack = contract_extra_bike_rack;
     }
@@ -133,7 +118,6 @@ public class Contract {
     public boolean isContract_extra_child_seat() {
         return contract_extra_child_seat;
     }
-
     public void setContract_extra_child_seat(boolean contract_extra_child_seat) {
         this.contract_extra_child_seat = contract_extra_child_seat;
     }
@@ -141,7 +125,6 @@ public class Contract {
     public boolean isContract_extra_bed_sheets() {
         return contract_extra_bed_sheets;
     }
-
     public void setContract_extra_bed_sheets(boolean contract_extra_bed_sheets) {
         this.contract_extra_bed_sheets = contract_extra_bed_sheets;
     }
@@ -149,7 +132,6 @@ public class Contract {
     public boolean isContract_extra_picnic_table() {
         return contract_extra_picnic_table;
     }
-
     public void setContract_extra_picnic_table(boolean contract_extra_picnic_table) {
         this.contract_extra_picnic_table = contract_extra_picnic_table;
     }
@@ -157,7 +139,6 @@ public class Contract {
     public boolean isContract_extra_chairs() {
         return contract_extra_chairs;
     }
-
     public void setContract_extra_chairs(boolean contract_extra_chairs) {
         this.contract_extra_chairs = contract_extra_chairs;
     }
@@ -165,7 +146,6 @@ public class Contract {
     public int getCustomer_id() {
         return customer_id;
     }
-
     public void setCustomer_id(int customer_id) {
         this.customer_id = customer_id;
     }
@@ -173,7 +153,6 @@ public class Contract {
     public int getMotorhome_id() {
         return motorhome_id;
     }
-
     public void setMotorhome_id(int motorhome_reg_number) {
         this.motorhome_id = motorhome_reg_number;
     }
@@ -181,33 +160,33 @@ public class Contract {
     /*
     * I metoden calculatePrice findes prisen for hele lejeperioden
     * Dette inkluderer hvilke extra ting kunden vælger at leje, så som camping bord og stole
-     */
+    */
     public void calculatePrice(List<Double> dateAndPrice){ // Lavet af JT og SR
         double totalPrice = seasonCheck(dateAndPrice);
         //en masse if-statements som tilføjer prisen for alt extra indhold som bliver lejet.
         if(contract_extra_bike_rack != false){
-            totalPrice += 200;
+            totalPrice += 20;
         }
         if (contract_extra_bed_sheets != false){
-            totalPrice += 150;
+            totalPrice += 15;
         }
         if (contract_extra_child_seat != false){
-            totalPrice += 200;
+            totalPrice += 20;
         }
         if (contract_extra_picnic_table != false){
-            totalPrice += 100;
+            totalPrice += 10;
         }
         if (contract_extra_chairs != false){
-            totalPrice += 200;
+            totalPrice += 20;
         }
         totalPrice += (this.contract_pick_up_distance + this.contract_drop_off_distance) * 0.7;
         this.contract_rent_price = totalPrice;//sætter kontraktens pris til den ændelige total pris
     }
 
     /*
-    * seasonCheck metoden udregner den samlede pris for udlejningsperioden i de enkelte dages sæsonperiode
+    * seasonCheck() udregner den samlede pris for udlejningsperioden i de enkelte dages sæsonperiode
     * Den parametre overførte liste dateAndPrice indenholder 2 variabler: index plads 0 har den daglige pris og index plads 1 indenholder det samlede antal dage udlejningen varer.
-    * */
+    */
     public double seasonCheck(List<Double> dateAndPrice){ // Lavet af JT og SR
         double totalPrice = 0;
         LocalDate startDate = LocalDate.parse(contract_start_date); //contractens String værdi bliver lavet om til en LocalDate objekt. Det gør at vi kan tjekke datoen lettere
@@ -222,10 +201,16 @@ public class Contract {
             }else{
                 totalPrice += dateAndPrice.get(0);
             }
-            startDate = startDate.plusDays(1);//Her lægger vi en dag til datoen
+            startDate = startDate.plusDays(1);//Her lægger vi en dag til datoen //TODO JT SR Hvorfor bliver der lagt en dag til her?
         }
         return totalPrice;
     }
+    /*
+        Denne metode checker at contract_start_date og contract_end_date bliver inputtet i den rigtige format,
+        ud fra inputtet fra SelectRentDays.html, via et Regex.
+        Dette Regex "\d" betyder numerisk værdi mellem 0-9 og {x} er antallet af \d efter hinanden.
+        Så det endelig format er dddd-dd-dd.
+     */
     public boolean validateDates(){
         String pattern = "\\d{4}-\\d{2}-\\d{2}";
         if(contract_start_date.matches(pattern) & contract_end_date.matches(pattern)){
@@ -233,15 +218,4 @@ public class Contract {
         }
         return false;
     }
-//    public boolean checkValues() {
-//        String pickUp = contract_pick_up_distance + "";
-//        String dropOff = contract_drop_off_distance + "";
-//        try {
-//            double a = Double.parseDouble(pickUp);
-//            double b = Double.parseDouble(dropOff);
-//        }catch(NumberFormatException err) {
-//            return true;
-//        }
-//        return false;
-//    }
 }
