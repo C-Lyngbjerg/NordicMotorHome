@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af TJ & SR-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
     <title>Motorhome table</title>
 </head>
 <body>
@@ -25,43 +26,42 @@
     </div>
 </div>
 
-
 <h1>Motorhome menu</h1>
 <a href = "/createMotorhome">
     <button class="button"><span>Create new motorhome</span></button>
 </a>
 <div class="table-wrapper">
     <div class="table-scroll">
-<table>
-    <thead>
-    <tr>
-        <th>Reg. number</th>
-        <th>Type</th>
-        <th>Brand</th>
-        <th>Model</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="motorhome: ${motorhome}">
-        <td th:text="${motorhome.motorhome_reg_number}"/>
-        <td th:text="${motorhome.type_description}"/>
-        <td th:text="${motorhome.motorhome_brand}"/>
-        <td th:text="${motorhome.motorhome_model}"/>
+        <table>
+            <thead>
+                <tr>
+                    <th>Reg. number</th>
+                    <th>Type</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="motorhome: ${motorhome}">
+                    <td th:text="${motorhome.motorhome_reg_number}"/>
+                    <td th:text="${motorhome.type_description}"/>
+                    <td th:text="${motorhome.motorhome_brand}"/>
+                    <td th:text="${motorhome.motorhome_model}"/>
 
-        <td>
-            <a style="text-decoration: none" th:href="@{'/viewOneMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="button"><span>View Details</span></button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/updateMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="button"><span>Update info</span></button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/deleteMotorhome/'+${motorhome.motorhome_id}}">
-                <button class="button1"><span>Delete</span></button>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <td>
+                        <a style="text-decoration: none" th:href="@{'/viewOneMotorhome/'+${motorhome.motorhome_id}}">
+                            <button class="button"><span>View Details</span></button>
+                        </a>
+                        <a style="text-decoration: none" th:href="@{'/updateMotorhome/'+${motorhome.motorhome_id}}">
+                            <button class="button"><span>Update info</span></button>
+                        </a>
+                        <a style="text-decoration: none" th:href="@{'/deleteMotorhome/'+${motorhome.motorhome_id}}">
+                            <button class="button1"><span>Delete</span></button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <form action="/motorhomeTable/" method="post">

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af WO-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
     <title>Create Repair</title>
 </head>
 <body>
@@ -26,59 +27,59 @@
 </div>
 
 <div style="width: 70%; float: left">
-<h1 style="text-align: left">Repair menu</h1>
-<table>
-    <form action="#" th:action="@{/createRepair}" th:object="${repair}" method="post">
-        <tr style="display: none">
-            <td><label>Indtast repair id</label></td>
-            <td><input type="text" th:field="*{repair_id}" placeholder="Repair id"/><br></td>
-            <td th:if="${#fields.hasErrors('repair_id')}" th:errors="*{repair_id}"></td>
-        </tr>
-        <tr>
-            <td><label>Indtast kort beskrivelse</label></td>
-            <td><input type="text" th:field="*{repair_description}" placeholder="Beskrivelse"><br></td>
-            <td th:if="${#fields.hasErrors('repair_description')}" th:errors="*{repair_description}"></td>
-        </tr>
-        <tr>
-            <td><label>Indtast dato</label></td>
-            <td><input type="text" th:field="*{repair_date}" placeholder="Format: YYYY-MM-DD"><br></td>
-            <td th:if="${#fields.hasErrors('repair_date')}" th:errors="*{repair_date}"></td>
-        </tr>
-        <tr>
-            <td><label>Indtast motorhome id</label></td>
-            <td><input type="text" th:field="*{motorhome_id}" placeholder="Motorhome id"><br></td>
-            <td th:if="${#fields.hasErrors('motorhome_id')}" th:errors="*{motorhome_id}"></td>
-        </tr>
-        <tr>
-            <td style="border: none"><input class="button" type="submit" value="Create"></td>
-        </tr>
+    <h1 style="text-align: left">Repair menu</h1>
+    <table>
+        <form action="#" th:action="@{/createRepair}" th:object="${repair}" method="post">
+            <tr style="display: none">
+                <td><label>Indtast repair id</label></td>
+                <td><input type="text" th:field="*{repair_id}" placeholder="Repair id"/><br></td>
+                <td th:if="${#fields.hasErrors('repair_id')}" th:errors="*{repair_id}"></td>
+            </tr>
+            <tr>
+                <td><label>Indtast kort beskrivelse</label></td>
+                <td><input type="text" th:field="*{repair_description}" placeholder="Beskrivelse"><br></td>
+                <td th:if="${#fields.hasErrors('repair_description')}" th:errors="*{repair_description}"></td>
+            </tr>
+            <tr>
+                <td><label>Indtast dato</label></td>
+                <td><input type="text" th:field="*{repair_date}" placeholder="Format: YYYY-MM-DD"><br></td>
+                <td th:if="${#fields.hasErrors('repair_date')}" th:errors="*{repair_date}"></td>
+            </tr>
+            <tr>
+                <td><label>Indtast motorhome id</label></td>
+                <td><input type="text" th:field="*{motorhome_id}" placeholder="Motorhome id"><br></td>
+                <td th:if="${#fields.hasErrors('motorhome_id')}" th:errors="*{motorhome_id}"></td>
+            </tr>
+            <tr>
+                <td style="border: none"><input class="button" type="submit" value="Create"></td>
+            </tr>
+        </form>
+    </table>
+    <form action="/repairTable/" method="post">
+        <input class="button" type="submit" value="Return">
     </form>
-</table>
-<form action="/repairTable/" method="post">
-    <input class="button" type="submit" value="Return">
-</form>
 </div>
 <div style="width: 30%; float: right">
     <h2>All motorhomes</h2>
     <div class="table-scroll">
-    <table>
-        <thead>
-            <tr>
-                <th>Motorhome ID</th>
-                <th>Reg. number</th>
-                <th>Brand</th>
-                <th>Model</th>
-            </tr>
-        </thead>
-        <tbody>
-        <tr th:each="motorhome: ${motorhomes}">
-            <td th:text="${motorhome.motorhome_id}"/>
-            <td th:text="${motorhome.motorhome_reg_number}"/>
-            <td th:text="${motorhome.motorhome_brand}"/>
-            <td th:text="${motorhome.motorhome_model}"/>
-        </tr>
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Motorhome ID</th>
+                    <th>Reg. number</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="motorhome: ${motorhomes}">
+                    <td th:text="${motorhome.motorhome_id}"/>
+                    <td th:text="${motorhome.motorhome_reg_number}"/>
+                    <td th:text="${motorhome.motorhome_brand}"/>
+                    <td th:text="${motorhome.motorhome_model}"/>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">

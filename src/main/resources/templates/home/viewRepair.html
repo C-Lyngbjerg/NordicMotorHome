@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af WO-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="/Logo.png">
     <link rel="stylesheet" href="/MyCSS.css">
     <link rel="stylesheet" href="/TableManager.css">
     <link rel="stylesheet" href="/NavBar.css">
-    <meta charset="UTF-8">
     <title>View Repair</title>
 </head>
 <body>
@@ -25,28 +26,27 @@
     </div>
 </div>
 
-
 <h1>Repair details</h1>
 <div class="wrapper">
     <div style="width: 800px; height: 100px; display: inline-block; padding:10px;" >
         <table style="border-collapse: collapse; width: 50%; margin: 20px 0px 0px 0px; margin:auto; ">
             <tbody style="margi: auto">
-            <tr>
-                <td class="infoBox"><label>Repair ID</label></td>
-                <td><span th:text="${repair.repair_id}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"> <label>Description</label></td>
-                <td><span th:text="${repair.repair_description}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox">Date</td>
-                <td><span th:text="${repair.repair_date}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox">Motorhome ID</td>
-                <td><span th:text="${repair.motorhome_id}"/></td>
-            </tr>
+                <tr>
+                    <td class="infoBox"><label>Repair ID</label></td>
+                    <td><span th:text="${repair.repair_id}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"> <label>Description</label></td>
+                    <td><span th:text="${repair.repair_description}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox">Date</td>
+                    <td><span th:text="${repair.repair_date}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox">Motorhome ID</td>
+                    <td><span th:text="${repair.motorhome_id}"/></td>
+                </tr>
             </tbody>
         </table>
         <form action="/viewRepair/" method="post">

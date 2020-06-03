@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af JT & SR-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
     <title>Create Contract</title>
 </head>
 <body>
@@ -27,87 +28,86 @@
   
 <h1>Create a new contract</h1>
 <div id="wrapper">
-<div id="first">
-    <h2>Input contract data</h2><br>
-<table>
-    <form action="/finalizeContract" method="post">
-        <tr style="display:none">
-            <td><label style="display: none">Enter start date</label></td>
-            <td><input style="display: none" type="text" name="contract_start_date" th:value="${contract.contract_start_date}"><br></td>
-        </tr>
-        <tr style="display:none">
-            <td><label style="display: none">Enter end date</label></td>
-            <td><input style="display: none" type="text" name="contract_end_date" th:value="${contract.contract_end_date}"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter motorhomes odometer</label></td>
-            <td><input type="text" name="contract_odometer" th:value=0 placeholder="Odometer"><br></td>
-        </tr>
-        <tr>
-            <td><label>Bike rack</label></td>
-            <td><input type="checkbox" name="contract_extra_bike_rack" value="1"><br></td>
-        </tr>
-        <tr>
-            <td><label>Bed sheets</label></td>
-            <td><input type="checkbox" name="contract_extra_bed_sheets" value="1"><br></td>
-        </tr>
-        <tr>
-            <td><label>Child seat</label></td>
-            <td><input type="checkbox" name="contract_extra_child_seat" value="1"><br></td>
-        </tr>
-        <tr>
-            <td><label>Picnic table</label></td>
-            <td><input type="checkbox" name="contract_extra_picnic_table" value="1"><br></td>
-        </tr>
-        <tr>
-            <td><label>Chairs</label></td>
-            <td><input type="checkbox" name="contract_extra_chairs" value="1"><br></td>
-        </tr>
-        <tr>
-            <td><label>Distance from pickup in km</label></td>
-            <td><input type="text" name="contract_pick_up_distance" th:value=0 placeholder="kilometer"><br></td>
-        </tr>
-        <tr>
-            <td><label>Distance from drop off in km</label></td>
-            <td><input type="text" name="contract_drop_off_distance" th:value=0 placeholder="kilometer"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter customer id</label></td>
-            <td><input type="text" name="customer_id" placeholder="Customer Id"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter motorhome id</label></td>
-            <td><input type="text" name="motorhome_id" placeholder="Motorhome id"><br></td>
-        </tr>
+    <div id="first">
+        <h2>Input contract data</h2><br>
+        <table>
+            <form action="/finalizeContract" method="post">
+                <tr style="display:none">
+                    <td><label style="display: none">Enter start date</label></td>
+                    <td><input style="display: none" type="text" name="contract_start_date" th:value="${contract.contract_start_date}"><br></td>
+                </tr>
+                <tr style="display:none">
+                    <td><label style="display: none">Enter end date</label></td>
+                    <td><input style="display: none" type="text" name="contract_end_date" th:value="${contract.contract_end_date}"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Enter motorhomes odometer</label></td>
+                    <td><input type="text" name="contract_odometer" th:value=0 placeholder="Odometer"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Bike rack</label></td>
+                    <td><input type="checkbox" name="contract_extra_bike_rack" value="1"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Bed sheets</label></td>
+                    <td><input type="checkbox" name="contract_extra_bed_sheets" value="1"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Child seat</label></td>
+                    <td><input type="checkbox" name="contract_extra_child_seat" value="1"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Picnic table</label></td>
+                    <td><input type="checkbox" name="contract_extra_picnic_table" value="1"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Chairs</label></td>
+                    <td><input type="checkbox" name="contract_extra_chairs" value="1"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Distance from pickup in km</label></td>
+                    <td><input type="text" name="contract_pick_up_distance" th:value=0 placeholder="kilometer"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Distance from drop off in km</label></td>
+                    <td><input type="text" name="contract_drop_off_distance" th:value=0 placeholder="kilometer"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Enter customer id</label></td>
+                    <td><input type="text" name="customer_id" placeholder="Customer Id"><br></td>
+                </tr>
+                <tr>
+                    <td><label>Enter motorhome id</label></td>
+                    <td><input type="text" name="motorhome_id" placeholder="Motorhome id"><br></td>
+                </tr>
 
-        <tr>
-
-            <td style="border: none"><input class="button" type="submit" value="Create"></td>
-        </tr>
-    </form>
-</table>
-</div>
-    <div id="second">
-<div class="table-wrapper">
-    <h2>Available motorhomes</h2>
-    <div class="table-scroll">
-        <table style="width:15%">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Reg Number</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="motorhome: ${motorhomeList}">
-                <td th:text="${motorhome.motorhome_id}"/>
-                <td th:text="${motorhome.motorhome_reg_number}"/>
-            </tr>
-            </tbody>
+                <tr>
+                    <td style="border: none"><input class="button" type="submit" value="Create"></td>
+                </tr>
+            </form>
         </table>
     </div>
-</div>
-</div>
+    <div id="second">
+        <div class="table-wrapper">
+            <h2>Available motorhomes</h2>
+            <div class="table-scroll">
+                <table style="width:15%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Reg Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="motorhome: ${motorhomeList}">
+                            <td th:text="${motorhome.motorhome_id}"/>
+                            <td th:text="${motorhome.motorhome_reg_number}"/>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>

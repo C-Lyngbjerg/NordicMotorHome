@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af WO & CB-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
     <title>Invoices</title>
 </head>
 <body>
@@ -25,49 +26,48 @@
     </div>
 </div>
 
-
 <h1>Invoice menu</h1>
 <a href = "/createInvoice">
     <button class="button"><span>Create new invoice</span></button>
 </a>
 <div class="table-wrapper">
     <div class="table-scroll">
-<table id="contractTableWidth">
-    <thead>
-    <tr>
-        <th>Invoice Id</th>
-        <th>Contract Id</th>
-        <th>Total Price</th>
-        <th>Distance Driven</th>
-        <th>Odometer at End</th>
-        <th>Days rented</th>
-        <th>Fuel gage under 50%</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="invoice: ${invoice}">
-        <td th:text="${invoice.invoice_id}"/>
-        <td th:text="${invoice.contract_id}"/>
-        <td th:text="${invoice.invoice_total_price}"/>
-        <td th:text="${invoice.invoice_distance_driven}"/>
-        <td th:text="${invoice.invoice_odometer_end}"/>
-        <td th:text="${invoice.invoice_rent_days}"/>
-        <td th:text="${invoice.invoice_fuel_gage}"/>
+        <table id="contractTableWidth">
+            <thead>
+                <tr>
+                    <th>Invoice Id</th>
+                    <th>Contract Id</th>
+                    <th>Total Price</th>
+                    <th>Distance Driven</th>
+                    <th>Odometer at End</th>
+                    <th>Days rented</th>
+                    <th>Fuel gage under 50%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="invoice: ${invoice}">
+                    <td th:text="${invoice.invoice_id}"/>
+                    <td th:text="${invoice.contract_id}"/>
+                    <td th:text="${invoice.invoice_total_price}"/>
+                    <td th:text="${invoice.invoice_distance_driven}"/>
+                    <td th:text="${invoice.invoice_odometer_end}"/>
+                    <td th:text="${invoice.invoice_rent_days}"/>
+                    <td th:text="${invoice.invoice_fuel_gage}"/>
 
-        <td style="width:40%">
-           <a style="text-decoration: none" th:href="@{'/viewInvoice/'+${invoice.invoice_id}}">
-                <button class="button"><span>View</span></button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/updateInvoice/'+${invoice.invoice_id}}">
-                <button class="button"><span>Update info</span></button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/deleteInvoice/'+${invoice.invoice_id}}">
-                <button class="button1"><span>Delete</span></button>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <td style="width:40%">
+                       <a style="text-decoration: none" th:href="@{'/viewInvoice/'+${invoice.invoice_id}}">
+                            <button class="button"><span>View</span></button>
+                        </a>
+                        <a style="text-decoration: none" th:href="@{'/updateInvoice/'+${invoice.invoice_id}}">
+                            <button class="button"><span>Update info</span></button>
+                        </a>
+                        <a style="text-decoration: none" th:href="@{'/deleteInvoice/'+${invoice.invoice_id}}">
+                            <button class="button1"><span>Delete</span></button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <form action="/invoiceTable/" method="post">

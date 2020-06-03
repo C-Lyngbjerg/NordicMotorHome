@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af TJ & SR-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
     <title>Create new motorhome</title>
 </head>
 <body>
@@ -27,36 +28,36 @@
 <div style="width: 70%; float: left">
     <h1 style=" width: 50%; text-align: left">Create new motorhome</h1>
     <table>
-    <form action="/createMotorhome" method="post">
-        <tr>
-            <td><label>Registration number</label></td>
-            <td><input type="text" name="motorhome_reg_number" placeholder="Reg Number"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter type</label></td>
-            <td><input type="text" name="type_id" placeholder="Type"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter brand</label></td>
-            <td><input type="text" name="motorhome_brand" placeholder="Brand"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter model</label></td>
-            <td><input type="text" name="motorhome_model" placeholder="Model"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter room height</label></td>
-            <td><input type="text" name="motorhome_room_height" placeholder="Room height"><br></td>
-        </tr>
-        <tr>
-            <td><label>Enter odometer value</label></td>
-            <td><input type="text" name="motorhome_odometer" placeholder="Odometer"><br></td>
-        </tr>
-        <tr style="border: none">
-            <td style="border: none"><input class="button" type="submit" value="Create"></td>
-        </tr>
-    </form>
-</table>
+        <form action="/createMotorhome" method="post">
+            <tr>
+                <td><label>Registration number</label></td>
+                <td><input type="text" name="motorhome_reg_number" placeholder="Reg Number"><br></td>
+            </tr>
+            <tr>
+                <td><label>Enter type</label></td>
+                <td><input type="text" name="type_id" placeholder="Type"><br></td>
+            </tr>
+            <tr>
+                <td><label>Enter brand</label></td>
+                <td><input type="text" name="motorhome_brand" placeholder="Brand"><br></td>
+            </tr>
+            <tr>
+                <td><label>Enter model</label></td>
+                <td><input type="text" name="motorhome_model" placeholder="Model"><br></td>
+            </tr>
+            <tr>
+                <td><label>Enter room height</label></td>
+                <td><input type="text" name="motorhome_room_height" placeholder="Room height"><br></td>
+            </tr>
+            <tr>
+                <td><label>Enter odometer value</label></td>
+                <td><input type="text" name="motorhome_odometer" placeholder="Odometer"><br></td>
+            </tr>
+            <tr style="border: none">
+                <td style="border: none"><input class="button" type="submit" value="Create"></td>
+            </tr>
+        </form>
+    </table>
 </div>
 <div style="width: 30%; float: right">
         <h2>All types</h2>

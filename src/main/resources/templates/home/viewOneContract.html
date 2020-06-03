@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+<!--Lavet af JT & SR-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="/Logo.png">
     <link rel="stylesheet" href="/MyCSS.css">
     <link rel="stylesheet" href="/TableManager.css">
     <link rel="stylesheet" href="/NavBar.css">
-    <meta charset="UTF-8">
-    <title>Contract ID</title>
+    <title>View Contract</title>
 </head>
 <body>
 <div class="navbar">
@@ -25,78 +26,76 @@
     </div>
 </div>
 
-
 <h1>Contract info</h1>
 <div class="wrapper">
     <div style="width: 800px; height: 100px; display: inline-block; padding:10px;" >
         <table style="border-collapse: collapse; width: 50%; margin: 20px 0px 0px 0px; margin:auto; ">
             <tbody style="margi: auto">
-            <tr>
-                <td class="infoBox"><label>Contract ID</label></td>
-                <td><span th:text="${contract.contract_id}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"> <label>Customer ID</label></td>
-                <td><span th:text="${contract.customer_id}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox">Motorhome ID</td>
-                <td><span th:text="${contract.motorhome_id}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox">Motorhome registration</td>
-                <td><span th:text="${contract.motorhome_reg_number}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox">Rent price</td>
-                <td><span th:text="${contract.contract_rent_price}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"><label>Start date</label></td>
-                <td><span th:text="${contract.contract_start_date}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"><label>End date</label></td>
-                <td><span th:text="${contract.contract_end_date}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"><label>Start odometer</label></td>
-                <td><span th:text="${contract.contract_odometer_start}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"><label>Bike rack</label></td>
-                <td><span th:text="${contract.contract_extra_bike_rack}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"><label>Child seat</label></td>
-                <td><span th:text="${contract.contract_extra_child_seat}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox" ><label>Bed sheets</label></td>
-                <td><span th:text="${contract.contract_extra_bed_sheets}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"><label>Picnic table</label></td>
-                <td><span th:text="${contract.contract_extra_picnic_table}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"><label>Chairs</label></td>
-                <td><span th:text="${contract.contract_extra_chairs}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox" ><label>Distance to pick up</label></td>
-                <td><span th:text="${contract.contract_pick_up_distance}"/></td>
-            </tr>
-            <tr>
-                <td class="infoBox"><label>Distance to drop off</label></td>
-                <td><span th:text="${contract.contract_drop_off_distance}"/></td>
-            </tr>
+                <tr>
+                    <td class="infoBox"><label>Contract ID</label></td>
+                    <td><span th:text="${contract.contract_id}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"> <label>Customer ID</label></td>
+                    <td><span th:text="${contract.customer_id}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox">Motorhome ID</td>
+                    <td><span th:text="${contract.motorhome_id}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox">Motorhome registration</td>
+                    <td><span th:text="${contract.motorhome_reg_number}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox">Rent price</td>
+                    <td><span th:text="${contract.contract_rent_price}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"><label>Start date</label></td>
+                    <td><span th:text="${contract.contract_start_date}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"><label>End date</label></td>
+                    <td><span th:text="${contract.contract_end_date}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"><label>Start odometer</label></td>
+                    <td><span th:text="${contract.contract_odometer_start}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"><label>Bike rack</label></td>
+                    <td><span th:text="${contract.contract_extra_bike_rack}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"><label>Child seat</label></td>
+                    <td><span th:text="${contract.contract_extra_child_seat}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox" ><label>Bed sheets</label></td>
+                    <td><span th:text="${contract.contract_extra_bed_sheets}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"><label>Picnic table</label></td>
+                    <td><span th:text="${contract.contract_extra_picnic_table}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"><label>Chairs</label></td>
+                    <td><span th:text="${contract.contract_extra_chairs}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox" ><label>Distance to pick up</label></td>
+                    <td><span th:text="${contract.contract_pick_up_distance}"/></td>
+                </tr>
+                <tr>
+                    <td class="infoBox"><label>Distance to drop off</label></td>
+                    <td><span th:text="${contract.contract_drop_off_distance}"/></td>
+                </tr>
             </tbody>
         </table>
         <form action="/viewOneContract/" method="post">
             <input class="button" type="submit" value="Return">
         </form>
-        </pre>
     </div>
 </div>
 

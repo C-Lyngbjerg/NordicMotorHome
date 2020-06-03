@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af WO & CB-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
     <title>Create invoice</title>
 </head>
 <body>
@@ -25,7 +26,6 @@
     </div>
 </div>
 
-
 <table style="width:100%; border: none">
     <td style="width:50%; border: none">
         <h1> Create new invoice </h1>
@@ -36,14 +36,6 @@
                     <td><input type="text" th:field="*{invoice_id}" placeholder="ID"><br></td>
                     <td th:if="${#fields.hasErrors('invoice_id')}" th:errors="*{invoice_id}"></td>
                 </tr>
-<!--                <tr>-->
-<!--                    <td ><label>Enter total price</label></td>-->
-<!--                    <td><input type="text" name="invoice_total_price" placeholder="Total price"><br></td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><label>Enter distance driven</label></td>-->
-<!--                    <td><input type="text" name="invoice_distance_drive" placeholder="Distance"><br></td>-->
-<!--                </tr>-->
                 <tr>
                     <td><label>Enter odometer end</label></td>
                     <td><input type="text" th:field="*{invoice_odometer_end}" placeholder="Odometer End"><br></td>
@@ -60,7 +52,6 @@
                     <td th:if="${#fields.hasErrors('invoice_fuel_gage')}" th:errors="*{invoice_fuel_gage}"></td>
                 </tr>
                 <tr>
-
                     <td style="border: none"><input class="button" type="submit" value="Create"></td>
                 </tr>
             </form>
@@ -68,25 +59,24 @@
     </td>
     <td style="border: none">
         <h1> Available contracts </h1>
-
         <table style="width:100%">
             <thead>
-            <tr>
-                <th>Contract Id</th>
-                <th>Customer Id</th>
-                <th>Motorhome Id</th>
-                <th>Motorhome Registration Number</th>
-                <th>Rental price</th>
-            </tr>
+                <tr>
+                    <th>Contract Id</th>
+                    <th>Customer Id</th>
+                    <th>Motorhome Id</th>
+                    <th>Motorhome Registration Number</th>
+                    <th>Rental price</th>
+                </tr>
             </thead>
             <tbody>
-            <tr th:each="contract: ${contracts}">
-                <td th:text="${contract.contract_id}"/>
-                <td th:text="${contract.customer_id}"/>
-                <td th:text="${contract.motorhome_id}"/>
-                <td th:text="${contract.motorhome_reg_number}"/>
-                <td th:text="${contract.contract_rent_price}"/>
-            </tr>
+                <tr th:each="contract: ${contracts}">
+                    <td th:text="${contract.contract_id}"/>
+                    <td th:text="${contract.customer_id}"/>
+                    <td th:text="${contract.motorhome_id}"/>
+                    <td th:text="${contract.motorhome_reg_number}"/>
+                    <td th:text="${contract.contract_rent_price}"/>
+                </tr>
             </tbody>
         </table>
     </td>

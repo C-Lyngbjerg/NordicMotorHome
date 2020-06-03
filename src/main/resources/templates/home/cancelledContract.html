@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af JT-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="/Logo.png">
     <link rel="stylesheet" href="/MyCSS.css">
     <link rel="stylesheet" href="/NavBar.css">
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CancelledContract</title>
 </head>
 <body>
 <div class="navbar">
@@ -24,22 +25,21 @@
     </div>
 </div>
 
-
 <h1>Contract info</h1>
 <table>
     <thead>
-    <tr>
-        <th>Contract ID</th>
-        <th>Customer ID</th>
-        <th>Rental price after cancellation</th>
-    </tr>
+        <tr>
+            <th>Contract ID</th>
+            <th>Customer ID</th>
+            <th>Rental price after cancellation</th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td><span th:text="${contract.contract_id}"></span></td>
-        <td><span th:text="${contract.customer_id}"></span></td>
-        <td><span th:text="${contract.contract_rent_price}"></span></td>
-    </tr>
+        <tr>
+            <td><span th:text="${contract.contract_id}"></span></td>
+            <td><span th:text="${contract.customer_id}"></span></td>
+            <td><span th:text="${contract.contract_rent_price}"></span></td>
+        </tr>
     </tbody>
     <br>
     <p>Are you sure you want to cancel this contract?</p>
@@ -50,7 +50,6 @@
         <button class="button"><span>Return</span></button>
     </a>
 </table>
-
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>

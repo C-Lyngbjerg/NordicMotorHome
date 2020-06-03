@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Lavet af WO-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
     <title>Repair Table</title>
 </head>
 <body>
@@ -25,41 +26,40 @@
     </div>
 </div>
 
-
 <h1>Repair Table</h1>
 <a href = "/createRepair">
     <button class="button"><span>Create new repair</span></button>
 </a>
 <div class="table-wrapper">
     <div class="table-scroll">
-<table>
-    <thead>
-    <tr>
-        <th>Repair id</th>
-        <th>Description</th>
-        <th>Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="repair: ${repairs}">
-        <td th:text="${repair.repair_id}"/>
-        <td th:text="${repair.repair_description}"/>
-        <td th:text="${repair.repair_date}"/>
-        <td>
-            <a style="text-decoration: none" th:href="@{'/viewRepair/'+${repair.repair_id}}">
-                <button class="button"><span>View</span></button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/updateRepair/'+${repair.repair_id}}">
-                <button class="button"><span>Update info</span></button>
-            </a>
-            <a style="text-decoration: none" th:href="@{'/deleteRepair/'+${repair.repair_id}}">
-                <button class="button1"><span>Delete</span></button>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Repair id</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="repair: ${repairs}">
+                    <td th:text="${repair.repair_id}"/>
+                    <td th:text="${repair.repair_description}"/>
+                    <td th:text="${repair.repair_date}"/>
+                    <td>
+                        <a style="text-decoration: none" th:href="@{'/viewRepair/'+${repair.repair_id}}">
+                            <button class="button"><span>View</span></button>
+                        </a>
+                        <a style="text-decoration: none" th:href="@{'/updateRepair/'+${repair.repair_id}}">
+                            <button class="button"><span>Update info</span></button>
+                        </a>
+                        <a style="text-decoration: none" th:href="@{'/deleteRepair/'+${repair.repair_id}}">
+                            <button class="button1"><span>Delete</span></button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <form action="/repairTable/" method="post">
     <input class="button" type="submit" value="Return">

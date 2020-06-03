@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+<!--Lavet af JT & SR-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="/Logo.png">
     <link rel="stylesheet" href="/MyCSS.css">
     <link rel="stylesheet" href="/TableManager.css">
     <link rel="stylesheet" href="/NavBar.css">
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Update Contract</title>
 </head>
 <body>
 <div class="navbar">
@@ -25,88 +26,85 @@
     </div>
 </div>
 
-
 <h1>Edit contract</h1>
 <form action="#" th:action="@{/updatedContract}" th:object="${contract}" method="post">
     <table>
         <thead>
-        <tr>
-            <th>Info</th>
-            <th>Input</th>
-        </tr>
+            <tr>
+                <th>Info</th>
+                <th>Input</th>
+            </tr>
         </thead>
         <tbody>
-        <tr style="display: none">
-            <td><label>Contract ID</label></td>
-            <td><input type="text" name="contract_id" th:value="${contract.contract_id}"></td>
-            <td th:if="${#fields.hasErrors('contract_id')}" th:errors="*{contract_id}"></td>
-        </tr>
-        <tr>
-            <td> <label>Customer ID</label></td>
-            <td><input type="text" th:field="*{customer_id}" th:value="${contract.customer_id}"></td>
-            <td th:if="${#fields.hasErrors('customer_id')}" th:errors="*{customer_id}"></td>
-        </tr>
-        <tr>
-            <td><label>Start date</label></td>
-            <td><input type="text" th:field="*{contract_start_date}" th:value="${contract.contract_start_date}"></td>
-            <td th:if="${#fields.hasErrors('contract_start_date')}" th:errors="*{contract_start_date}"></td>
-        </tr>
-        <tr>
-            <td><label>End date</label></td>
-            <td><input type="text" th:field="*{contract_end_date}" th:value="${contract.contract_end_date}"></td>
-            <td th:if="${#fields.hasErrors('contract_end_date')}" th:errors="*{contract_end_date}"></td>
-        </tr>
-        <tr>
-            <td><label>Start odometer</label></td>
-            <td><input type="text" th:field="*{contract_odometer_start}" th:value="${contract.contract_odometer_start}"></td>
-            <td th:if="${#fields.hasErrors('contract_odometer_start')}" th:errors="*{contract_odometer_start}"></td>
-        </tr>
-        <tr>
-            <td><label>Motorhome ID</label></td>
-            <td><input type="text" th:field="*{motorhome_id}" th:value="${contract.motorhome_id}"></td>
-            <td th:if="${#fields.hasErrors('motorhome_id')}" th:errors="*{motorhome_id}"></td>
-        </tr>
-        <tr>
-            <td><label>Bike rack</label></td>
-            <td><input type="text" th:field="*{contract_extra_bike_rack}" th:value="${contract.contract_extra_bike_rack}"></td>
-            <td th:if="${#fields.hasErrors('contract_extra_bike_rack')}" th:errors="*{contract_extra_bike_rack}"></td>
-        </tr>
-        <tr>
-            <td><label>Child seat</label></td>
-            <td><input type="text" th:field="*{contract_extra_child_seat}" th:value="${contract.contract_extra_child_seat}"></td>
-            <td th:if="${#fields.hasErrors('contract_extra_child_seat')}" th:errors="*{contract_extra_child_seat}"></td>
-        </tr>
-        <tr>
-            <td><label>Bed sheets</label></td>
-            <td><input type="text" th:field="*{contract_extra_bed_sheets}" th:value="${contract.contract_extra_bed_sheets}"></td>
-            <td th:if="${#fields.hasErrors('contract_extra_bed_sheets')}" th:errors="*{contract_extra_bed_sheets}"></td>
-        </tr>
-        <tr>
-            <td><label>Picnic table</label></td>
-            <td><input type="text" th:field="*{contract_extra_picnic_table}" th:value="${contract.contract_extra_picnic_table}"></td>
-            <td th:if="${#fields.hasErrors('contract_extra_picnic_table')}" th:errors="*{contract_extra_picnic_table}"></td>
-        </tr>
-        <tr>
-            <td><label>Chairs</label></td>
-            <td><input type="text" th:field="*{contract_extra_chairs}" th:value="${contract.contract_extra_chairs}"></td>
-            <td th:if="${#fields.hasErrors('contract_extra_chairs')}" th:errors="*{contract_extra_chairs}"></td>
-        </tr>
-        <tr>
-            <td><label>Distance to pick up</label></td>
-            <td><input type="text" th:field="*{contract_pick_up_distance}" th:value="${contract.contract_pick_up_distance}"></td>
-            <td th:if="${#fields.hasErrors('contract_pick_up_distance')}" th:errors="*{contract_pick_up_distance}"></td>
-        </tr>
-        <tr>
-            <td><label>Distance to drop off</label></td>
-            <td><input type="text" th:field="*{contract_drop_off_distance}" th:value="${contract.contract_drop_off_distance}"></td>
-            <td th:if="${#fields.hasErrors('contract_drop_off_distance')}" th:errors="*{contract_drop_off_distance}"></td>
-        </tr>
+            <tr style="display: none">
+                <td><label>Contract ID</label></td>
+                <td><input type="text" name="contract_id" th:value="${contract.contract_id}"></td>
+                <td th:if="${#fields.hasErrors('contract_id')}" th:errors="*{contract_id}"></td>
+            </tr>
+            <tr>
+                <td> <label>Customer ID</label></td>
+                <td><input type="text" th:field="*{customer_id}" th:value="${contract.customer_id}"></td>
+                <td th:if="${#fields.hasErrors('customer_id')}" th:errors="*{customer_id}"></td>
+            </tr>
+            <tr>
+                <td><label>Start date</label></td>
+                <td><input type="text" th:field="*{contract_start_date}" th:value="${contract.contract_start_date}"></td>
+                <td th:if="${#fields.hasErrors('contract_start_date')}" th:errors="*{contract_start_date}"></td>
+            </tr>
+            <tr>
+                <td><label>End date</label></td>
+                <td><input type="text" th:field="*{contract_end_date}" th:value="${contract.contract_end_date}"></td>
+                <td th:if="${#fields.hasErrors('contract_end_date')}" th:errors="*{contract_end_date}"></td>
+            </tr>
+            <tr>
+                <td><label>Start odometer</label></td>
+                <td><input type="text" th:field="*{contract_odometer_start}" th:value="${contract.contract_odometer_start}"></td>
+                <td th:if="${#fields.hasErrors('contract_odometer_start')}" th:errors="*{contract_odometer_start}"></td>
+            </tr>
+            <tr>
+                <td><label>Motorhome ID</label></td>
+                <td><input type="text" th:field="*{motorhome_id}" th:value="${contract.motorhome_id}"></td>
+                <td th:if="${#fields.hasErrors('motorhome_id')}" th:errors="*{motorhome_id}"></td>
+            </tr>
+            <tr>
+                <td><label>Bike rack</label></td>
+                <td><input type="text" th:field="*{contract_extra_bike_rack}" th:value="${contract.contract_extra_bike_rack}"></td>
+                <td th:if="${#fields.hasErrors('contract_extra_bike_rack')}" th:errors="*{contract_extra_bike_rack}"></td>
+            </tr>
+            <tr>
+                <td><label>Child seat</label></td>
+                <td><input type="text" th:field="*{contract_extra_child_seat}" th:value="${contract.contract_extra_child_seat}"></td>
+                <td th:if="${#fields.hasErrors('contract_extra_child_seat')}" th:errors="*{contract_extra_child_seat}"></td>
+            </tr>
+            <tr>
+                <td><label>Bed sheets</label></td>
+                <td><input type="text" th:field="*{contract_extra_bed_sheets}" th:value="${contract.contract_extra_bed_sheets}"></td>
+                <td th:if="${#fields.hasErrors('contract_extra_bed_sheets')}" th:errors="*{contract_extra_bed_sheets}"></td>
+            </tr>
+            <tr>
+                <td><label>Picnic table</label></td>
+                <td><input type="text" th:field="*{contract_extra_picnic_table}" th:value="${contract.contract_extra_picnic_table}"></td>
+                <td th:if="${#fields.hasErrors('contract_extra_picnic_table')}" th:errors="*{contract_extra_picnic_table}"></td>
+            </tr>
+            <tr>
+                <td><label>Chairs</label></td>
+                <td><input type="text" th:field="*{contract_extra_chairs}" th:value="${contract.contract_extra_chairs}"></td>
+                <td th:if="${#fields.hasErrors('contract_extra_chairs')}" th:errors="*{contract_extra_chairs}"></td>
+            </tr>
+            <tr>
+                <td><label>Distance to pick up</label></td>
+                <td><input type="text" th:field="*{contract_pick_up_distance}" th:value="${contract.contract_pick_up_distance}"></td>
+                <td th:if="${#fields.hasErrors('contract_pick_up_distance')}" th:errors="*{contract_pick_up_distance}"></td>
+            </tr>
+            <tr>
+                <td><label>Distance to drop off</label></td>
+                <td><input type="text" th:field="*{contract_drop_off_distance}" th:value="${contract.contract_drop_off_distance}"></td>
+                <td th:if="${#fields.hasErrors('contract_drop_off_distance')}" th:errors="*{contract_drop_off_distance}"></td>
+            </tr>
         </tbody>
     </table>
     <input class="button" type="submit" value="Save changes">
-    </form>
-    <br>
-
+</form>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
 </html>

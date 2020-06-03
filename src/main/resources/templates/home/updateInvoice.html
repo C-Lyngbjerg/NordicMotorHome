@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!--Laver af WO & CB-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="/Logo.png">
     <link rel="stylesheet" href="/MyCSS.css">
     <link rel="stylesheet" href="/TableManager.css">
     <link rel="stylesheet" href="/NavBar.css">
-    <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
@@ -24,7 +25,6 @@
         </div>
     </div>
 </div>
-
 
 <table>
     <form action="#" th:action="@{/updateInvoice}" th:object="${invoice}" method="post">
@@ -63,7 +63,6 @@
         </tr>
         <tr></tr>
         <tr>
-
             <td style="border: none"><input class="button" type="submit" value="Update"></td>
         </tr>
     </form>

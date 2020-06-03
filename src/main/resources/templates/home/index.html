@@ -1,14 +1,16 @@
 <!DOCTYPE html>
+<!--Lavet af alle-->
 <html lang="en">
-<head>
+<head> <!-- Denne del indeholder vores eksterne CSS filer, titelkortet og charset-->
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="IndexStyle.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
     <title>Nordic Motorhome Rental</title>
 </head>
 <body>
+<!--Navigations bar-->
 <div class="navbar">
     <a href="/">Home</a>
     <div class="dropdown">
@@ -25,47 +27,46 @@
     </div>
 </div>
 
-
 <h1> Nordic Motorhome Rental </h1>
 <div class="wrapper">
-<pre>
-Nordic Motorhome Rental is a Danish company that rents out motorhomes.
-Nordic Motorhome Rental was founded in 2019 and is situated just outside Copenhagen.
+    <pre>
+    Nordic Motorhome Rental is a Danish company that rents out motorhomes.
+    Nordic Motorhome Rental was founded in 2019 and is situated just outside Copenhagen.
 
-Press a button regarding the subject you want to interact with.
-</pre>
+    Press a button regarding the subject you want to interact with.
+    </pre>
 </div>
-
+<!--Wrapper class, der sørger for at centrere knapper i midten af siden. Er sat ind i et table for nemmere at arbejde med-->
 <div class="wrapper">
-<div class="div1">
-    <table>
-        <tr>
-            <td>
-    <a style="text-decoration: none" href = "/customerTable">
-        <button class="button"><img src="customerIcon.png" alt="" width="55 px" height="70 px" align="left"><span>Customers</span></button>
-    </a></td>
-            <td>
-    <a style="text-decoration: none" href = "/invoiceTable">
-        <button class="button" ><img src="invoiceIcon.png" alt="" width="55 px" height="70 px" align="left"><span>Invoices</span></button>
-    </a></td>
-        </tr>
-        <tr>
-        <td>
-    <a style="text-decoration: none" href = "/contractTable">
-        <button class="button"><img src="contractIcon.png" alt="" width="55 px" height="70 px" align="left"><span>Contracts</span></button>
-    </a>
-        </td>
-        <td>
-        <a style="text-decoration: none" href = "/motorhomeTable">
-            <button style="height:42px" class="button1"><img src="motorhomeIcon.png" alt="" width="48 px" height="33px" align="left"><span>Motorhomes</span></button>
-        </a>
-        <a style="text-decoration: none" href = "/repairTable">
-            <button style="height:42px" class="button1"> <img src="repairIcon.png" alt="" width="42 px" height="30 px" align="left"><span>Repairs</span></button>
-        </a>
-        </td>
-        </tr>
-    </table>
-</div>
+    <div class="div1">
+        <table>
+            <tr>
+                <td>
+                    <a style="text-decoration: none" href = "/customerTable">
+                        <button class="button"><img src="customerIcon.png" alt="" width="55 px" height="70 px" align="left"><span>Customers</span></button>
+                    </a></td>
+                <td>
+                    <a style="text-decoration: none" href = "/invoiceTable">
+                        <button class="button" ><img src="invoiceIcon.png" alt="" width="55 px" height="70 px" align="left"><span>Invoices</span></button>
+                    </a></td>
+            </tr>
+            <tr>
+                <td>
+                    <a style="text-decoration: none" href = "/contractTable">
+                        <button class="button"><img src="contractIcon.png" alt="" width="55 px" height="70 px" align="left"><span>Contracts</span></button>
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none" href = "/motorhomeTable">
+                        <button style="height:42px" class="button1"><img src="motorhomeIcon.png" alt="" width="48 px" height="33px" align="left"><span>Motorhomes</span></button>
+                    </a>
+                    <a style="text-decoration: none" href = "/repairTable">
+                        <button style="height:42px" class="button1"> <img src="repairIcon.png" alt="" width="42 px" height="30 px" align="left"><span>Repairs</span></button>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--Lavet af WO-->
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <link rel="icon" href="Logo.png">
     <link rel="stylesheet" href="MyCSS.css">
     <link rel="stylesheet" href="TableManager.css">
     <link rel="stylesheet" href="NavBar.css">
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SelectRentDays</title>
 </head>
 <body>
 <div class="navbar">
@@ -24,11 +25,10 @@
         </div>
     </div>
 </div>
-  
-  
+
 <div class="wrapper">
     <h1>Input start og end date</h1>
-<form action="/createContract" method="get">
+    <form action="/createContract" method="get">
     <tr>
         <td><label>Enter start date</label></td>
         <td><input type="text" name="contract_start_date" placeholder="Start date (YYYY-MM-DD)"><br></td>
@@ -41,7 +41,7 @@
     <tr>
         <td><input class="button" type="submit" value="Create"></td>
     </tr>
-</form>
+    </form>
 </div>
 <img src="/LogoFinal2.png" alt="LogoFinal.jpeg" style="opacity: 45%; position: fixed; bottom: -50px; right: 50px">
 </body>
