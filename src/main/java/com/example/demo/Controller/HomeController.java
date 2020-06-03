@@ -170,7 +170,7 @@ public class HomeController implements WebMvcConfigurer { // Alle
     @GetMapping("/deleteMotorhome/{motorhome_id}")
     public String delete(@PathVariable("motorhome_id") int motorhome_id){
         boolean deleted = motorhomeService.delete(motorhome_id);
-        return "redirect:/";
+        return "redirect:/motorhomeTable";
     }
 
     /*
