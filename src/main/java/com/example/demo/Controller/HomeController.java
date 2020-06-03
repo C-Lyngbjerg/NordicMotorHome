@@ -14,13 +14,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.validation.Valid;
 import java.util.List;
-/*
-Skabere:
-William Omø - WO
-Christoffer Bjerge - CB
-Sebastian Rasmussen - SR
-Jakob Tørsløv - JT
- */
+
+// Læs README.md først
 
 //Spring frameworks MVC
 @Controller

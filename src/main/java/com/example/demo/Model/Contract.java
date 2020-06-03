@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Contract {
+public class Contract { //Lavet af JT & SR
 
     @Id
     private int contract_id;
@@ -211,7 +211,7 @@ public class Contract {
         Dette Regex "\d" betyder numerisk værdi mellem 0-9 og {x} er antallet af \d efter hinanden.
         Så det endelig format er dddd-dd-dd.
      */
-    public boolean validateDates(){
+    public boolean validateDates(){ // Lavet af WO
         String pattern = "\\d{4}-\\d{2}-\\d{2}";
         if(contract_start_date.matches(pattern) & contract_end_date.matches(pattern)){
             return true;

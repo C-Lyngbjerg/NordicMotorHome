@@ -72,7 +72,7 @@ public class Invoice { // WO & CB
  * Disse bliver udregnet og sat til objektets element "invoice_total_price"
  * Da spring bruger getters, til at lave object via rowMapper, bliver dette lavet ved initialisation af objektet.
  */
-    public double getInvoice_total_price() { //CB
+    public double getInvoice_total_price() { // Lavet af CB
         invoice_total_price = 0.0;
         //Hvis gas tank er under 50% (sat som en boolean til at være true) vil der blive lagt 70 til total price
         if(isInvoice_fuel_gage()){

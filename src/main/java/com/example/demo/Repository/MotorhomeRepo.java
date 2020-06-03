@@ -6,11 +6,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
-
+//TODO SKRIV KOMMENTARER TIL MOTORHOME REPO
 @Repository
-public class MotorhomeRepo implements RepositoryI { //WO, JT & CB
+public class MotorhomeRepo implements RepositoryI { // Lavet af JT & SR
     @Autowired
     JdbcTemplate template;
 
@@ -27,30 +26,26 @@ public class MotorhomeRepo implements RepositoryI { //WO, JT & CB
         return null;
     }
 
-    public Object findById(int id){
+    public Object findById(int id){ // Lavet af SR
         String sql = "SELECT * FROM motorhomes WHERE motorhome_id = ?";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         Motorhome motorhome = template.queryForObject(sql,rowMapper,id);
         return motorhome;
     }
 
-    public Boolean delete(int id){
+    public Boolean delete(int id){ // Lavet af SR
         String sql = "DELETE FROM motorhomes WHERE motorhome_id = ?";
-        //String sql2 = "DELETE FROM contracts WHERE motorhome_id = ?";
-        //String sql3 = "DELETE FROM invoices WHERE contract_id IN (SELECT contract_id FROM contracts WHERE motorhome_id =?";
-        //template.update(sql3, id);
-        //template.update(sql2, id);
         return template.update(sql,id) < 0;
     }
 
-    public Object update(Object obj){
+    public Object update(Object obj){ // Lavet af SR
         Motorhome mot = (Motorhome) obj;
         String sql = "UPDATE motorhomes SET motorhome_id = ?,motorhome_reg_number = ?, motorhome_brand = ?, motorhome_room_height = ?, motorhome_model = ?, motorhome_odometer = ?, type_id = ? WHERE motorhome_id = ?";
         template.update(sql,mot.getMotorhome_id(),mot.getMotorhome_reg_number(),mot.getMotorhome_brand(),mot.getMotorhome_room_height(),mot.getMotorhome_model(),mot.getMotorhome_odometer(),mot.getType_id(), mot.getMotorhome_id());
         return null;
     }
 
-    public List<Motorhome> findAvailable(String startDate, String endDate){ //WO
+    public List<Motorhome> findAvailable(String startDate, String endDate){
         String sql = "SELECT motorhome_id,motorhome_reg_number FROM motorhomes WHERE motorhome_id NOT IN (SELECT motorhome_id FROM contracts WHERE ? BETWEEN contract_start_date AND contract_end_date OR ? BETWEEN contract_start_date AND contract_end_date OR ? >= contract_start_date AND ? <= contract_end_date)";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(sql,rowMapper,startDate,endDate,startDate,endDate);
