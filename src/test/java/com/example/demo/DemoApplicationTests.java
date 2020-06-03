@@ -33,7 +33,7 @@ class DemoApplicationTests {
             }else {
                 con.setContract_rent_price(con.getContract_rent_price() * 0.2);
             }
-        }else if(daysToStart > 15 && daysToStart < 49){
+        }else if(daysToStart >= 15 && daysToStart <= 49){
             con.setContract_rent_price(con.getContract_rent_price()*0.5);
         }else if(daysToStart < 15 && daysToStart > 0){
             con.setContract_rent_price(con.getContract_rent_price()*0.8);
