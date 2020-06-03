@@ -201,7 +201,7 @@ public class Contract { //Lavet af JT & SR
             }else{
                 totalPrice += dateAndPrice.get(0);
             }
-            startDate = startDate.plusDays(1);//Her lægger vi en dag til datoen //TODO JT SR Hvorfor bliver der lagt en dag til her?
+            startDate = startDate.plusDays(1);//Her lægger vi en dag til datoen for så at tjekke om næste dato har samme måned. Dette gøres for alle datoerne i lejeperioden
         }
         return totalPrice;
     }
