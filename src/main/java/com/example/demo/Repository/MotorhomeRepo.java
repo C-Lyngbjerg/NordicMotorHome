@@ -51,7 +51,7 @@ public class MotorhomeRepo implements RepositoryI { // Lavet af JT & SR
         return template.query(sql,rowMapper,startDate,endDate,startDate,endDate);
     }
 
-    public List<Motorhome> fetchTypes(){
+    public List<Motorhome> fetchTypes(){ // Lavet af JT
         String sql = "SELECT type_id, type_description FROM mh_types";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(sql,rowMapper);

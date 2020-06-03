@@ -4,15 +4,15 @@ import com.example.demo.Model.Customer;
 import com.example.demo.Repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
-public class CustomerService {
+public class CustomerService { // Lavet af WO & CB
 
     @Autowired
     CustomerRepo repo;
-
+    /* Denne klasse indeholder metoder, der bliver kaldt i HomeController og kalder på lignende metoder i repo
+       Kommentarer og forklaring kan findes i repo klassen. */
     public List<Customer> fetchAll(){
         return repo.fetchAll();
     }
