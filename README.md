@@ -1,4 +1,5 @@
 # NordicMotorHome
+Dette projekt er skrevet af William Omø, Jakob Tørsløv, Sebastian Rasmussen og Christoffer Bjerge i forbindelse med vores førsteårseksamen på KEA foråret 2020.
 
 # Hvordan hentes og køres dette projekt
 For at køre dette program skal man enten hente zip filen, som vi har vedhæftet, åbne den og derefter køre programmet i Intellij eller en anden IDE. i zip filen ligger der også en .SQL fil, som skal åbnes i MySQL Workbench og køres derinde. 
