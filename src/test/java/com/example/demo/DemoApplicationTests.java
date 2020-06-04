@@ -24,7 +24,7 @@ class DemoApplicationTests {
     @Test
     public void cancelContractTest(){
         Contract con = new Contract();
-        con.setContract_rent_price(15592.12345);
+        con.setContract_rent_price(1000);
         System.out.println(con.getContract_rent_price());
         Double daysToStart = 5.0;
         if(daysToStart >= 50){
